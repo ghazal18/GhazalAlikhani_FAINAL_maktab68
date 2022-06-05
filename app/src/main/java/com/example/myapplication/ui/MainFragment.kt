@@ -32,13 +32,7 @@ class MainFragment : Fragment() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-       // viewModel.list.observe(viewLifecycleOwner) {
 
-//            binding.textViewww1.text = it[0].average_rating
-////            binding.textViewww2.text = it[1].average_rating
-////            binding.textViewww3.text = it[2].average_rating
-////            binding.textViewww4.text = it[3].average_rating
-      //  }
         viewModel.productDataList.observe(viewLifecycleOwner){
             binding.textViewww1.text = it[0].date_created
             binding.textViewww2.text = it[1].date_created
