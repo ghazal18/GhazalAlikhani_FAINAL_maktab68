@@ -10,7 +10,7 @@ class ProductRemoteDataSource @Inject constructor(val apiService: ApiService) {
     suspend fun getCategorys():List<CategoriesItem> {
         return apiService.getCategories()
     }
-    suspend fun getProduct():List<ProductsItem>{
-        return apiService.getProducts()
+    suspend fun getProduct(oderBy:String):List<ProductsItem>{
+        return apiService.getProducts(orderBy = oderBy)
     }
 }

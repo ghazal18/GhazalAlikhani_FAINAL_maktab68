@@ -6,32 +6,52 @@ import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.ProductRepository
 import com.example.myapplication.model.CategoriesItem
 import com.example.myapplication.model.ProductsItem
+import com.example.myapplication.network.ORDER_BY_DATE
+import com.example.myapplication.network.ORDER_BY_RATING
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainProductViewModel @Inject constructor(val productRepository: ProductRepository):ViewModel() {
+class MainProductViewModel @Inject constructor(val productRepository: ProductRepository) :
+    ViewModel() {
     var categorieslist = MutableLiveData<List<CategoriesItem>>()
-    var productAverageList = MutableLiveData<List<ProductsItem>>()
+    var productPopularityList = MutableLiveData<List<ProductsItem>>()
     var productDataList = MutableLiveData<List<ProductsItem>>()
+    var productRatingList = MutableLiveData<List<ProductsItem>>()
+
     init {
         getCategories()
-        getProducts()
+        getRatingProducts()
+        getDatingProducts()
+        getPopularProducts()
     }
-    fun getCategories(){
+
+    fun getCategories() {
         viewModelScope.launch {
-            val list =productRepository.getCategoriesList()
+            val list = productRepository.getCategoriesList()
             categorieslist.value = list
         }
     }
-    fun getProducts(){
+
+    fun getRatingProducts() {
         viewModelScope.launch {
-            val list = productRepository.getProduct()
-            val sortedByAverageList = list.sortedByDescending { it.average_rating }
-            val sortedByDateList = list.sortedByDescending { it.date_created }
-            productAverageList.value = sortedByAverageList
-            productDataList.value = sortedByDateList
+            val list = productRepository.getRatingProduct()
+            productRatingList.value = list
         }
     }
+    fun getDatingProducts() {
+        viewModelScope.launch {
+            val dateList = productRepository.getDateProduct()
+            productDataList.value = dateList
+        }
+    }
+    fun getPopularProducts() {
+        viewModelScope.launch {
+            val dateList = productRepository.getPopularProduct()
+            productPopularityList.value = dateList
+        }
+    }
+
+
 }
