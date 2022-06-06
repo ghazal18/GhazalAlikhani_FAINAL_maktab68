@@ -6,10 +6,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ProductListItemViewBinding
 import com.example.myapplication.model.ProductsItem
+import com.bumptech.glide.Glide
 
 typealias ProductClickHandler = (ProductsItem) -> Unit
 

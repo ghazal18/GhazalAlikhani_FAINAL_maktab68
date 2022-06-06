@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
+import com.example.myapplication.adaptor.CategoriesAdaptor
 import com.example.myapplication.adaptor.ProductAdaptor
 import com.example.myapplication.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,6 +50,16 @@ class MainFragment : Fragment() {
         val xxadapter = ProductAdaptor() { Product ->
             val action = MainFragmentDirections.actionMainFragmentToDetailsFragment(Product)
             findNavController().navigate(action)
+        }
+        val categoryAdap = CategoriesAdaptor(){
+
+
+        }
+        binding.categoryRecyclerView.adapter = categoryAdap
+        viewModel.categorieslist.observe(viewLifecycleOwner){
+            if (it != null){
+                categoryAdap.submitList(it)
+            }
         }
 
         binding.PopulartiyProductRecyclerView.adapter = adapter
