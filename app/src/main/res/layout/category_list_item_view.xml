@@ -8,8 +8,7 @@
             type="com.example.myapplication.model.CategoriesItem" />
     </data>
 
-    <androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -23,16 +22,20 @@
 
             <ImageView
                 android:id="@+id/categoryImage"
-                android:layout_width="100dp"
-                android:background="@color/gray"
-                android:layout_height="100dp" />
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@drawable/rounded_corner"
+                android:elevation="8dp"
+                android:padding="50dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:gravity="center"
-                android:text="@{category.name}" />
+                android:text="@{category.name}"
+                android:textStyle="bold"
+                android:textSize="22sp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

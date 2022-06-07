@@ -80,6 +80,18 @@ class MainFragment : Fragment() {
                 xadapter.submitList(it)
             }
         }
+        binding.showAllBest.setOnClickListener {
+            val action = MainFragmentDirections.actionMainFragmentToShowAllFragment("best")
+            findNavController().navigate(action)
+        }
+        binding.showAllNew.setOnClickListener {
+            val action = MainFragmentDirections.actionMainFragmentToShowAllFragment("new")
+            findNavController().navigate(action)
+        }
+        binding.showAllPopulary.setOnClickListener {
+            val action = MainFragmentDirections.actionMainFragmentToShowAllFragment("popular")
+            findNavController().navigate(action)
+        }
 
     }
 }

@@ -36,9 +36,11 @@ class DetailsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        var por = args.productsss
-        binding.texttt.text = por.date_created
-        Glide.with(this).load(por.images[0].src).into(binding.imag)
+        var porductt = args.productsss
+        binding.product = porductt
+        binding.lifecycleOwner = this.viewLifecycleOwner
+        Glide.with(this).load(porductt.images[0].src).into(binding.imaggg)
+        binding.cardView.setBackgroundResource(R.drawable.rounded_top_corner)
     }
 
 

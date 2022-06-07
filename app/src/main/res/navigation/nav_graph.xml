@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_mainFragment_to_secondFragment"
             app:destination="@id/secondFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_showAllFragment"
+            app:destination="@id/showAllFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
@@ -33,5 +36,14 @@
         <action
             android:id="@+id/action_secondFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/showAllFragment"
+        android:name="com.example.myapplication.ui.ShowAllFragment"
+        android:label="fragment_show_all"
+        tools:layout="@layout/fragment_show_all" >
+        <argument
+            android:name="listType"
+            app:argType="string" />
     </fragment>
 </navigation>
