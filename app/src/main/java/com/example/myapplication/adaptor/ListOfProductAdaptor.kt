@@ -8,10 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
-import com.example.myapplication.databinding.CategoryListItemViewBinding
-import com.example.myapplication.databinding.ProductListItemViewBinding
 import com.example.myapplication.databinding.ProductShowAllItemViewBinding
-import com.example.myapplication.model.CategoriesItem
 import com.example.myapplication.model.ProductsItem
 
 typealias ProductShowAllClickHandler = (ProductsItem) -> Unit
@@ -22,6 +19,8 @@ class ListOfProductAdaptor(val onClick: ProductShowAllClickHandler)
         RecyclerView.ViewHolder(binding.root) {
         fun bind(product: ProductsItem, onClick: ProductShowAllClickHandler) {
             Glide.with(itemView).load(product.images[0].src).into(binding.productImageView)
+            var numberOfStars = product.average_rating.toFloat()
+            binding.rBar.rating = numberOfStars
             binding.linear.setOnClickListener {
                 onClick.invoke(product)
             }
