@@ -57,7 +57,7 @@ class MainFragment : Fragment() {
 
         }
         binding.categoryRecyclerView.adapter = categoryAdap
-        categoryViewModel.categorieslist.observe(viewLifecycleOwner){
+        categoryViewModel.categoriesList.observe(viewLifecycleOwner){
             if (it != null){
                 categoryAdap.submitList(it)
             }

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.adaptor.ListOfCategoriesAdaptor
 import com.example.myapplication.databinding.FragmentCategoriesBinding
@@ -32,10 +33,11 @@ class CategoriesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val adaptor = ListOfCategoriesAdaptor() {
-
+            val action = CategoriesFragmentDirections.actionCategoriesFragmentToCategoryDetailsFragment(it.id.toString())
+            findNavController().navigate(action)
         }
         binding.categoryRecyclerView.adapter = adaptor
-        viewModel.categorieslist.observe(viewLifecycleOwner) {
+        viewModel.categoriesList.observe(viewLifecycleOwner) {
             if (it != null) {
                 adaptor.submitList(it)
             }

@@ -23,7 +23,14 @@ interface ApiService {
     suspend fun getProducts(
         @Query("consumer_key") key:String = CONSUMER_KEY,
         @Query("consumer_secret") secret:String = CONSUMER_SECRET,
-        @Query("orderby")orderBy :String ,
+        @Query("orderby")orderBy :String
+    ):List<ProductsItem>
+
+    @GET("products")
+    suspend fun getProductsWithCategory(
+        @Query("consumer_key") key:String = CONSUMER_KEY,
+        @Query("consumer_secret") secret:String = CONSUMER_SECRET,
+        @Query("category")categoryy :String
     ):List<ProductsItem>
 
 

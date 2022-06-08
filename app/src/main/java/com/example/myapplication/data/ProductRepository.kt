@@ -21,4 +21,7 @@ class ProductRepository @Inject constructor(val productRemoteDataSource:ProductR
     suspend fun getPopularProduct():List<ProductsItem>{
         return productRemoteDataSource.getProduct(ORDER_BY_POPULARITY)
     }
+    suspend fun getCategorysProduct(categoryId: String): List<ProductsItem> {
+        return productRemoteDataSource.getCategorysProduct(categoryId)
+    }
 }

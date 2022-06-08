@@ -7,10 +7,15 @@ import com.example.myapplication.network.ApiService
 import javax.inject.Inject
 
 class ProductRemoteDataSource @Inject constructor(val apiService: ApiService) {
-    suspend fun getCategorys():List<CategoriesItem> {
+    suspend fun getCategorys(): List<CategoriesItem> {
         return apiService.getCategories()
     }
-    suspend fun getProduct(oderBy:String):List<ProductsItem>{
+
+    suspend fun getProduct(oderBy: String): List<ProductsItem> {
         return apiService.getProducts(orderBy = oderBy)
+    }
+
+    suspend fun getCategorysProduct(categoryId: String): List<ProductsItem> {
+        return apiService.getProductsWithCategory(categoryy = categoryId)
     }
 }
