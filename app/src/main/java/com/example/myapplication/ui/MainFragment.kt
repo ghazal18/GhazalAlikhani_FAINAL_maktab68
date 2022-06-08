@@ -1,10 +1,13 @@
 package com.example.myapplication.ui
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -38,6 +41,7 @@ class MainFragment : Fragment() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         val adapter = ProductAdaptor() { Product ->
@@ -96,6 +100,11 @@ class MainFragment : Fragment() {
         }
         binding.textViewCategory.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_categoriesFragment)
+        }
+        viewModel.connectionStatus.observe(viewLifecycleOwner){
+            if (!it){
+                Toast.makeText(context, "Please check your connection", Toast.LENGTH_SHORT).show()
+            }
         }
 
     }
