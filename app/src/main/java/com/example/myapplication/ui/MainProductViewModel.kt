@@ -45,9 +45,13 @@ class MainProductViewModel @Inject constructor(
     fun getRatingProducts() {
         viewModelScope.launch {
             if (isOnline(context)) {
-                val list = productRepository.getRatingProduct()
-                productRatingList.value = list
-                connectionStatus.value = true
+                try {
+                    val list = productRepository.getRatingProduct()
+                    productRatingList.value = list
+                    connectionStatus.value = true
+                } catch (e: Exception) {
+                    connectionStatus.value = false
+                }
             } else {
                 connectionStatus.value = false
             }
@@ -58,9 +62,13 @@ class MainProductViewModel @Inject constructor(
     fun getDatingProducts() {
         viewModelScope.launch {
             if (isOnline(context)) {
-                val dateList = productRepository.getDateProduct()
-                productDataList.value = dateList
-                connectionStatus.value = true
+                try {
+                    val dateList = productRepository.getDateProduct()
+                    productDataList.value = dateList
+                    connectionStatus.value = true
+                } catch (e: Exception) {
+                    connectionStatus.value = false
+                }
             } else {
                 connectionStatus.value = false
             }
@@ -71,9 +79,13 @@ class MainProductViewModel @Inject constructor(
     fun getPopularProducts() {
         viewModelScope.launch {
             if (isOnline(context)) {
-                val list = productRepository.getPopularProduct()
-                productPopularityList.value = list
-                connectionStatus.value = true
+                try {
+                    val list = productRepository.getPopularProduct()
+                    productPopularityList.value = list
+                    connectionStatus.value = true
+                } catch (e: Exception) {
+                    connectionStatus.value = false
+                }
             } else {
                 connectionStatus.value = false
             }

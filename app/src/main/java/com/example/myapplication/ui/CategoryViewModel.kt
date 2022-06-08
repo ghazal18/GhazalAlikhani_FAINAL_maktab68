@@ -42,9 +42,14 @@ class CategoryViewModel @Inject constructor(
     fun getCategories() {
         viewModelScope.launch {
             if (isOnline(context)) {
-                val list = productRepository.getCategoriesList()
-                categoriesList.value = list
-                connectionStatus.value = true
+                try {
+                    val list = productRepository.getCategoriesList()
+                    categoriesList.value = list
+                    connectionStatus.value = true
+                } catch (e: Exception) {
+                    connectionStatus.value = false
+                }
+
             } else {
                 connectionStatus.value = false
             }
@@ -55,14 +60,19 @@ class CategoryViewModel @Inject constructor(
     fun getProductWithCategoryId(categoryId: String) {
         viewModelScope.launch {
             if (isOnline(context)) {
-                val list = productRepository.getCategorysProduct(categoryId)
-                productslist.value = list
-                connectionStatus.value = true
+                try {
+                    val list = productRepository.getCategorysProduct(categoryId)
+                    productslist.value = list
+                    connectionStatus.value = true
+                } catch (e: Exception) {
+                    connectionStatus.value = false
+                }
             } else {
                 connectionStatus.value = false
             }
         }
     }
+
     @RequiresApi(Build.VERSION_CODES.M)
     fun isOnline(context: Context): Boolean {
         val connectivityManager =
