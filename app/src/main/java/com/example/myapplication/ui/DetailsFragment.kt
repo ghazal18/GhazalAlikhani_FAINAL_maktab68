@@ -49,7 +49,9 @@ class DetailsFragment : Fragment() {
         binding.lifecycleOwner = this.viewLifecycleOwner
         binding.cardView.setBackgroundResource(R.drawable.rounded_top_corner)
         binding.viewPager.adapter = context?.let { ViewPagerAdapter(it, porductt.images) }
-        binding.indicator.setViewPager(binding.viewPager)
+        binding.indicator.setViewPager2(binding.viewPager)
+        var numberOfStars = porductt.average_rating.toFloat()
+        binding.rBar.rating = numberOfStars
         viewModel.connectionStatus.observe(viewLifecycleOwner){
             if (!it){
                 Toast.makeText(context, "Please check your connection", Toast.LENGTH_SHORT).show()
