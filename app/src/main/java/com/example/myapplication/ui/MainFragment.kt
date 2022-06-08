@@ -98,7 +98,7 @@ class MainFragment : Fragment() {
             val action = MainFragmentDirections.actionMainFragmentToShowAllFragment("popular")
             findNavController().navigate(action)
         }
-        binding.textViewCategory.setOnClickListener {
+        binding.showAllcategory.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_categoriesFragment)
         }
         viewModel.connectionStatus.observe(viewLifecycleOwner){
