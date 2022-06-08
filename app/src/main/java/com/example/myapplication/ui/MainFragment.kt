@@ -20,6 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainFragment : Fragment() {
     val viewModel: MainProductViewModel by viewModels()
+    val categoryViewModel: CategoryViewModel by viewModels()
     lateinit var binding: FragmentMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +57,7 @@ class MainFragment : Fragment() {
 
         }
         binding.categoryRecyclerView.adapter = categoryAdap
-        viewModel.categorieslist.observe(viewLifecycleOwner){
+        categoryViewModel.categorieslist.observe(viewLifecycleOwner){
             if (it != null){
                 categoryAdap.submitList(it)
             }
@@ -91,6 +92,9 @@ class MainFragment : Fragment() {
         binding.showAllPopulary.setOnClickListener {
             val action = MainFragmentDirections.actionMainFragmentToShowAllFragment("popular")
             findNavController().navigate(action)
+        }
+        binding.textViewCategory.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment_to_categoriesFragment)
         }
 
     }

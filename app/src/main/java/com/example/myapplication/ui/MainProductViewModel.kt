@@ -15,24 +15,16 @@ import javax.inject.Inject
 @HiltViewModel
 class MainProductViewModel @Inject constructor(val productRepository: ProductRepository) :
     ViewModel() {
-    var categorieslist = MutableLiveData<List<CategoriesItem>>()
     var productPopularityList = MutableLiveData<List<ProductsItem>>()
     var productDataList = MutableLiveData<List<ProductsItem>>()
     var productRatingList = MutableLiveData<List<ProductsItem>>()
 
     init {
-        getCategories()
         getRatingProducts()
         getDatingProducts()
         getPopularProducts()
     }
 
-    fun getCategories() {
-        viewModelScope.launch {
-            val list = productRepository.getCategoriesList()
-            categorieslist.value = list
-        }
-    }
 
     fun getRatingProducts() {
         viewModelScope.launch {
