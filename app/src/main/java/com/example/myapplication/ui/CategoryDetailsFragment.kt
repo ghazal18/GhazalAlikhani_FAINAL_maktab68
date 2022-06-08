@@ -40,7 +40,7 @@ class CategoryDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val adaptor = ListOfProductAdaptor() { Product ->
-            val action = ShowAllFragmentDirections.actionShowAllFragmentToDetailsFragment(Product)
+            val action = CategoryDetailsFragmentDirections.actionCategoryDetailsFragmentToDetailsFragment(Product)
             findNavController().navigate(action)
 
         }
