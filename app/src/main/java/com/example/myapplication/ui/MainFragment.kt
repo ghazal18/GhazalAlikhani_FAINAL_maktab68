@@ -53,7 +53,8 @@ class MainFragment : Fragment() {
             findNavController().navigate(action)
         }
         val categoryAdap = CategoriesAdaptor(){
-
+            val action = MainFragmentDirections.actionMainFragmentToCategoryDetailsFragment(it.id.toString())
+            findNavController().navigate(action)
 
         }
         binding.categoryRecyclerView.adapter = categoryAdap
