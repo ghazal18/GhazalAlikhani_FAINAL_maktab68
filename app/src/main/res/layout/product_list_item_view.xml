@@ -12,7 +12,10 @@
     <LinearLayout
         android:id="@+id/linear"
         android:layout_width="170dp"
-        android:layout_height="170dp"
+        android:padding="8dp"
+        android:layout_height="215dp"
+        android:layout_margin="4dp"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <ImageView
