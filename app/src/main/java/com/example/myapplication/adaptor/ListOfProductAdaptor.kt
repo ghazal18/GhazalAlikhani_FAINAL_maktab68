@@ -12,13 +12,18 @@ import com.example.myapplication.databinding.ProductShowAllItemViewBinding
 import com.example.myapplication.model.ProductsItem
 
 typealias ProductShowAllClickHandler = (ProductsItem) -> Unit
-class ListOfProductAdaptor(val onClick: ProductShowAllClickHandler)
-    : ListAdapter<ProductsItem, ListOfProductAdaptor.ItemHolder>(ProductDiffCallback) {
+
+class ListOfProductAdaptor(val onClick: ProductShowAllClickHandler) :
+    ListAdapter<ProductsItem, ListOfProductAdaptor.ItemHolder>(ProductDiffCallback) {
 
     class ItemHolder(val binding: ProductShowAllItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(product: ProductsItem, onClick: ProductShowAllClickHandler) {
-            Glide.with(itemView).load(product.images[0].src).into(binding.productImageView)
+            try {
+                Glide.with(itemView).load(product.images[0].src).into(binding.productImageView)
+            } catch (e: Exception) {
+                binding.productImageView.setImageResource(R.drawable.ic_connection_error)
+            }
             var numberOfStars = product.average_rating.toFloat()
             binding.rBar.rating = numberOfStars
             binding.linear.setOnClickListener {

@@ -13,13 +13,17 @@ import com.bumptech.glide.Glide
 
 typealias ProductClickHandler = (ProductsItem) -> Unit
 
-class ProductAdaptor(val onClick: ProductClickHandler)
-    : ListAdapter<ProductsItem, ProductAdaptor.ItemHolder>(MovieDiffCallback) {
+class ProductAdaptor(val onClick: ProductClickHandler) :
+    ListAdapter<ProductsItem, ProductAdaptor.ItemHolder>(MovieDiffCallback) {
 
     class ItemHolder(val binding: ProductListItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(product: ProductsItem, onClick: ProductClickHandler) {
-           Glide.with(itemView).load(product.images[0].src).into(binding.productImage)
+            try {
+                Glide.with(itemView).load(product.images[0].src).into(binding.productImage)
+            } catch (e: Exception) {
+                binding.productImage.setImageResource(R.drawable.ic_connection_error)
+            }
             binding.linear.setOnClickListener {
                 onClick.invoke(product)
             }

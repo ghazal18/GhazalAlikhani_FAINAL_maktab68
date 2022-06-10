@@ -22,7 +22,11 @@ class ListOfCategoriesAdaptor(val onClick: CategoriesShowAllClickHandler) :
     class ItemHolder(val binding: ListOfCategoriesItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(category: CategoriesItem, onClick: CategoriesShowAllClickHandler) {
-            Glide.with(itemView).load(category.image.src).into(binding.categoryImageInList)
+            try {
+                Glide.with(itemView).load(category.image.src).into(binding.categoryImageInList)
+            } catch (e: Exception) {
+                binding.categoryImageInList.setImageResource(R.drawable.ic_connection_error)
+            }
             binding.linear.setOnClickListener {
                 onClick.invoke(category)
             }

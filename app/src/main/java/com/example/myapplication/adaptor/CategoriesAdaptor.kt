@@ -15,13 +15,17 @@ import com.example.myapplication.model.ProductsItem
 
 typealias CategoriesClickHandler = (CategoriesItem) -> Unit
 
-class CategoriesAdaptor(val onClick: CategoriesClickHandler)
-    : ListAdapter<CategoriesItem, CategoriesAdaptor.ItemHolder>(CategoriesDiffCallback) {
+class CategoriesAdaptor(val onClick: CategoriesClickHandler) :
+    ListAdapter<CategoriesItem, CategoriesAdaptor.ItemHolder>(CategoriesDiffCallback) {
 
     class ItemHolder(val binding: CategoryListItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(category: CategoriesItem, onClick: CategoriesClickHandler) {
-            Glide.with(itemView).load(category.image.src).into(binding.categoryImage)
+            try {
+                Glide.with(itemView).load(category.image.src).into(binding.categoryImage)
+            } catch (e: Exception) {
+                binding.categoryImage.setImageResource(R.drawable.ic_connection_error)
+            }
             binding.linear.setOnClickListener {
                 onClick.invoke(category)
             }
