@@ -23,6 +23,11 @@
             android:imeOptions="actionDone"
             android:padding="16dp"
             android:textSize="18sp" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="go"
+            android:id="@+id/go"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/menu"

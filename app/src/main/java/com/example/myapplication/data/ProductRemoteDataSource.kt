@@ -25,7 +25,7 @@ class ProductRemoteDataSource @Inject constructor(val apiService: ApiService) {
         return apiService.createAccount(customer = customer)
     }
 
-    suspend fun search(orderBy: String, searchWord: String) : List<ProductsItem>{
-        return apiService.searchProduct(orderBy = orderBy, word = searchWord)
+    suspend fun search(orderBy: String, searchWord: String, order: String): List<ProductsItem> {
+        return apiService.searchProduct(word = searchWord,  order = order, orderBy = orderBy)
     }
 }

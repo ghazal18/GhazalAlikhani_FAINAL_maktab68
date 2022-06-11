@@ -14,9 +14,13 @@ class SearchProductViewModel @Inject constructor(val productRepository: ProductR
     ViewModel() {
     var searchedList = MutableLiveData<List<ProductsItem>>()
 
-    fun searchItem(searchWord: String,orderBy:String) {
+    fun searchItem(searchWord: String, orderBy: String, order: String) {
         viewModelScope.launch {
-            val list = productRepository.searchWord(orderBy,searchWord)
+            val list = productRepository.searchWord(
+                searchWord = searchWord,
+                orderBy = orderBy,
+                order = order
+            )
             searchedList.value = list
         }
     }

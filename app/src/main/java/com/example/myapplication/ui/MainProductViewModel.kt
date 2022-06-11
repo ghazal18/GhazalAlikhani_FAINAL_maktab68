@@ -1,24 +1,16 @@
 package com.example.myapplication.ui
 
 import android.app.Application
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.ProductRepository
-import com.example.myapplication.model.CategoriesItem
 import com.example.myapplication.model.ProductsItem
-import com.example.myapplication.network.ORDER_BY_DATE
-import com.example.myapplication.network.ORDER_BY_RATING
 import com.example.myapplication.network.hasInternetConnection
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 @RequiresApi(Build.VERSION_CODES.M)

@@ -1,13 +1,11 @@
 package com.example.myapplication.data
 
-import com.example.myapplication.model.Categories
+import com.example.myapplication.NetworkParams.Companion.ORDER_BY_DATE
+import com.example.myapplication.NetworkParams.Companion.ORDER_BY_POPULARITY
+import com.example.myapplication.NetworkParams.Companion.ORDER_BY_RATING
 import com.example.myapplication.model.CategoriesItem
 import com.example.myapplication.model.Customer
 import com.example.myapplication.model.ProductsItem
-import com.example.myapplication.network.ORDER_BY_DATE
-import com.example.myapplication.network.ORDER_BY_POPULARITY
-import com.example.myapplication.network.ORDER_BY_RATING
-import okhttp3.RequestBody
 import javax.inject.Inject
 
 class ProductRepository @Inject constructor(val productRemoteDataSource: ProductRemoteDataSource) {
@@ -35,7 +33,11 @@ class ProductRepository @Inject constructor(val productRemoteDataSource: Product
         return productRemoteDataSource.setaCustomer(customer)
     }
 
-    suspend fun searchWord(orderBy: String, searchWord: String): List<ProductsItem> {
-        return productRemoteDataSource.search(orderBy = orderBy, searchWord)
+    suspend fun searchWord(orderBy: String, searchWord: String, order: String): List<ProductsItem> {
+        return productRemoteDataSource.search(
+            searchWord = searchWord,
+            order = order,
+            orderBy = orderBy
+        )
     }
 }
