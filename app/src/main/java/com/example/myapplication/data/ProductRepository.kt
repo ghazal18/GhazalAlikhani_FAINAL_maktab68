@@ -2,10 +2,12 @@ package com.example.myapplication.data
 
 import com.example.myapplication.model.Categories
 import com.example.myapplication.model.CategoriesItem
+import com.example.myapplication.model.Customer
 import com.example.myapplication.model.ProductsItem
 import com.example.myapplication.network.ORDER_BY_DATE
 import com.example.myapplication.network.ORDER_BY_POPULARITY
 import com.example.myapplication.network.ORDER_BY_RATING
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 class ProductRepository @Inject constructor(val productRemoteDataSource:ProductRemoteDataSource){
@@ -23,5 +25,8 @@ class ProductRepository @Inject constructor(val productRemoteDataSource:ProductR
     }
     suspend fun getCategorysProduct(categoryId: String): List<ProductsItem> {
         return productRemoteDataSource.getCategorysProduct(categoryId)
+    }
+    suspend fun setCustomer(customer: Customer):Customer{
+        return productRemoteDataSource.setaCustomer(customer)
     }
 }

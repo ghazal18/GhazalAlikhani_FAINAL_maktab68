@@ -77,7 +77,9 @@ dependencies {
     // For control over item selection of both touch and mouse driven selection
     implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
     def room_version = "2.4.2"
+    //noinspection GradleDependency
     implementation "androidx.room:room-runtime:$room_version"
+
     annotationProcessor "androidx.room:room-compiler:$room_version"
     // optional - RxJava2 support for Room
     implementation "androidx.room:room-rxjava2:$room_version"
@@ -116,4 +118,7 @@ dependencies {
     implementation "com.tbuonomo:dotsindicator:4.3"
 
     implementation "com.google.android.material:material:1.6.1"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.7.2"
+
+
 }

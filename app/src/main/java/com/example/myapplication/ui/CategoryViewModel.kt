@@ -13,6 +13,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.ProductRepository
 import com.example.myapplication.model.CategoriesItem
 import com.example.myapplication.model.ProductsItem
+import com.example.myapplication.network.hasInternetConnection
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.net.SocketTimeoutException
@@ -41,7 +42,7 @@ class CategoryViewModel @Inject constructor(
     @RequiresApi(Build.VERSION_CODES.M)
     fun getCategories() {
         viewModelScope.launch {
-            if (isOnline(context)) {
+            if (hasInternetConnection(context)) {
                 try {
                     val list = productRepository.getCategoriesList()
                     categoriesList.value = list
@@ -59,7 +60,7 @@ class CategoryViewModel @Inject constructor(
     @RequiresApi(Build.VERSION_CODES.M)
     fun getProductWithCategoryId(categoryId: String) {
         viewModelScope.launch {
-            if (isOnline(context)) {
+            if (hasInternetConnection(context)) {
                 try {
                     val list = productRepository.getCategorysProduct(categoryId)
                     productslist.value = list
@@ -73,23 +74,4 @@ class CategoryViewModel @Inject constructor(
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    fun isOnline(context: Context): Boolean {
-        val connectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        if (connectivityManager != null) {
-            val capabilities =
-                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-            if (capabilities != null) {
-                if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
-                    return true
-                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-                    return true
-                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
-                    return true
-                }
-            }
-        }
-        return false
-    }
 }

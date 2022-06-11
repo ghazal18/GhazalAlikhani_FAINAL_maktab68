@@ -7,6 +7,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
@@ -26,10 +28,17 @@ class Module {
 
     @Singleton
     @Provides
+    fun getInspector():OkHttpClient{
+        val logger= HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
+        return  OkHttpClient.Builder().addInterceptor(logger).build()
+    }
+    @Singleton
+    @Provides
     fun getRetrofit(): Retrofit {
         val retrofit = Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(getMoshi()))
             .baseUrl("https://woocommerce.maktabsharif.ir/wp-json/wc/v3/")
+            .client(getInspector())
             .build()
         return retrofit
     }
@@ -40,4 +49,5 @@ class Module {
         val movieApiService = getRetrofit().create(ApiService::class.java)
         return movieApiService
     }
+
 }

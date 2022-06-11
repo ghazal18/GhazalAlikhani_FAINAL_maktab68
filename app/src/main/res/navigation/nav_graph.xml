@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/signinFragment">
 
     <fragment
         android:id="@+id/mainFragment"
@@ -64,4 +64,8 @@
             android:id="@+id/action_categoryDetailsFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/signinFragment"
+        android:name="com.example.myapplication.ui.SigninFragment"
+        android:label="SigninFragment" />
 </navigation>
