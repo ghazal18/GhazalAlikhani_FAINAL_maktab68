@@ -6,6 +6,7 @@
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1975" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable/ic_baseline_arrow_left_24.xml" value="0.202" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable/ic_baseline_remove_red_eye_24.xml" value="0.1975" />
+        <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.159" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable/ic_baseline_shopping_basket_24.xml" value="0.1975" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable/ic_baseline_shopping_cart_24.xml" value="0.1975" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable/ic_connection_error.xml" value="0.214" />
@@ -27,10 +28,12 @@
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/fragment_first.xml" value="0.25416666666666665" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/fragment_login.xml" value="0.25416666666666665" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/fragment_main.xml" value="0.25943646996278574" />
+        <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/fragment_search.xml" value="0.1" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/fragment_second.xml" value="0.23596014492753623" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/fragment_show_all.xml" value="0.25416666666666665" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/fragment_signin.xml" value="0.264" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/list_of_categories_item_view.xml" value="0.25416666666666665" />
+        <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/option_item.xml" value="0.1" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/product_list_item_view.xml" value="0.264" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/product_show_all_item_view.xml" value="0.536" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/view_page_holder.xml" value="0.25416666666666665" />

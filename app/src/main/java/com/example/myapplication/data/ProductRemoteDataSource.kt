@@ -24,4 +24,8 @@ class ProductRemoteDataSource @Inject constructor(val apiService: ApiService) {
     suspend fun setaCustomer(customer: Customer): Customer {
         return apiService.createAccount(customer = customer)
     }
+
+    suspend fun search(orderBy: String, searchWord: String) : List<ProductsItem>{
+        return apiService.searchProduct(orderBy = orderBy, word = searchWord)
+    }
 }

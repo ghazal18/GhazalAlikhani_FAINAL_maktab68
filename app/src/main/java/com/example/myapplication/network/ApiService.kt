@@ -41,4 +41,12 @@ interface ApiService {
         @Body customer: Customer
     ): Customer
 
+    @GET("product")
+    suspend fun searchProduct(
+        @Query("consumer_key") key: String = CONSUMER_KEY,
+        @Query("consumer_secret") secret: String = CONSUMER_SECRET,
+        @Query("orderby") orderBy: String,
+        @Query("search") word: String = ORDER_BY_DATE
+    ): List<ProductsItem>
+
 }

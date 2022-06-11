@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item android:id="@+id/mostSale"
+        android:title="پرفروش ترین ها" />
+    <item android:id="@+id/chipest"
+        android:title="قیمت کم به زیاد" />
+    <item android:id="@+id/expensive"
+        android:title="قیمت زیاد به کم" />
+    <item android:id="@+id/newest"
+        android:title="جدیدترین ها" />
 </menu>
