@@ -7,7 +7,7 @@ import kotlinx.parcelize.RawValue
 
 @Parcelize
 data class ProductsItem(
-    val _links: @RawValue LinksX,
+    val _links: @RawValue Links,
     val attributes: @RawValue List<Any>,
     val average_rating: String,
     val backordered: Boolean,
@@ -36,7 +36,7 @@ data class ProductsItem(
     val featured: Boolean,
     val grouped_products: @RawValue List<Any>,
     val id: Int,
-    val images: @RawValue List<ImageX>,
+    val images: @RawValue List<Image>,
     val low_stock_amount: @RawValue Any?,
     val manage_stock: Boolean,
     val menu_order: Int,

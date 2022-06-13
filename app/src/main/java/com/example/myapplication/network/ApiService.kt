@@ -4,9 +4,7 @@ import com.example.myapplication.NetworkParams.Companion.CONSUMER_KEY
 import com.example.myapplication.NetworkParams.Companion.CONSUMER_SECRET
 import com.example.myapplication.NetworkParams.Companion.DESC_ORDER
 import com.example.myapplication.NetworkParams.Companion.ORDER_BY_DATE
-import com.example.myapplication.model.CategoriesItem
-import com.example.myapplication.model.Customer
-import com.example.myapplication.model.ProductsItem
+import com.example.myapplication.model.*
 import retrofit2.http.*
 
 
@@ -46,5 +44,13 @@ interface ApiService {
         @Query("order") order: String = DESC_ORDER,
         @Query("orderby") orderBy: String
     ): List<ProductsItem>
+
+    @POST("orders")
+    suspend fun setOrder(
+        @Query("consumer_key") key: String = CONSUMER_KEY,
+        @Query("consumer_secret") secret: String = CONSUMER_SECRET,
+        @Body order: OrderBody
+    ): Order
+
 
 }

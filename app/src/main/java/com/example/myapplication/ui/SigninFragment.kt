@@ -1,5 +1,7 @@
 package com.example.myapplication.ui
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -20,7 +22,13 @@ import org.json.JSONObject
 class SigninFragment : Fragment() {
     lateinit var binding: FragmentSigninBinding
     val viewModel: UserViewModel by viewModels()
+    lateinit var sp: SharedPreferences
+    lateinit var editor: SharedPreferences.Editor
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        sp = this.requireActivity().getSharedPreferences("accountId", Context.MODE_PRIVATE)
+        editor = sp.edit()
         super.onCreate(savedInstanceState)
 
     }
@@ -37,6 +45,7 @@ class SigninFragment : Fragment() {
 
         binding.saveInformationButton.setOnClickListener {
             var customer = Customer(
+                0,
                 binding.EditTextName.text.toString(),
                 binding.EditTextLastName.text.toString(),
                 binding.EditTextEmail.text.toString(),
@@ -68,6 +77,10 @@ class SigninFragment : Fragment() {
             )
             viewModel.getAndSetCustomer(customer)
             viewModel.customerLiveData.observe(viewLifecycleOwner) {
+                if (it != null) {
+                    editor.putInt("id",it.customer_id)
+                    editor.apply()
+                }
                 Toast.makeText(context, "سفارش شما ثبت شد", Toast.LENGTH_SHORT).show()
             }
         }

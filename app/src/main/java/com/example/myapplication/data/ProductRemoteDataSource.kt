@@ -1,9 +1,6 @@
 package com.example.myapplication.data
 
-import com.example.myapplication.model.Categories
-import com.example.myapplication.model.CategoriesItem
-import com.example.myapplication.model.Customer
-import com.example.myapplication.model.ProductsItem
+import com.example.myapplication.model.*
 import com.example.myapplication.network.ApiService
 import okhttp3.RequestBody
 import javax.inject.Inject
@@ -26,6 +23,10 @@ class ProductRemoteDataSource @Inject constructor(val apiService: ApiService) {
     }
 
     suspend fun search(orderBy: String, searchWord: String, order: String): List<ProductsItem> {
-        return apiService.searchProduct(word = searchWord,  order = order, orderBy = orderBy)
+        return apiService.searchProduct(word = searchWord, order = order, orderBy = orderBy)
+    }
+
+    suspend fun setOrder(order: OrderBody): Order {
+        return apiService.setOrder(order = order)
     }
 }

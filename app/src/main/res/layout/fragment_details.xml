@@ -218,6 +218,7 @@
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:padding="12dp"
+                        android:id="@+id/buyButton"
                         android:elevation="2dp"
                         app:icon="@drawable/ic_baseline_shopping_basket_24"
                         android:drawableStart="@drawable/ic_baseline_shopping_basket_24"/>

@@ -1,36 +1,37 @@
 package com.example.myapplication.ui
 
-import android.content.Intent
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
-import com.example.myapplication.MainActivity
 import com.example.myapplication.R
 import com.example.myapplication.adaptor.ViewPagerAdapter
 import com.example.myapplication.databinding.FragmentDetailsBinding
-import com.example.myapplication.model.ProductsItem
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.hilt.android.AndroidEntryPoint
-import me.relex.circleindicator.CircleIndicator3
-import java.io.ByteArrayInputStream
-import java.io.ObjectInputStream
 
 @AndroidEntryPoint
 class DetailsFragment : Fragment() {
     val args: DetailsFragmentArgs by navArgs()
     lateinit var binding: FragmentDetailsBinding
     val viewModel: MainProductViewModel by viewModels()
+    lateinit var sp: SharedPreferences
+    lateinit var editor: SharedPreferences.Editor
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        sp = this.requireActivity().getSharedPreferences("order", Context.MODE_PRIVATE)
+        editor = sp.edit()
     }
 
     override fun onCreateView(
@@ -52,10 +53,15 @@ class DetailsFragment : Fragment() {
         binding.indicator.setViewPager2(binding.viewPager)
         var numberOfStars = porductt.average_rating.toFloat()
         binding.rBar.rating = numberOfStars
-        viewModel.connectionStatus.observe(viewLifecycleOwner){
-            if (!it){
+        viewModel.connectionStatus.observe(viewLifecycleOwner) {
+            if (!it) {
                 Toast.makeText(context, "Please check your connection", Toast.LENGTH_SHORT).show()
             }
+        }
+        binding.buyButton.setOnClickListener {
+
+            editor.putInt("id",porductt.id)
+            editor.apply()
         }
     }
 

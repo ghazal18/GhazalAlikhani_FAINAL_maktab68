@@ -1,5 +1,5 @@
 package com.example.myapplication.model
 
-data class CollectionX(
+data class CustomerX(
     val href: String
 )
