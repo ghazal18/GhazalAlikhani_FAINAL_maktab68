@@ -2,7 +2,6 @@ package com.example.myapplication.ui
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.graphics.Insets.add
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -57,15 +56,26 @@ class DetailsFragment : Fragment() {
                 Toast.makeText(context, "Please check your connection", Toast.LENGTH_SHORT).show()
             }
         }
+        binding.textView.text = viewModel.number.toString()
 
+        viewModel.number.observe(viewLifecycleOwner) {
+            binding.textViewNumber.text = it.toString()
+        }
+        binding.buttonDec.setOnClickListener {
+            viewModel.decTheNumber()
+        }
+        binding.buttonInc.setOnClickListener {
+            viewModel.incTheNumber()
+        }
         binding.buyButton.setOnClickListener {
-            IdArray.idssssArray.add(porductt.id)
+            ArrayOfProductDetails.idOfProductArray.add(porductt.id)
             val separator = "-"
-            val string = IdArray.idssssArray.joinToString(separator)
+            val string = ArrayOfProductDetails.idOfProductArray.joinToString(separator)
             println(string)
             editor.putString("id", string)
             editor.apply()
         }
+
     }
 
 

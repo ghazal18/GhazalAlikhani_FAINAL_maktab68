@@ -11,6 +11,7 @@ import com.example.myapplication.model.ProductsItem
 import com.example.myapplication.network.hasInternetConnection
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.plus
 import javax.inject.Inject
 
 @RequiresApi(Build.VERSION_CODES.M)
@@ -20,12 +21,13 @@ class MainProductViewModel @Inject constructor(
     application: Application
 ) : AndroidViewModel(application) {
 
-
+    var number = MutableLiveData(1)
     private val context = getApplication<Application>().applicationContext
     var productPopularityList = MutableLiveData<List<ProductsItem>>()
     var productDataList = MutableLiveData<List<ProductsItem>>()
     var productRatingList = MutableLiveData<List<ProductsItem>>()
-    var connectionStatus = MutableLiveData<Boolean>(true)
+    var connectionStatus = MutableLiveData(true)
+
 
     init {
         getRatingProducts()
@@ -33,6 +35,17 @@ class MainProductViewModel @Inject constructor(
         getPopularProducts()
     }
 
+    fun decTheNumber() {
+        if (number.value == 0) {
+            number.value = 0
+        } else {
+            number.value = number.value?.minus(1)
+        }
+    }
+
+    fun incTheNumber() {
+        number.value = number.value?.plus(1)
+    }
 
     @RequiresApi(Build.VERSION_CODES.M)
     fun getRatingProducts() {
@@ -85,10 +98,6 @@ class MainProductViewModel @Inject constructor(
 
         }
     }
-
-
-
-
 
 
 }

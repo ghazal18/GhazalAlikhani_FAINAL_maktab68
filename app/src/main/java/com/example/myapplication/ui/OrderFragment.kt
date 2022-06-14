@@ -19,7 +19,7 @@ import com.example.myapplication.model.Order
 import com.example.myapplication.model.OrderBody
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
-
+var srcOfProductItem: String = ""
 
 @AndroidEntryPoint
 class OrderFragment : Fragment() {
@@ -27,6 +27,7 @@ class OrderFragment : Fragment() {
     val viewModel: OrderViewModel by viewModels()
     lateinit var sp: SharedPreferences
     lateinit var sp2: SharedPreferences
+    var productIdInAdaptor = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,13 +61,24 @@ class OrderFragment : Fragment() {
         }
         val order = OrderBody(userId, 0, "", listOfOrder)
         viewModel.order(order)
-        val adaptor = OrderAdaptor {
 
+
+        viewModel.searchProductWithId.observe(viewLifecycleOwner) {
+            if (it != null) {
+                 srcOfProductItem = it.images[0].src
+            }
         }
+
+        val adaptor = OrderAdaptor(viewModel = viewModel, srcOfProductItem)
         binding.orderListRecyclerView.adapter = adaptor
         viewModel.orderList.observe(viewLifecycleOwner) {
             adaptor.submitList(it)
         }
 
     }
+
+//    private fun onClicks(): (LineItem) -> Unit {
+//
+//
+//    }
 }

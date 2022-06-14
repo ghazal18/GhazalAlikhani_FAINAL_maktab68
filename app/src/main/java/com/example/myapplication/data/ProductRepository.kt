@@ -38,7 +38,12 @@ class ProductRepository @Inject constructor(val productRemoteDataSource: Product
             orderBy = orderBy
         )
     }
+
     suspend fun serOrder(order: OrderBody):Order{
         return productRemoteDataSource.setOrder(order)
+    }
+
+    suspend fun searchForProduct(id:Int):ProductsItem{
+        return productRemoteDataSource.searchForProduct(id)
     }
 }
