@@ -2,6 +2,7 @@ package com.example.myapplication.ui
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Insets.add
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,8 +17,6 @@ import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
 import com.example.myapplication.adaptor.ViewPagerAdapter
 import com.example.myapplication.databinding.FragmentDetailsBinding
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,7 +26,6 @@ class DetailsFragment : Fragment() {
     val viewModel: MainProductViewModel by viewModels()
     lateinit var sp: SharedPreferences
     lateinit var editor: SharedPreferences.Editor
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sp = this.requireActivity().getSharedPreferences("order", Context.MODE_PRIVATE)
@@ -45,6 +43,7 @@ class DetailsFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         var porductt = args.productsss
         binding.product = porductt
         binding.lifecycleOwner = this.viewLifecycleOwner
@@ -58,9 +57,13 @@ class DetailsFragment : Fragment() {
                 Toast.makeText(context, "Please check your connection", Toast.LENGTH_SHORT).show()
             }
         }
-        binding.buyButton.setOnClickListener {
 
-            editor.putInt("id",porductt.id)
+        binding.buyButton.setOnClickListener {
+            IdArray.idssssArray.add(porductt.id)
+            val separator = "-"
+            val string = IdArray.idssssArray.joinToString(separator)
+            println(string)
+            editor.putString("id", string)
             editor.apply()
         }
     }

@@ -17,6 +17,7 @@ import com.example.myapplication.model.LineItem
 import com.example.myapplication.model.LineItemBody
 import com.example.myapplication.model.Order
 import com.example.myapplication.model.OrderBody
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -43,10 +44,21 @@ class OrderFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         var userId = sp.getInt("id", 0)
-        var productId = sp2.getInt("id", 0)
+        //get list from details and convert from string to int array
+        var productId = sp2.getString("id", "")
+        println(productId)
         val listOfOrder = mutableListOf<LineItemBody>()
-
-        val order = OrderBody(userId,0,"",listOfOrder)
+        val list: List<String>? = productId?.split("-")?.let { listOf(*it.toTypedArray()) }
+        val result = list?.map { it.toInt() }
+        println(result)
+        //convert id list to list of LineItemBody and add to list
+        if (result != null) {
+            for (i in result.indices) {
+                var lineItemBody = LineItemBody(0, result[i], 1)
+                listOfOrder.add(lineItemBody)
+            }
+        }
+        val order = OrderBody(userId, 0, "", listOfOrder)
         viewModel.order(order)
         val adaptor = OrderAdaptor {
 
