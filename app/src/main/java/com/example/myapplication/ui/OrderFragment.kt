@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.adaptor.OrderAdaptor
 import com.example.myapplication.databinding.FragmentOrderBinding
@@ -19,6 +20,7 @@ import com.example.myapplication.model.Order
 import com.example.myapplication.model.OrderBody
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
+
 var srcOfProductItem: String = ""
 
 @AndroidEntryPoint
@@ -47,38 +49,42 @@ class OrderFragment : Fragment() {
         var userId = sp.getInt("id", 0)
         //get list from details and convert from string to int array
         var productId = sp2.getString("id", "")
+        var productCount = sp2.getString("count", "")
         println(productId)
+        println(productCount)
         val listOfOrder = mutableListOf<LineItemBody>()
+
         val list: List<String>? = productId?.split("-")?.let { listOf(*it.toTypedArray()) }
-        val result = list?.map { it.toInt() }
-        println(result)
+        val countList: List<String>? = productCount?.split("-")?.let { listOf(*it.toTypedArray()) }
+        val idResult = list?.map { it.toInt() }
+        val countResult = countList?.map { it.toInt() }
+        println(idResult)
+        println(countResult)
         //convert id list to list of LineItemBody and add to list
-        if (result != null) {
-            for (i in result.indices) {
-                var lineItemBody = LineItemBody(0, result[i], 1)
+        if (idResult != null && countResult != null) {
+            for (i in 0..idResult.size - 1) {
+
+                var lineItemBody = LineItemBody(0, idResult[i], countResult[i])
                 listOfOrder.add(lineItemBody)
+                println("${lineItemBody.product_id} ,${lineItemBody.quantity} ")
+
             }
         }
         val order = OrderBody(userId, 0, "", listOfOrder)
         viewModel.order(order)
 
 
-        viewModel.searchProductWithId.observe(viewLifecycleOwner) {
-            if (it != null) {
-                 srcOfProductItem = it.images[0].src
-            }
-        }
+        val adaptorL = OrderAdaptor() {
 
-        val adaptor = OrderAdaptor(viewModel = viewModel, srcOfProductItem)
-        binding.orderListRecyclerView.adapter = adaptor
+        }
+        binding.orderListRecyclerView.adapter = adaptorL
         viewModel.orderList.observe(viewLifecycleOwner) {
-            adaptor.submitList(it)
+            if (it != null){
+            println( "${it.size} is the size of the list")
+            adaptorL.submitList(it)
+            }
         }
 
     }
 
-//    private fun onClicks(): (LineItem) -> Unit {
-//
-//
-//    }
 }

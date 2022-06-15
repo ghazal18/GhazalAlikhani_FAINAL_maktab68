@@ -25,6 +25,7 @@ class DetailsFragment : Fragment() {
     val viewModel: MainProductViewModel by viewModels()
     lateinit var sp: SharedPreferences
     lateinit var editor: SharedPreferences.Editor
+    var clicked = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sp = this.requireActivity().getSharedPreferences("order", Context.MODE_PRIVATE)
@@ -68,12 +69,21 @@ class DetailsFragment : Fragment() {
             viewModel.incTheNumber()
         }
         binding.buyButton.setOnClickListener {
-            ArrayOfProductDetails.idOfProductArray.add(porductt.id)
-            val separator = "-"
-            val string = ArrayOfProductDetails.idOfProductArray.joinToString(separator)
-            println(string)
-            editor.putString("id", string)
-            editor.apply()
+          if(!clicked){
+              ArrayOfProductDetails.idOfProductArray.add(porductt.id)
+              val separator = "-"
+              val string = ArrayOfProductDetails.idOfProductArray.joinToString(separator)
+              println("the id: " + string)
+              editor.putString("id", string)
+              ArrayOfProductDetails.numberOfProductArray.add(
+                  binding.textViewNumber.text.toString().toInt()
+              )
+              val string2 = ArrayOfProductDetails.numberOfProductArray.joinToString(separator)
+              println("the count: " + string2)
+              editor.putString("count", string2)
+              editor.apply()
+              clicked = true
+          }
         }
 
     }

@@ -235,7 +235,7 @@
                                 android:layout_marginVertical="8dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:textSize="14sp" />
+                                android:textSize="24sp" />
 
                             <Button
                                 android:id="@+id/buttonInc"

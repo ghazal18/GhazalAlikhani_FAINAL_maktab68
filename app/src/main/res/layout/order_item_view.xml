@@ -8,41 +8,40 @@
             type="com.example.myapplication.model.LineItem" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/linear"
+    <androidx.cardview.widget.CardView
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/gray"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{orderProduct.name}" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{orderProduct.total}" />
+                android:layout_weight="1"
+                android:text="@{orderProduct.name}"
+                android:textSize="25sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{String.valueOf(orderProduct.quantity)}" />
+                android:layout_weight="1"
+                android:text="@{orderProduct.total}"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@{String.valueOf(orderProduct.quantity)}"
+                android:textSize="25sp" />
 
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/orderImageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_margin="12dp" />
-
-
-    </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </layout>
