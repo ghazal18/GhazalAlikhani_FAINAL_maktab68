@@ -12,17 +12,20 @@ import com.example.myapplication.model.LineItem
 import com.example.myapplication.model.ProductsItem
 
 
-typealias OrderClickHandler = (ProductsItem) -> Unit
+typealias OrderClickHandler = (LineItem) -> Unit
 
 class OrderAdaptor(val onClick: OrderClickHandler) :
     ListAdapter<LineItem, OrderAdaptor.ItemHolder>(OrderDiffCallback) {
 
     class ItemHolder(val binding: OrderItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(product: LineItem, onClick: OrderClickHandler) {
+        fun bind(orderProduct: LineItem, onClick: OrderClickHandler) {
 
-//            binding.linear.setOnClickListener {
-//                onClick.invoke(product)
+//            binding.buttonDecrease.setOnClickListener {
+//                onClick.invoke(orderProduct)
+//            }
+//            binding.buttonDecrease.setOnClickListener {
+//                onClick2.invoke(orderProduct)
 //            }
         }
     }
