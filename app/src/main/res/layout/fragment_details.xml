@@ -197,10 +197,10 @@
                         android:background="@color/darkGray" />
 
                     <TextView
+                        android:id="@+id/textViewProductDis"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="12dp"
-                        android:text="@{product.description}"
                         android:textColor="@color/darkGray2"
                         android:textSize="18sp" />
 

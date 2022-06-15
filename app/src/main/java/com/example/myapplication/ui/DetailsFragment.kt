@@ -57,6 +57,7 @@ class DetailsFragment : Fragment() {
                 Toast.makeText(context, "Please check your connection", Toast.LENGTH_SHORT).show()
             }
         }
+        binding.textViewProductDis.text = RemoveTag.removingTag(porductt.description)
         binding.textView.text = viewModel.number.toString()
 
         viewModel.number.observe(viewLifecycleOwner) {
