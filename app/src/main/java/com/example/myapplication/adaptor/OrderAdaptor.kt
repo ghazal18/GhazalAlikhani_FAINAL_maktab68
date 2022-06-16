@@ -14,7 +14,7 @@ import com.example.myapplication.model.ProductsItem
 
 typealias OrderClickHandler = (LineItem) -> Unit
 
-class OrderAdaptor(val onClick: OrderClickHandler,val onClick2: OrderClickHandler) :
+class OrderAdaptor(val onClick: OrderClickHandler, val onClick2: OrderClickHandler) :
     ListAdapter<LineItem, OrderAdaptor.ItemHolder>(OrderDiffCallback) {
 
     class ItemHolder(val binding: OrderItemViewBinding) :
@@ -22,9 +22,15 @@ class OrderAdaptor(val onClick: OrderClickHandler,val onClick2: OrderClickHandle
         fun bind(orderProduct: LineItem, onClick: OrderClickHandler, onClick2: OrderClickHandler) {
 
             binding.buttonDecrease.setOnClickListener {
+            var quantity = binding.textViewQuantity.text.toString().toInt()
+                var increase = ++quantity
+                binding.textViewQuantity.text = increase.toString()
                 onClick.invoke(orderProduct)
             }
             binding.buttonIncrease.setOnClickListener {
+            var quantity = binding.textViewQuantity.text.toString().toInt()
+                var decrease = --quantity
+                binding.textViewQuantity.text = decrease.toString()
                 onClick2.invoke(orderProduct)
             }
         }

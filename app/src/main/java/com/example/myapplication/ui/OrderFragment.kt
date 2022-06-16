@@ -32,7 +32,6 @@ class OrderFragment : Fragment() {
     lateinit var sp2: SharedPreferences
     var responseOrder: Order? = null
     var orderId = 0
-    var productIdClicked = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,13 +76,8 @@ class OrderFragment : Fragment() {
         val order = OrderBody(userId, 0, "", listOfOrder)
         viewModel.order(order)
 
-
-
-
         viewModel.orderId.observe(viewLifecycleOwner) {
             orderId = it
-
-            println("the order id in observer $orderId")
         }
 
         val adaptor = OrderAdaptor({
