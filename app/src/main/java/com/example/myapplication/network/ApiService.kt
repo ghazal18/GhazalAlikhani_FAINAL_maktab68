@@ -40,8 +40,8 @@ interface ApiService {
     suspend fun searchProduct(
         @Query("consumer_key") key: String = CONSUMER_KEY,
         @Query("consumer_secret") secret: String = CONSUMER_SECRET,
-        @Query("search") word: String ,
-        @Query("order") order: String ,
+        @Query("search") word: String,
+        @Query("order") order: String,
         @Query("orderby") orderBy: String
     ): List<ProductsItem>
 
@@ -58,7 +58,7 @@ interface ApiService {
         @Query("consumer_key") key: String = CONSUMER_KEY,
         @Query("consumer_secret") secret: String = CONSUMER_SECRET,
         @Body order: OrderUpdate
-    ):Order
+    ): Order
 
     @GET("products/{id}")
     suspend fun searchForProduct(
@@ -66,6 +66,13 @@ interface ApiService {
         @Query("consumer_key") key: String = CONSUMER_KEY,
         @Query("consumer_secret") secret: String = CONSUMER_SECRET
     ): ProductsItem
+
+    @GET("products/reviews")
+    suspend fun getReviews(
+        @Query("consumer_key") key: String = CONSUMER_KEY,
+        @Query("consumer_secret") secret: String = CONSUMER_SECRET,
+        @Query("product")id:Int
+    ):Reviews
 
 
 }
