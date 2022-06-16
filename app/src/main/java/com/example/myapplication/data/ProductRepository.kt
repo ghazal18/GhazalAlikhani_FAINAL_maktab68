@@ -43,6 +43,9 @@ class ProductRepository @Inject constructor(val productRemoteDataSource: Product
         return productRemoteDataSource.setOrder(order)
     }
 
+    suspend fun updateAnOrder(id: Int,order: OrderUpdate):Order{
+        return productRemoteDataSource.updateAnOrder(id,order)
+    }
     suspend fun searchForProduct(id:Int):ProductsItem{
         return productRemoteDataSource.searchForProduct(id)
     }

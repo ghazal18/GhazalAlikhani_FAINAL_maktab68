@@ -29,7 +29,12 @@ class ProductRemoteDataSource @Inject constructor(val apiService: ApiService) {
     suspend fun setOrder(order: OrderBody): Order {
         return apiService.setOrder(order = order)
     }
-    suspend fun searchForProduct(id :Int):ProductsItem{
+
+    suspend fun updateAnOrder(id: Int, order: OrderUpdate): Order {
+        return apiService.updateAnOrder(id = id, order = order)
+    }
+
+    suspend fun searchForProduct(id: Int): ProductsItem {
         return apiService.searchForProduct(id = id)
     }
 }

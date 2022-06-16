@@ -4,20 +4,21 @@ import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.TextUtils.indexOf
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.room.Update
 import com.example.myapplication.R
 import com.example.myapplication.adaptor.OrderAdaptor
+import com.example.myapplication.adaptor.OrderClickHandler
 import com.example.myapplication.databinding.FragmentOrderBinding
-import com.example.myapplication.model.LineItem
-import com.example.myapplication.model.LineItemBody
-import com.example.myapplication.model.Order
-import com.example.myapplication.model.OrderBody
+import com.example.myapplication.model.*
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,7 +30,9 @@ class OrderFragment : Fragment() {
     val viewModel: OrderViewModel by viewModels()
     lateinit var sp: SharedPreferences
     lateinit var sp2: SharedPreferences
-    var productIdInAdaptor = 0
+    var responseOrder: Order? = null
+    var orderId = 0
+    var productIdClicked = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +45,7 @@ class OrderFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order, container, false)
+        binding.lifecycleOwner = this.viewLifecycleOwner
         return binding.root
     }
 
@@ -74,17 +78,35 @@ class OrderFragment : Fragment() {
         viewModel.order(order)
 
 
-        val adaptorL = OrderAdaptor() {
 
+
+        viewModel.orderId.observe(viewLifecycleOwner) {
+            orderId = it
+
+            println("the order id in observer $orderId")
         }
-        binding.orderListRecyclerView.adapter = adaptorL
+
+        val adaptor = OrderAdaptor({
+            var updateOrder = OrderUpdate(listOf(LineItemBodyUpdate(it.id, ++it.quantity)))
+            responseOrder?.let { it1 -> viewModel.updateAnOrder(it1.id, updateOrder) }
+
+        }, {
+            var updateOrder = OrderUpdate(listOf(LineItemBodyUpdate(it.id, --it.quantity)))
+            responseOrder?.let { it1 -> viewModel.updateAnOrder(it1.id, updateOrder) }
+        })
+        viewModel.orderLiveData.observe(viewLifecycleOwner) {
+            responseOrder = it
+        }
+
+        binding.orderListRecyclerView.adapter = adaptor
         viewModel.orderList.observe(viewLifecycleOwner) {
-            if (it != null){
-            println( "${it.size} is the size of the list")
-            adaptorL.submitList(it)
+            if (it != null) {
+                adaptor.submitList(it)
             }
+            println("the order id is ${responseOrder?.id}")
         }
 
     }
+
 
 }

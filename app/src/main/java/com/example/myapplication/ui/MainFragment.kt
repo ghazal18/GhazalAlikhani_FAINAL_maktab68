@@ -36,8 +36,8 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
+        binding.lifecycleOwner = this.viewLifecycleOwner
         return binding.root
     }
 

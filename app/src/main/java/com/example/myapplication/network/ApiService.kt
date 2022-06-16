@@ -52,11 +52,20 @@ interface ApiService {
         @Body order: OrderBody
     ): Order
 
+    @PUT("orders/{id}")
+    suspend fun updateAnOrder(
+        @Path(value = "id") id: Int,
+        @Query("consumer_key") key: String = CONSUMER_KEY,
+        @Query("consumer_secret") secret: String = CONSUMER_SECRET,
+        @Body order: OrderUpdate
+    ):Order
+
     @GET("products/{id}")
     suspend fun searchForProduct(
         @Path(value = "id") id: Int,
         @Query("consumer_key") key: String = CONSUMER_KEY,
         @Query("consumer_secret") secret: String = CONSUMER_SECRET
     ): ProductsItem
+
 
 }

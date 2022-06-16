@@ -14,19 +14,19 @@ import com.example.myapplication.model.ProductsItem
 
 typealias OrderClickHandler = (LineItem) -> Unit
 
-class OrderAdaptor(val onClick: OrderClickHandler) :
+class OrderAdaptor(val onClick: OrderClickHandler,val onClick2: OrderClickHandler) :
     ListAdapter<LineItem, OrderAdaptor.ItemHolder>(OrderDiffCallback) {
 
     class ItemHolder(val binding: OrderItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(orderProduct: LineItem, onClick: OrderClickHandler) {
+        fun bind(orderProduct: LineItem, onClick: OrderClickHandler, onClick2: OrderClickHandler) {
 
-//            binding.buttonDecrease.setOnClickListener {
-//                onClick.invoke(orderProduct)
-//            }
-//            binding.buttonDecrease.setOnClickListener {
-//                onClick2.invoke(orderProduct)
-//            }
+            binding.buttonDecrease.setOnClickListener {
+                onClick.invoke(orderProduct)
+            }
+            binding.buttonIncrease.setOnClickListener {
+                onClick2.invoke(orderProduct)
+            }
         }
     }
 
@@ -43,7 +43,7 @@ class OrderAdaptor(val onClick: OrderClickHandler) :
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
         val order = getItem(position)
         holder.binding.orderProduct = order
-        holder.bind(order, onClick)
+        holder.bind(order, onClick, onClick2)
     }
 
 }
