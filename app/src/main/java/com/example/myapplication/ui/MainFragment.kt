@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.adaptor.CategoriesAdaptor
 import com.example.myapplication.adaptor.ProductAdaptor
+import com.example.myapplication.adaptor.ViewPagerAdapter
 import com.example.myapplication.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -106,6 +107,11 @@ class MainFragment : Fragment() {
             if (!it){
                 Toast.makeText(context, "Please check your connection", Toast.LENGTH_SHORT).show()
             }
+        }
+        viewModel.sliderPhoto.observe(viewLifecycleOwner){
+            var list = it
+            binding.viewPager.adapter = context?.let { ViewPagerAdapter(it, list) }
+            binding.indicator.setViewPager2(binding.viewPager)
         }
 
     }

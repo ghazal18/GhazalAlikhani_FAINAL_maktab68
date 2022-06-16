@@ -40,8 +40,8 @@ interface ApiService {
     suspend fun searchProduct(
         @Query("consumer_key") key: String = CONSUMER_KEY,
         @Query("consumer_secret") secret: String = CONSUMER_SECRET,
-        @Query("search") word: String = ORDER_BY_DATE,
-        @Query("order") order: String = DESC_ORDER,
+        @Query("search") word: String ,
+        @Query("order") order: String ,
         @Query("orderby") orderBy: String
     ): List<ProductsItem>
 

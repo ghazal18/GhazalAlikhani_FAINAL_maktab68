@@ -6,7 +6,11 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.myapplication.NetworkParams.Companion.ASC_ORDER
+import com.example.myapplication.NetworkParams.Companion.DESC_ORDER
+import com.example.myapplication.NetworkParams.Companion.ORDER_BY_DATE
 import com.example.myapplication.data.ProductRepository
+import com.example.myapplication.model.Image
 import com.example.myapplication.model.ProductsItem
 import com.example.myapplication.network.hasInternetConnection
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,6 +37,7 @@ class MainProductViewModel @Inject constructor(
         getRatingProducts()
         getDatingProducts()
         getPopularProducts()
+        slider()
     }
 
     fun decTheNumber() {
@@ -96,6 +101,20 @@ class MainProductViewModel @Inject constructor(
                 connectionStatus.value = false
             }
 
+        }
+    }
+
+    var sliderPhoto = MutableLiveData<List<Image>>()
+
+    fun slider() {
+        viewModelScope.launch {
+            val list = productRepository.searchWord(
+                searchWord = "تخفیفات",
+                orderBy = ORDER_BY_DATE,
+                order = ASC_ORDER
+            )
+
+            sliderPhoto.value = list[0].images
         }
     }
 

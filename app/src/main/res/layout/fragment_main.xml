@@ -22,10 +22,26 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/photoooooooooooo" />
+                android:layout_height="wrap_content"
+                />
+
+
+            <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                android:id="@+id/indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:dotsColor="@color/slowGray"
+                app:dotsCornerRadius="10dp"
+                app:dotsSize="10dp"
+                app:dotsSpacing="2dp"
+                android:layout_gravity="center"
+                app:dotsWidthFactor="1.5"
+                app:progressMode="true"
+                app:selectedDotColor="@color/gray" />
 
             <LinearLayout
                 android:layout_width="match_parent"
