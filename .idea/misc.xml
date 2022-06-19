@@ -5,32 +5,39 @@
       <map>
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1975" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable/ic_baseline_arrow_left_24.xml" value="0.202" />
+        <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable/ic_baseline_filter_alt_24.xml" value="0.1745" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable/ic_baseline_remove_red_eye_24.xml" value="0.1975" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.159" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable/ic_baseline_shopping_basket_24.xml" value="0.1975" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable/ic_baseline_shopping_cart_24.xml" value="0.1975" />
+        <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable/ic_baseline_sort_24.xml" value="0.1745" />
+        <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable/ic_baseline_store_24.xml" value="0.1745" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable/ic_connection_error.xml" value="0.214" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1975" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable/rounded_corner.xml" value="0.1975" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable/rounded_corner_five.xml" value="0.214" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable/rounded_corner_four.xml" value="0.214" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable/rounded_corner_gray.xml" value="0.1745" />
+        <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable/rounded_corner_seven.xml" value="0.1745" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable/rounded_corner_six.xml" value="0.214" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable/rounded_corner_three.xml" value="0.1975" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable/rounded_corner_two.xml" value="0.1975" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/drawable/rounded_top_corner.xml" value="0.1975" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/activity_main.xml" value="0.24010416666666667" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/activity_splash_screen.xml" value="0.25416666666666665" />
+        <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/attribute_list_item_view.xml" value="0.25416666666666665" />
+        <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/attribute_term_item_view.xml" value="0.25416666666666665" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/category_list_item_view.xml" value="0.16" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/content_splash_screen.xml" value="0.25416666666666665" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/fragment_categories.xml" value="0.25416666666666665" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/fragment_category_details.xml" value="0.25416666666666665" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/fragment_details.xml" value="0.2" />
+        <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/fragment_filter.xml" value="0.264" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/fragment_first.xml" value="0.25416666666666665" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/fragment_login.xml" value="0.25416666666666665" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/fragment_main.xml" value="0.25943646996278574" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/fragment_order.xml" value="0.25416666666666665" />
-        <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/fragment_search.xml" value="0.1" />
+        <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/fragment_search.xml" value="0.264" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/fragment_second.xml" value="0.23596014492753623" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/fragment_show_all.xml" value="0.25416666666666665" />
         <entry key="..\:/ghazal_alikhani_FINAL_maktab68/app/src/main/res/layout/fragment_signin.xml" value="0.264" />

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="attribute"
+            type="com.example.myapplication.model.AttributesItem" />
+    </data>
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:id="@+id/attributeTextView"
+        android:padding="12dp"
+        android:text="@{attribute.name}"
+        android:textSize="22sp" />
+
+
+</layout>

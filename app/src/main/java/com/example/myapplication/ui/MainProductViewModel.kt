@@ -10,8 +10,10 @@ import com.example.myapplication.NetworkParams.Companion.ASC_ORDER
 import com.example.myapplication.NetworkParams.Companion.DESC_ORDER
 import com.example.myapplication.NetworkParams.Companion.ORDER_BY_DATE
 import com.example.myapplication.data.ProductRepository
+import com.example.myapplication.model.AttributesItem
 import com.example.myapplication.model.Image
 import com.example.myapplication.model.ProductsItem
+import com.example.myapplication.model.ReviewsItem
 import com.example.myapplication.network.hasInternetConnection
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -30,6 +32,8 @@ class MainProductViewModel @Inject constructor(
     var productPopularityList = MutableLiveData<List<ProductsItem>>()
     var productDataList = MutableLiveData<List<ProductsItem>>()
     var productRatingList = MutableLiveData<List<ProductsItem>>()
+    var reviewsList = MutableLiveData<List<ReviewsItem>>()
+
     var connectionStatus = MutableLiveData(true)
 
 
@@ -115,6 +119,13 @@ class MainProductViewModel @Inject constructor(
             )
 
             sliderPhoto.value = list[0].images
+        }
+    }
+
+    fun getReviews(id: Int) {
+        viewModelScope.launch {
+            val listOfReview = productRepository.getReviews(id)
+
         }
     }
 

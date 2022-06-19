@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.NetworkParams.Companion.ASC_ORDER
 import com.example.myapplication.NetworkParams.Companion.DESC_ORDER
 import com.example.myapplication.NetworkParams.Companion.ORDER_BY_DATE
@@ -62,6 +63,7 @@ class SearchFragment : Fragment() {
 
         }
     })*/
+
         binding.go.setOnClickListener {
             search = binding.searchEditText.text.toString()
         }
@@ -97,7 +99,9 @@ class SearchFragment : Fragment() {
                 show()
             }
         }
-
+        binding.filter.setOnClickListener {
+            findNavController().navigate(R.id.action_searchFragment_to_filterFragment)
+        }
     }
 
 

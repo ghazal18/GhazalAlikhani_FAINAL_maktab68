@@ -49,4 +49,13 @@ class ProductRepository @Inject constructor(val productRemoteDataSource: Product
     suspend fun searchForProduct(id:Int):ProductsItem{
         return productRemoteDataSource.searchForProduct(id)
     }
+    suspend fun getReviews(productId:Int):List<ReviewsItem>{
+        return productRemoteDataSource.getReviews(productId)
+    }
+    suspend fun getAttributes():List<AttributesItem>{
+        return productRemoteDataSource.getAttributes()
+    }
+    suspend fun getAttributeTerm(id:Int):List<Term>{
+        return productRemoteDataSource.getAttributeTerm(id)
+    }
 }

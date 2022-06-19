@@ -23,33 +23,56 @@
             android:imeOptions="actionDone"
             android:padding="16dp"
             android:textSize="18sp" />
+
         <Button
+            android:id="@+id/go"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="go"
-            android:id="@+id/go"/>
+            android:text="go" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/menu"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="مرتب سازی:">
+            android:orientation="horizontal">
 
-            <AutoCompleteTextView
-                android:id="@+id/autoCompleteText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/filter"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_corner_seven"
+                android:gravity="start"
                 android:padding="16dp"
-                android:clickable="true"
-                android:cursorVisible="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:importantForAutofill="no"
-                android:textColor="@color/black" />
+                android:text="فیلتر:"
+                android:textSize="20sp"
+                app:drawableStartCompat="@drawable/ic_baseline_filter_alt_24" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/menu"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:hint="مرتب سازی:"
+                android:src="@drawable/ic_baseline_sort_24">
+
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:importantForAutofill="no"
+                    android:padding="16dp"
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/movieRecyclerView"

@@ -37,4 +37,16 @@ class ProductRemoteDataSource @Inject constructor(val apiService: ApiService) {
     suspend fun searchForProduct(id: Int): ProductsItem {
         return apiService.searchForProduct(id = id)
     }
+
+    suspend fun getReviews(productId: Int): List<ReviewsItem> {
+        return apiService.getReviews(id = productId)
+    }
+
+    suspend fun getAttributes(): List<AttributesItem> {
+        return apiService.getAttributes()
+    }
+
+    suspend fun getAttributeTerm(id: Int): List<Term> {
+        return apiService.getAttributeTerm(attribute_id = id)
+    }
 }

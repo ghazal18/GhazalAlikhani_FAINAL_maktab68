@@ -71,8 +71,21 @@ interface ApiService {
     suspend fun getReviews(
         @Query("consumer_key") key: String = CONSUMER_KEY,
         @Query("consumer_secret") secret: String = CONSUMER_SECRET,
-        @Query("product")id:Int
-    ):Reviews
+        @Query("product") id: Int
+    ): List<ReviewsItem>
+
+    @GET("products/attributes")
+    suspend fun getAttributes(
+        @Query("consumer_key") key: String = CONSUMER_KEY,
+        @Query("consumer_secret") secret: String = CONSUMER_SECRET,
+    ): List<AttributesItem>
+
+    @GET("products/attributes/{attribute_id}/terms")
+    suspend fun getAttributeTerm(
+        @Path(value = "attribute_id") attribute_id: Int,
+        @Query("consumer_key") key: String = CONSUMER_KEY,
+        @Query("consumer_secret") secret: String = CONSUMER_SECRET,
+    ): List<Term>
 
 
 }
