@@ -4,6 +4,6 @@ import java.util.Collections.replaceAll
 
 object RemoveTag {
     fun removingTag(string: String):String{
-        return string.replace("\\<[^>]*>","")
+        return string.replace("<.*?>".toRegex(),"")
     }
 }

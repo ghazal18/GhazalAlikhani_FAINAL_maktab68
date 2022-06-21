@@ -125,7 +125,7 @@ class MainProductViewModel @Inject constructor(
     fun getReviews(id: Int) {
         viewModelScope.launch {
             val listOfReview = productRepository.getReviews(id)
-
+            reviewsList.value = listOfReview
         }
     }
 

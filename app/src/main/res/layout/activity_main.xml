@@ -35,7 +35,7 @@
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:background="@color/red"
-                android:src="@drawable/ic_baseline_shopping_cart_24" />
+                android:src="@drawable/ic_baseline_shopping_cart_white" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/mytoolbar"

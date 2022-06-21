@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
+import com.example.myapplication.adaptor.ReviewAdaptor
 import com.example.myapplication.adaptor.ViewPagerAdapter
 import com.example.myapplication.databinding.FragmentDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -58,6 +59,7 @@ class DetailsFragment : Fragment() {
             }
         }
         binding.textViewProductDis.text = RemoveTag.removingTag(porductt.description)
+
         binding.textView.text = viewModel.number.toString()
 
         viewModel.number.observe(viewLifecycleOwner) {
@@ -70,23 +72,40 @@ class DetailsFragment : Fragment() {
             viewModel.incTheNumber()
         }
         binding.buyButton.setOnClickListener {
-          if(!clicked){
-              ArrayOfProductDetails.idOfProductArray.add(porductt.id)
-              val separator = "-"
-              val string = ArrayOfProductDetails.idOfProductArray.joinToString(separator)
-              println("the id: " + string)
-              editor.putString("id", string)
-              ArrayOfProductDetails.numberOfProductArray.add(
-                  binding.textViewNumber.text.toString().toInt()
-              )
-              val string2 = ArrayOfProductDetails.numberOfProductArray.joinToString(separator)
-              println("the count: " + string2)
-              editor.putString("count", string2)
-              editor.apply()
-              clicked = true
-          }
+            if (!clicked) {
+                ArrayOfProductDetails.idOfProductArray.add(porductt.id)
+                val separator = "-"
+                val string = ArrayOfProductDetails.idOfProductArray.joinToString(separator)
+                println("the id: " + string)
+                editor.putString("id", string)
+                ArrayOfProductDetails.numberOfProductArray.add(
+                    binding.textViewNumber.text.toString().toInt()
+                )
+                val string2 = ArrayOfProductDetails.numberOfProductArray.joinToString(separator)
+                println("the count: " + string2)
+                editor.putString("count", string2)
+                editor.apply()
+                clicked = true
+            }
         }
+        viewModel.getReviews(porductt.id)
 
+        binding.reviewsButton.setOnClickListener {
+            binding.linearLayoutReviews.visibility = View.VISIBLE
+            binding.linearLayoutSpecifications.visibility = View.GONE
+        }
+        binding.SpecificationsButton.setOnClickListener {
+            binding.linearLayoutReviews.visibility = View.GONE
+            binding.linearLayoutSpecifications.visibility = View.VISIBLE
+        }
+        val reviewAdaptor = ReviewAdaptor {
+
+        }
+        binding.reviewRecyclerView.adapter = reviewAdaptor
+        viewModel.reviewsList.observe(viewLifecycleOwner) {
+            println("the review list number ${it.size}")
+            reviewAdaptor.submitList(it)
+        }
     }
 
 

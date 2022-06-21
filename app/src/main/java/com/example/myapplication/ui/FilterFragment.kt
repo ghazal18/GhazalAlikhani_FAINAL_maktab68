@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.adaptor.AttributeAdaptor
 import com.example.myapplication.adaptor.AttributeTermAdaptor
@@ -42,12 +43,16 @@ class FilterFragment : Fragment() {
         viewModel.attributesList.observe(viewLifecycleOwner) {
             adaptor.submitList(it)
         }
-        val termAdaptor = AttributeTermAdaptor{
+        val termAdaptor = AttributeTermAdaptor {
 
         }
         binding.attributeTermRecyclerView.adapter = termAdaptor
-        viewModel.attributesTermList.observe(viewLifecycleOwner){
+        viewModel.attributesTermList.observe(viewLifecycleOwner) {
             termAdaptor.submitList(it)
+        }
+        binding.filterButton.setOnClickListener {
+            val action = FilterFragmentDirections.actionFilterFragmentToSearchFragment(ArrayOfProductDetails.array)
+            findNavController().navigate(action)
         }
 
     }

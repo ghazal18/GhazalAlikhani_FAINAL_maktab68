@@ -20,9 +20,9 @@ class AttributeTermAdaptor(val onClick: AttributeTermClickHandler) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(attribute: Term, onClick: AttributeTermClickHandler) {
 
-//            binding.attributeTextView.setOnClickListener {
-//                onClick.invoke(attribute)
-//            }
+            binding.checkBox.setOnClickListener {
+                onClick.invoke(attribute)
+            }
         }
     }
 
