@@ -1,4 +1,4 @@
-package com.example.myapplication.ui
+package com.example.myapplication.ui.fragments
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -15,8 +15,8 @@ import com.example.myapplication.databinding.FragmentSigninBinding
 import com.example.myapplication.model.Billing
 import com.example.myapplication.model.Customer
 import com.example.myapplication.model.Shipping
+import com.example.myapplication.viewModels.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import org.json.JSONObject
 
 @AndroidEntryPoint
 class SigninFragment : Fragment() {

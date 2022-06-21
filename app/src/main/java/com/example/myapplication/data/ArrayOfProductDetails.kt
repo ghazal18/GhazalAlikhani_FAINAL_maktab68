@@ -1,4 +1,4 @@
-package com.example.myapplication.ui
+package com.example.myapplication.data
 
 object ArrayOfProductDetails {
     var idOfProductArray: MutableList<Int> = mutableListOf<Int>()

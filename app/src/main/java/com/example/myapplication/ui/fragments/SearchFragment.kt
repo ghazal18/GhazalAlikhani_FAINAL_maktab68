@@ -1,23 +1,21 @@
-package com.example.myapplication.ui
+package com.example.myapplication.ui.fragments
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.*
 import android.widget.PopupMenu
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.myapplication.NetworkParams.Companion.ASC_ORDER
-import com.example.myapplication.NetworkParams.Companion.DESC_ORDER
-import com.example.myapplication.NetworkParams.Companion.ORDER_BY_DATE
-import com.example.myapplication.NetworkParams.Companion.ORDER_BY_POPULARITY
-import com.example.myapplication.NetworkParams.Companion.ORDER_BY_PRICE
 import com.example.myapplication.R
 import com.example.myapplication.adaptor.ListOfProductAdaptor
+import com.example.myapplication.data.NetworkParams.Companion.ASC_ORDER
+import com.example.myapplication.data.NetworkParams.Companion.DESC_ORDER
+import com.example.myapplication.data.NetworkParams.Companion.ORDER_BY_DATE
+import com.example.myapplication.data.NetworkParams.Companion.ORDER_BY_POPULARITY
+import com.example.myapplication.data.NetworkParams.Companion.ORDER_BY_PRICE
 import com.example.myapplication.databinding.FragmentSearchBinding
+import com.example.myapplication.viewModels.SearchProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

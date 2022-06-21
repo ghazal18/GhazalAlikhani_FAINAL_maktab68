@@ -1,4 +1,4 @@
-package com.example.myapplication.ui
+package com.example.myapplication.viewModels
 
 import android.app.Application
 import android.os.Build
@@ -6,18 +6,15 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.myapplication.NetworkParams.Companion.ASC_ORDER
-import com.example.myapplication.NetworkParams.Companion.DESC_ORDER
-import com.example.myapplication.NetworkParams.Companion.ORDER_BY_DATE
+import com.example.myapplication.data.NetworkParams.Companion.ASC_ORDER
+import com.example.myapplication.data.NetworkParams.Companion.ORDER_BY_DATE
 import com.example.myapplication.data.ProductRepository
-import com.example.myapplication.model.AttributesItem
 import com.example.myapplication.model.Image
 import com.example.myapplication.model.ProductsItem
 import com.example.myapplication.model.ReviewsItem
 import com.example.myapplication.network.hasInternetConnection
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.plus
 import javax.inject.Inject
 
 @RequiresApi(Build.VERSION_CODES.M)

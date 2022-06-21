@@ -1,4 +1,4 @@
-package com.example.myapplication.ui
+package com.example.myapplication.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,6 +13,8 @@ import com.example.myapplication.R
 import com.example.myapplication.adaptor.AttributeAdaptor
 import com.example.myapplication.adaptor.AttributeTermAdaptor
 import com.example.myapplication.databinding.FragmentFilterBinding
+import com.example.myapplication.data.ArrayOfProductDetails
+import com.example.myapplication.viewModels.SearchProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -51,7 +53,9 @@ class FilterFragment : Fragment() {
             termAdaptor.submitList(it)
         }
         binding.filterButton.setOnClickListener {
-            val action = FilterFragmentDirections.actionFilterFragmentToSearchFragment(ArrayOfProductDetails.array)
+            val action = FilterFragmentDirections.actionFilterFragmentToSearchFragment(
+                ArrayOfProductDetails.array
+            )
             findNavController().navigate(action)
         }
 

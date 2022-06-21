@@ -1,7 +1,6 @@
 package com.example.myapplication.model
 
 data class CategoriesItem(
-    val _links: Links,
     val count: Int,
     val description: String,
     val display: String,

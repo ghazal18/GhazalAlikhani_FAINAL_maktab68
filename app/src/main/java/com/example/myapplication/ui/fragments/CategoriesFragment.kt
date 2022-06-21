@@ -1,4 +1,4 @@
-package com.example.myapplication.ui
+package com.example.myapplication.ui.fragments
 
 import android.os.Build
 import android.os.Bundle
@@ -11,18 +11,16 @@ import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
-import com.example.myapplication.adaptor.ListOfProductAdaptor
+import com.example.myapplication.adaptor.ListOfCategoriesAdaptor
 import com.example.myapplication.databinding.FragmentCategoriesBinding
-import com.example.myapplication.databinding.FragmentCategoryDetailsBinding
+import com.example.myapplication.viewModels.CategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CategoryDetailsFragment : Fragment() {
-    val args: CategoryDetailsFragmentArgs by navArgs()
-    lateinit var binding: FragmentCategoryDetailsBinding
-    val viewModel :CategoryViewModel by viewModels()
+class CategoriesFragment : Fragment() {
+    lateinit var binding: FragmentCategoriesBinding
+    val viewModel: CategoryViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -32,33 +30,27 @@ class CategoryDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(
-            layoutInflater,
-            R.layout.fragment_category_details,
-            container,
-            false
-        )
+
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_categories, container, false)
         return binding.root
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val adaptor = ListOfProductAdaptor() { Product ->
-            val action = CategoryDetailsFragmentDirections.actionCategoryDetailsFragmentToDetailsFragment(Product)
+        val adaptor = ListOfCategoriesAdaptor() {
+            val action = CategoriesFragmentDirections.actionCategoriesFragmentToCategoryDetailsFragment(it.id.toString())
             findNavController().navigate(action)
-
         }
-        binding.productByCategoryRecyclerView.adapter = adaptor
-        var id = args.id
-        viewModel.getProductWithCategoryId(id)
-        viewModel.productslist.observe(viewLifecycleOwner){
-            adaptor.submitList(it)
+        binding.categoryRecyclerView.adapter = adaptor
+        viewModel.categoriesList.observe(viewLifecycleOwner) {
+            if (it != null) {
+                adaptor.submitList(it)
+            }
         }
         viewModel.connectionStatus.observe(viewLifecycleOwner){
             if (!it){
                 Toast.makeText(context, "Please check your connection", Toast.LENGTH_SHORT).show()
             }
         }
-
     }
 }

@@ -1,25 +1,19 @@
-package com.example.myapplication.ui
+package com.example.myapplication.ui.fragments
 
 import android.content.Context
-import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.TextUtils.indexOf
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import androidx.room.Update
 import com.example.myapplication.R
 import com.example.myapplication.adaptor.OrderAdaptor
-import com.example.myapplication.adaptor.OrderClickHandler
 import com.example.myapplication.databinding.FragmentOrderBinding
 import com.example.myapplication.model.*
-import com.google.gson.Gson
+import com.example.myapplication.viewModels.OrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 var srcOfProductItem: String = ""

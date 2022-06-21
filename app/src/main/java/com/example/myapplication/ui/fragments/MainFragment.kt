@@ -1,6 +1,5 @@
-package com.example.myapplication.ui
+package com.example.myapplication.ui.fragments
 
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,17 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.adaptor.CategoriesAdaptor
 import com.example.myapplication.adaptor.ProductAdaptor
 import com.example.myapplication.adaptor.ViewPagerAdapter
 import com.example.myapplication.databinding.FragmentMainBinding
+import com.example.myapplication.viewModels.CategoryViewModel
+import com.example.myapplication.viewModels.MainProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 

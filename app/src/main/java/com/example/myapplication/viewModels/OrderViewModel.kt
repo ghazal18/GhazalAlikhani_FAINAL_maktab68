@@ -1,9 +1,7 @@
-package com.example.myapplication.ui
+package com.example.myapplication.viewModels
 
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
+
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.ProductRepository

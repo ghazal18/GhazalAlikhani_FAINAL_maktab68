@@ -1,4 +1,4 @@
-package com.example.myapplication.ui
+package com.example.myapplication.ui.fragments
 
 import android.os.Build
 import android.os.Bundle
@@ -15,6 +15,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
 import com.example.myapplication.adaptor.ListOfProductAdaptor
 import com.example.myapplication.databinding.FragmentShowAllBinding
+import com.example.myapplication.viewModels.MainProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

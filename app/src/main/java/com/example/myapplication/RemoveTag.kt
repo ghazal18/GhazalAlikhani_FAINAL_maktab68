@@ -1,6 +1,4 @@
-package com.example.myapplication.ui
-
-import java.util.Collections.replaceAll
+package com.example.myapplication
 
 object RemoveTag {
     fun removingTag(string: String):String{

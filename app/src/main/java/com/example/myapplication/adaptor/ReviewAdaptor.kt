@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ReviewListItemViewBinding
 import com.example.myapplication.model.ReviewsItem
-import com.example.myapplication.ui.RemoveTag
+import com.example.myapplication.RemoveTag
 
 typealias ReviewClickHandler = (ReviewsItem) -> Unit
 class ReviewAdaptor(val onClick: ReviewClickHandler) :

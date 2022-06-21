@@ -1,9 +1,7 @@
 package com.example.myapplication.network
 
-import com.example.myapplication.NetworkParams.Companion.CONSUMER_KEY
-import com.example.myapplication.NetworkParams.Companion.CONSUMER_SECRET
-import com.example.myapplication.NetworkParams.Companion.DESC_ORDER
-import com.example.myapplication.NetworkParams.Companion.ORDER_BY_DATE
+import com.example.myapplication.data.NetworkParams.Companion.CONSUMER_KEY
+import com.example.myapplication.data.NetworkParams.Companion.CONSUMER_SECRET
 import com.example.myapplication.model.*
 import retrofit2.http.*
 

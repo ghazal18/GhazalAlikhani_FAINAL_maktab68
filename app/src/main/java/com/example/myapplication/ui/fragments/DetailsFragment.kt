@@ -1,4 +1,4 @@
-package com.example.myapplication.ui
+package com.example.myapplication.ui.fragments
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -17,6 +17,9 @@ import com.example.myapplication.R
 import com.example.myapplication.adaptor.ReviewAdaptor
 import com.example.myapplication.adaptor.ViewPagerAdapter
 import com.example.myapplication.databinding.FragmentDetailsBinding
+import com.example.myapplication.data.ArrayOfProductDetails
+import com.example.myapplication.viewModels.MainProductViewModel
+import com.example.myapplication.RemoveTag
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
 
-        tools:context=".ui.FilterFragment">
+        tools:context=".ui.fragments.FilterFragment">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"

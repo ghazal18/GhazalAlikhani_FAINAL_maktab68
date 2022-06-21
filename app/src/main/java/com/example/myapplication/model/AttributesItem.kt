@@ -1,7 +1,6 @@
 package com.example.myapplication.model
 
 data class AttributesItem(
-    val _links: LinksXXX,
     val has_archives: Boolean,
     val id: Int,
     val name: String,

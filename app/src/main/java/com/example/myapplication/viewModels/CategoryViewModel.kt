@@ -1,4 +1,4 @@
-package com.example.myapplication.ui
+package com.example.myapplication.viewModels
 
 import android.app.Application
 import android.content.Context
