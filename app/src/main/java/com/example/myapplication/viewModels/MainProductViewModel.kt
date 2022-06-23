@@ -109,20 +109,39 @@ class MainProductViewModel @Inject constructor(
 
     fun slider() {
         viewModelScope.launch {
-            val list = productRepository.searchWord(
-                searchWord = "تخفیفات",
-                orderBy = ORDER_BY_DATE,
-                order = ASC_ORDER
-            )
+            if (hasInternetConnection(context)) {
+                try {
+                    val list = productRepository.searchWord(
+                        searchWord = "تخفیفات",
+                        orderBy = ORDER_BY_DATE,
+                        order = ASC_ORDER
+                    )
 
-            sliderPhoto.value = list[0].images
+                    sliderPhoto.value = list[0].images
+                    connectionStatus.value = true
+                } catch (e: Exception) {
+                    connectionStatus.value = false
+                }
+            } else {
+                connectionStatus.value = false
+            }
         }
     }
 
     fun getReviews(id: Int) {
         viewModelScope.launch {
-            val listOfReview = productRepository.getReviews(id)
-            reviewsList.value = listOfReview
+            if (hasInternetConnection(context)) {
+                try {
+                    val listOfReview = productRepository.getReviews(id)
+                    reviewsList.value = listOfReview
+                    connectionStatus.value = true
+                } catch (e: Exception) {
+                    connectionStatus.value = false
+                }
+            } else {
+                connectionStatus.value = false
+            }
+
         }
     }
 

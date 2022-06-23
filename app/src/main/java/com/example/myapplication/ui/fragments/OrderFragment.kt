@@ -3,10 +3,13 @@ package com.example.myapplication.ui.fragments
 import android.content.Context
 import android.content.DialogInterface
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -44,6 +47,7 @@ class OrderFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         var userId = sp.getInt("id", 0)
             println("the user id is $userId")
@@ -113,6 +117,11 @@ class OrderFragment : Fragment() {
                 adaptor.submitList(it)
             }
             println("the order id is ${responseOrder?.id}")
+        }
+        viewModel.connectionStatus.observe(viewLifecycleOwner){
+            if (!it){
+                Toast.makeText(context, "Please check your connection", Toast.LENGTH_SHORT).show()
+            }
         }
 
     }
