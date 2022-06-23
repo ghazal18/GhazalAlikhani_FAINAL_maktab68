@@ -78,6 +78,7 @@ class SigninFragment : Fragment() {
             viewModel.getAndSetCustomer(customer)
             viewModel.customerLiveData.observe(viewLifecycleOwner) {
                 if (it != null) {
+                    println(it.customer_id)
                     editor.putInt("id",it.customer_id)
                     editor.apply()
                 }

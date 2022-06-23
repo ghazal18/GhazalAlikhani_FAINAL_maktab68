@@ -44,4 +44,11 @@ class SearchProductViewModel @Inject constructor(val productRepository: ProductR
             attributesTermList.value = list
         }
     }
+
+//    fun getProductWithFilter(){
+//        viewModelScope.launch {
+//            val list = productRepository.getProductWithFilter()
+//            searchedList.value = list
+//        }
+//    }
 }

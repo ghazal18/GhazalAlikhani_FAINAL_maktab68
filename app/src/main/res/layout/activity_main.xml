@@ -26,12 +26,14 @@
             <ImageButton
                 android:id="@+id/buttonProfile"
                 android:layout_width="60dp"
+                android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:background="@color/red"
                 android:src="@drawable/ic_baseline_account_circle_24" />
 
             <ImageButton
                 android:id="@+id/buttonshop"
+                android:layout_weight="1"
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:background="@color/red"
@@ -39,13 +41,21 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/mytoolbar"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="80"
                 android:layout_height="wrap_content"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme"
                 app:titleTextColor="@color/white"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="0dp" />
+            <ImageButton
+                android:id="@+id/buttonSearch"
+                android:layout_width="60dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@color/red"
+                android:src="@drawable/ic_baseline_search_white" />
 
         </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>

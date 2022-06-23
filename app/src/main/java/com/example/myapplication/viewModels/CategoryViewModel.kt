@@ -26,14 +26,11 @@ class CategoryViewModel @Inject constructor(
     application: Application
 ) : AndroidViewModel(application) {
 
-
     private val context = getApplication<Application>().applicationContext
-
 
     var categoriesList = MutableLiveData<List<CategoriesItem>>()
     var productslist = MutableLiveData<List<ProductsItem>>()
     var connectionStatus = MutableLiveData<Boolean>(true)
-
 
     init {
         getCategories()

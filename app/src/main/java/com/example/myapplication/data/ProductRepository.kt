@@ -1,8 +1,9 @@
 package com.example.myapplication.data
 
-import com.example.myapplication.NetworkParams.Companion.ORDER_BY_DATE
-import com.example.myapplication.NetworkParams.Companion.ORDER_BY_POPULARITY
-import com.example.myapplication.NetworkParams.Companion.ORDER_BY_RATING
+
+import com.example.myapplication.data.NetworkParams.Companion.ORDER_BY_DATE
+import com.example.myapplication.data.NetworkParams.Companion.ORDER_BY_POPULARITY
+import com.example.myapplication.data.NetworkParams.Companion.ORDER_BY_RATING
 import com.example.myapplication.model.*
 import javax.inject.Inject
 
@@ -39,23 +40,39 @@ class ProductRepository @Inject constructor(val productRemoteDataSource: Product
         )
     }
 
-    suspend fun serOrder(order: OrderBody):Order{
+    suspend fun serOrder(order: OrderBody): Order {
         return productRemoteDataSource.setOrder(order)
     }
 
-    suspend fun updateAnOrder(id: Int,order: OrderUpdate):Order{
-        return productRemoteDataSource.updateAnOrder(id,order)
+    suspend fun updateAnOrder(id: Int, order: OrderUpdate): Order {
+        return productRemoteDataSource.updateAnOrder(id, order)
     }
-    suspend fun searchForProduct(id:Int):ProductsItem{
+
+    suspend fun searchForProduct(id: Int): ProductsItem {
         return productRemoteDataSource.searchForProduct(id)
     }
-    suspend fun getReviews(productId:Int):List<ReviewsItem>{
+
+    suspend fun getReviews(productId: Int): List<ReviewsItem> {
         return productRemoteDataSource.getReviews(productId)
     }
-    suspend fun getAttributes():List<AttributesItem>{
+
+    suspend fun getAttributes(): List<AttributesItem> {
         return productRemoteDataSource.getAttributes()
     }
-    suspend fun getAttributeTerm(id:Int):List<Term>{
+
+    suspend fun getAttributeTerm(id: Int): List<Term> {
         return productRemoteDataSource.getAttributeTerm(id)
+    }
+
+    suspend fun getProductWithFilter(
+        search: String,
+        attribute: String,
+        attributeTerm: Int
+    ): List<ProductsItem> {
+        return productRemoteDataSource.getProductWithFilter(
+            search = search,
+            attribute = attribute,
+            attributeTerm = attributeTerm
+        )
     }
 }

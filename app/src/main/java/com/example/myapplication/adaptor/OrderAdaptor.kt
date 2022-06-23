@@ -10,6 +10,7 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.OrderItemViewBinding
 import com.example.myapplication.model.LineItem
 import com.example.myapplication.model.ProductsItem
+import com.example.myapplication.viewModels.OrderViewModel
 
 
 typealias OrderClickHandler = (LineItem) -> Unit
@@ -20,15 +21,14 @@ class OrderAdaptor(val onClick: OrderClickHandler, val onClick2: OrderClickHandl
     class ItemHolder(val binding: OrderItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(orderProduct: LineItem, onClick: OrderClickHandler, onClick2: OrderClickHandler) {
-
             binding.buttonDecrease.setOnClickListener {
-            var quantity = binding.textViewQuantity.text.toString().toInt()
+                var quantity = binding.textViewQuantity.text.toString().toInt()
                 var increase = ++quantity
                 binding.textViewQuantity.text = increase.toString()
                 onClick.invoke(orderProduct)
             }
             binding.buttonIncrease.setOnClickListener {
-            var quantity = binding.textViewQuantity.text.toString().toInt()
+                var quantity = binding.textViewQuantity.text.toString().toInt()
                 var decrease = --quantity
                 binding.textViewQuantity.text = decrease.toString()
                 onClick2.invoke(orderProduct)

@@ -119,9 +119,10 @@
 
                 <TextView
                     android:layout_width="wrap_content"
+                    android:id="@+id/textViewTotalPrice"
                     android:layout_height="wrap_content"
-                    android:text="@{orderProduct.total}"
                     android:textColor="@color/black"
+                    android:text="@{orderProduct.total}"
                     android:textSize="17sp" />
 
             </LinearLayout>

@@ -85,5 +85,14 @@ interface ApiService {
         @Query("consumer_secret") secret: String = CONSUMER_SECRET,
     ): List<Term>
 
+    @GET("products")
+    suspend fun getProductWithFilter(
+        @Query("consumer_key") key: String = CONSUMER_KEY,
+        @Query("consumer_secret") secret: String = CONSUMER_SECRET,
+        @Query("attribute")attribute:String,
+        @Query("attribute_term")attribute_term:Int,
+        @Query("search")search:String
+    ):List<ProductsItem>
+
 
 }

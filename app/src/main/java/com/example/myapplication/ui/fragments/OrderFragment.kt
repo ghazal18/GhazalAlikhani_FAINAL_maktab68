@@ -1,11 +1,13 @@
 package com.example.myapplication.ui.fragments
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -44,6 +46,25 @@ class OrderFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         var userId = sp.getInt("id", 0)
+            println("the user id is $userId")
+        if (userId == 0) {
+            val alertDialog: AlertDialog? = activity?.let {
+                val builder = AlertDialog.Builder(it)
+                builder.setTitle("ابتدا وارد اکانت خود شوید")
+                    .apply {
+                        setPositiveButton("ساختن اکانت ",
+                            DialogInterface.OnClickListener { dialog, id ->
+                                // User clicked OK button
+                            })
+                        setNegativeButton("لغو",
+                            DialogInterface.OnClickListener { dialog, id ->
+                                // User cancelled the dialog
+                            })
+                    }
+                builder.create()
+            }
+        }
+
         //get list from details and convert from string to int array
         var productId = sp2.getString("id", "")
         var productCount = sp2.getString("count", "")

@@ -2,6 +2,7 @@ package com.example.myapplication.adaptor
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -19,10 +20,12 @@ class AttributeTermAdaptor(val onClick: AttributeTermClickHandler) :
     class ItemHolder(val binding: AttributeTermItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(attribute: Term, onClick: AttributeTermClickHandler) {
-
-            binding.checkBox.setOnClickListener {
+            binding.checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
                 onClick.invoke(attribute)
             }
+//            binding.checkBox.setOnClickListener {
+//                onClick.invoke(attribute)
+//            }
         }
     }
 

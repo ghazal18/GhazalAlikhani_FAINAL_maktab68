@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.mytoolbar)
         setSupportActionBar(toolbar)
         val buttonProfile = findViewById<ImageButton>(R.id.buttonProfile)
+        val buttonSearch = findViewById<ImageButton>(R.id.buttonSearch)
         val buttonShop = findViewById<ImageButton>(R.id.buttonshop)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
@@ -27,9 +28,11 @@ class MainActivity : AppCompatActivity() {
         buttonProfile.setOnClickListener {
             navController.navigate(R.id.signinFragment)
         }
-
         buttonShop.setOnClickListener {
             navController.navigate(R.id.orderFragment)
+        }
+        buttonSearch.setOnClickListener {
+            navController.navigate(R.id.searchFragment)
         }
 
     }

@@ -49,4 +49,16 @@ class ProductRemoteDataSource @Inject constructor(val apiService: ApiService) {
     suspend fun getAttributeTerm(id: Int): List<Term> {
         return apiService.getAttributeTerm(attribute_id = id)
     }
+
+    suspend fun getProductWithFilter(
+        search: String,
+        attribute: String,
+        attributeTerm: Int
+    ): List<ProductsItem> {
+        return apiService.getProductWithFilter(
+            attribute = attribute,
+            attribute_term = attributeTerm,
+            search = search
+        )
+    }
 }
