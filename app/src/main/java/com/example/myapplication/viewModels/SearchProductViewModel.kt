@@ -17,6 +17,7 @@ class SearchProductViewModel @Inject constructor(val productRepository: ProductR
     var searchedList = MutableLiveData<List<ProductsItem>>()
     var attributesList = MutableLiveData<List<AttributesItem>>()
     var attributesTermList = MutableLiveData<List<Term>>()
+
     init {
         getAttribute()
     }
@@ -38,17 +39,18 @@ class SearchProductViewModel @Inject constructor(val productRepository: ProductR
             attributesList.value = listOfAttributes
         }
     }
-    fun getAttributeTerm(id:Int){
+
+    fun getAttributeTerm(id: Int) {
         viewModelScope.launch {
             val list = productRepository.getAttributeTerm(id)
             attributesTermList.value = list
         }
     }
 
-//    fun getProductWithFilter(){
-//        viewModelScope.launch {
-//            val list = productRepository.getProductWithFilter()
-//            searchedList.value = list
-//        }
-//    }
+    fun getProductWithFilter (search: String,attribute: String, attributeTerm: Int) {
+        viewModelScope.launch {
+            val list = productRepository.getProductWithFilter(search,attribute,attributeTerm)
+            searchedList.value = list
+        }
+    }
 }

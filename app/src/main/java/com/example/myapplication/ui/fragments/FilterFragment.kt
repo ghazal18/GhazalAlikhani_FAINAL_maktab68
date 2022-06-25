@@ -22,6 +22,9 @@ class FilterFragment : Fragment() {
 
     lateinit var binding: FragmentFilterBinding
     val viewModel: SearchProductViewModel by viewModels()
+    var filterId = " "
+    var filterName = " "
+    var filterTermId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +41,7 @@ class FilterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val adaptor = AttributeAdaptor {
-            Toast.makeText(context, "${it.id}", Toast.LENGTH_SHORT).show()
+            filterId = it.slug
             viewModel.getAttributeTerm(it.id.toString().toInt())
         }
         binding.attributeRecyclerView.adapter = adaptor
@@ -46,6 +49,8 @@ class FilterFragment : Fragment() {
             adaptor.submitList(it)
         }
         val termAdaptor = AttributeTermAdaptor {
+            filterName = it.name
+            filterTermId = it.id
             Toast.makeText(context, it.slug, Toast.LENGTH_SHORT).show()
         }
         binding.attributeTermRecyclerView.adapter = termAdaptor
@@ -53,9 +58,7 @@ class FilterFragment : Fragment() {
             termAdaptor.submitList(it)
         }
         binding.filterButton.setOnClickListener {
-            val action = FilterFragmentDirections.actionFilterFragmentToSearchFragment(
-                ArrayOfProductDetails.array
-            )
+            val action = FilterFragmentDirections.actionFilterFragmentToSearchFragment(filterId,filterTermId,filterName)
             findNavController().navigate(action)
         }
 

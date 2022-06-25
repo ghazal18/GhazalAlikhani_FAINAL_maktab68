@@ -49,12 +49,12 @@
                 android:id="@+id/filter"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
+                android:layout_margin="11dp"
                 android:layout_weight="1"
                 android:background="@drawable/rounded_corner_seven"
                 android:gravity="start"
                 android:padding="16dp"
-                android:text="فیلتر:"
+                android:text="@string/filter"
                 android:textSize="20sp"
                 app:drawableStartCompat="@drawable/ic_baseline_filter_alt_24" />
 
