@@ -88,6 +88,9 @@
             android:name="filterName"
             app:argType="string"
             android:defaultValue=" " />
+        <action
+            android:id="@+id/action_searchFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
 
 
     </fragment>

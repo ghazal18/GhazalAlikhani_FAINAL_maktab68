@@ -43,17 +43,20 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         var search = ""
-        val adaptor = ListOfProductAdaptor {
-
+        var order = ""
+        var orderBy = ""
+        val adaptor = ListOfProductAdaptor { Product ->
+            val action = SearchFragmentDirections.actionSearchFragmentToDetailsFragment(Product)
+            findNavController().navigate(action)
         }
         var filterSlug = args.filterID
         var filterTermId = args.filterTermID
         var filterName = args.filterName
 
-        viewModel.getProductWithFilter(search,filterSlug,filterTermId)
+        viewModel.getProductWithFilter(search, filterSlug, filterTermId)
 
         viewModel.searchedList.observe(viewLifecycleOwner) {
-            binding.filter.text = getString(R.string.filter)+ " " + filterName
+            binding.filter.text = getString(R.string.filter) + " " + filterName
             if (it != null) {
                 adaptor.submitList(it)
             }
@@ -64,6 +67,7 @@ class SearchFragment : Fragment() {
 
         binding.go.setOnClickListener {
             search = binding.searchEditText.text.toString()
+            search(orderBy, order, search, filterSlug, filterTermId)
         }
         binding.autoCompleteText.setOnClickListener {
             PopupMenu(context, binding.autoCompleteText).apply {
@@ -71,26 +75,22 @@ class SearchFragment : Fragment() {
                 setOnMenuItemClickListener { item ->
                     binding.autoCompleteText.setText(item.title)
                     when (item.itemId) {
-                        R.id.mostSale -> viewModel.searchItem(
-                            search,
-                            ORDER_BY_POPULARITY,
-                            ASC_ORDER
-                        )
-                        R.id.chipest -> viewModel.searchItem(
-                            search,
-                            ORDER_BY_PRICE,
-                            ASC_ORDER
-                        )
-                        R.id.expensive -> viewModel.searchItem(
-                            search,
-                            ORDER_BY_PRICE,
-                            DESC_ORDER
-                        )
-                        R.id.newest -> viewModel.searchItem(
-                            search,
-                            ORDER_BY_DATE,
-                            DESC_ORDER
-                        )
+                        R.id.mostSale -> {
+                            order = ASC_ORDER
+                            orderBy = ORDER_BY_POPULARITY
+                        }
+                        R.id.chipest -> {
+                            order = ASC_ORDER
+                            orderBy = ORDER_BY_PRICE
+                        }
+                        R.id.expensive -> {
+                            order = DESC_ORDER
+                            orderBy = ORDER_BY_PRICE
+                        }
+                        R.id.newest -> {
+                            order = DESC_ORDER
+                            orderBy = ORDER_BY_DATE
+                        }
                     }
                     true
                 }
@@ -104,6 +104,21 @@ class SearchFragment : Fragment() {
 
     }
 
+    fun search(
+        orderBy: String,
+        order: String,
+        search: String,
+        filterSlug: String,
+        filterTermId: Int
+    ) {
+        viewModel.searchProduct(
+            search,
+            filterSlug,
+            filterTermId,
+            orderBy,
+            order
+        )
+    }
 
 }
 

@@ -75,4 +75,18 @@ class ProductRepository @Inject constructor(val productRemoteDataSource: Product
             attributeTerm = attributeTerm
         )
     }
+    suspend fun searchProduct(
+        search: String,
+        attribute: String,
+        attributeTerm: Int,
+        orderBy: String, order: String
+    ): List<ProductsItem> {
+        return productRemoteDataSource.searchProduct(
+            attribute = attribute,
+            attributeTerm = attributeTerm,
+            search = search,
+            order = order, orderBy = orderBy
+        )
+    }
+
 }

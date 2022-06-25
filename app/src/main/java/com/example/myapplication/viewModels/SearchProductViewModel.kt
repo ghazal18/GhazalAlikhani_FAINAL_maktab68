@@ -47,9 +47,26 @@ class SearchProductViewModel @Inject constructor(val productRepository: ProductR
         }
     }
 
-    fun getProductWithFilter (search: String,attribute: String, attributeTerm: Int) {
+    fun getProductWithFilter(search: String, attribute: String, attributeTerm: Int) {
         viewModelScope.launch {
-            val list = productRepository.getProductWithFilter(search,attribute,attributeTerm)
+            val list = productRepository.getProductWithFilter(search, attribute, attributeTerm)
+            searchedList.value = list
+        }
+    }
+
+    fun searchProduct(
+        search: String,
+        attribute: String,
+        attributeTerm: Int,
+        orderBy: String, order: String
+    ) {
+        viewModelScope.launch {
+            val list = productRepository.searchProduct(
+                attribute = attribute,
+                attributeTerm = attributeTerm,
+                search = search,
+                order = order, orderBy = orderBy
+            )
             searchedList.value = list
         }
     }

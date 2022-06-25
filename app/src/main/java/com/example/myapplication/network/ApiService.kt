@@ -43,6 +43,17 @@ interface ApiService {
         @Query("orderby") orderBy: String
     ): List<ProductsItem>
 
+    @GET("products")
+    suspend fun searchProduct2(
+        @Query("consumer_key") key: String = CONSUMER_KEY,
+        @Query("consumer_secret") secret: String = CONSUMER_SECRET,
+        @Query("search") search: String,
+        @Query("order") order: String,
+        @Query("orderby") orderBy: String,
+        @Query("attribute") attribute: String,
+        @Query("attribute_term") attribute_term: Int
+    ): List<ProductsItem>
+
     @POST("orders")
     suspend fun setOrder(
         @Query("consumer_key") key: String = CONSUMER_KEY,
@@ -89,10 +100,10 @@ interface ApiService {
     suspend fun getProductWithFilter(
         @Query("consumer_key") key: String = CONSUMER_KEY,
         @Query("consumer_secret") secret: String = CONSUMER_SECRET,
-        @Query("attribute")attribute:String,
-        @Query("attribute_term")attribute_term:Int,
-        @Query("search")search:String
-    ):List<ProductsItem>
+        @Query("attribute") attribute: String,
+        @Query("attribute_term") attribute_term: Int,
+        @Query("search") search: String
+    ): List<ProductsItem>
 
 
 }
