@@ -28,27 +28,23 @@ class ProductRemoteDataSource @Inject constructor(val apiService: ApiService) {
         return apiService.searchProduct(word = searchWord, order = order, orderBy = orderBy)
     }
 
-    suspend fun setOrder(order: OrderBody): Order {
+    suspend fun setOrder(order: OrderBody): Response<Order> {
         return apiService.setOrder(order = order)
     }
 
-    suspend fun updateAnOrder(id: Int, order: OrderUpdate): Order {
+    suspend fun updateAnOrder(id: Int, order: OrderUpdate): Response<Order> {
         return apiService.updateAnOrder(id = id, order = order)
     }
 
-    suspend fun searchForProduct(id: Int): ProductsItem {
-        return apiService.searchForProduct(id = id)
-    }
-
-    suspend fun getReviews(productId: Int): List<ReviewsItem> {
+    suspend fun getReviews(productId: Int):Response<List<ReviewsItem>> {
         return apiService.getReviews(id = productId)
     }
 
-    suspend fun getAttributes(): List<AttributesItem> {
+    suspend fun getAttributes():Response<List<AttributesItem>> {
         return apiService.getAttributes()
     }
 
-    suspend fun getAttributeTerm(id: Int): List<Term> {
+    suspend fun getAttributeTerm(id: Int): Response<List<Term>> {
         return apiService.getAttributeTerm(attribute_id = id)
     }
 

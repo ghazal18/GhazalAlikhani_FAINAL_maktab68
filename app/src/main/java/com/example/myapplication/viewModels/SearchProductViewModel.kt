@@ -16,8 +16,8 @@ import javax.inject.Inject
 class SearchProductViewModel @Inject constructor(val productRepository: ProductRepository) :
     ViewModel() {
     var searchedList = MutableLiveData<Resource<List<ProductsItem>>>()
-    var attributesList = MutableLiveData<List<AttributesItem>>()
-    var attributesTermList = MutableLiveData<List<Term>>()
+    var attributesList = MutableLiveData<Resource<List<AttributesItem>>>()
+    var attributesTermList = MutableLiveData<Resource<List<Term>>>()
 
     init {
         getAttribute()

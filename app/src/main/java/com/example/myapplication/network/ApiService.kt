@@ -60,7 +60,7 @@ interface ApiService {
         @Query("consumer_key") key: String = CONSUMER_KEY,
         @Query("consumer_secret") secret: String = CONSUMER_SECRET,
         @Body order: OrderBody
-    ): Order
+    ): Response<Order>
 
     @PUT("orders/{id}")
     suspend fun updateAnOrder(
@@ -68,34 +68,27 @@ interface ApiService {
         @Query("consumer_key") key: String = CONSUMER_KEY,
         @Query("consumer_secret") secret: String = CONSUMER_SECRET,
         @Body order: OrderUpdate
-    ): Order
-
-    @GET("products/{id}")
-    suspend fun searchForProduct(
-        @Path(value = "id") id: Int,
-        @Query("consumer_key") key: String = CONSUMER_KEY,
-        @Query("consumer_secret") secret: String = CONSUMER_SECRET
-    ): ProductsItem
+    ): Response<Order>
 
     @GET("products/reviews")
     suspend fun getReviews(
         @Query("consumer_key") key: String = CONSUMER_KEY,
         @Query("consumer_secret") secret: String = CONSUMER_SECRET,
         @Query("product") id: Int
-    ): List<ReviewsItem>
+    ):Response<List<ReviewsItem>>
 
     @GET("products/attributes")
     suspend fun getAttributes(
         @Query("consumer_key") key: String = CONSUMER_KEY,
         @Query("consumer_secret") secret: String = CONSUMER_SECRET,
-    ): List<AttributesItem>
+    ):Response<List<AttributesItem>>
 
     @GET("products/attributes/{attribute_id}/terms")
     suspend fun getAttributeTerm(
         @Path(value = "attribute_id") attribute_id: Int,
         @Query("consumer_key") key: String = CONSUMER_KEY,
         @Query("consumer_secret") secret: String = CONSUMER_SECRET,
-    ): List<Term>
+    ):Response<List<Term>>
 
     @GET("products")
     suspend fun getProductWithFilter(

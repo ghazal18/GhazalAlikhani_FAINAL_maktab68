@@ -106,8 +106,7 @@ class DetailsFragment : Fragment() {
         }
         binding.reviewRecyclerView.adapter = reviewAdaptor
         viewModel.reviewsList.observe(viewLifecycleOwner) {
-            println("the review list number ${it.size}")
-            reviewAdaptor.submitList(it)
+            reviewAdaptor.submitList(it.data)
         }
     }
 

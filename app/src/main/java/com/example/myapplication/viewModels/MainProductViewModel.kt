@@ -31,7 +31,7 @@ class MainProductViewModel @Inject constructor(
     var productPopularityList = MutableLiveData<Resource<List<ProductsItem>>>()
     var productDataList = MutableLiveData<Resource<List<ProductsItem>>>()
     var productRatingList = MutableLiveData<Resource<List<ProductsItem>>>()
-    var reviewsList = MutableLiveData<List<ReviewsItem>>()
+    var reviewsList = MutableLiveData<Resource<List<ReviewsItem>>>()
     var statusLiveData = MutableLiveData<Status>()
     var connectionStatus = MutableLiveData(true)
 

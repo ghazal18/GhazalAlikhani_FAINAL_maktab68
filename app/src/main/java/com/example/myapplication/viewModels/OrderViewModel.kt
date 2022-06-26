@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.ProductRepository
 import com.example.myapplication.model.*
+import com.example.myapplication.network.Resource
 import com.example.myapplication.network.hasInternetConnection
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -23,9 +24,8 @@ class OrderViewModel @Inject constructor(
 
     private val context = getApplication<Application>().applicationContext
     val orderList = MutableLiveData<List<LineItem>>()
-    val orderLiveData = MutableLiveData<Order>()
+    val orderLiveData = MutableLiveData<Resource<Order>>()
     var orderId = MutableLiveData<Int>()
-    var searchProductWithId = MutableLiveData<ProductsItem?>()
     var connectionStatus = MutableLiveData(true)
 
 
@@ -35,10 +35,10 @@ class OrderViewModel @Inject constructor(
             if (hasInternetConnection(context)) {
                 try {
                     var order = repository.serOrder(order)
-                    orderId.value = order.id
+                    orderId.value = order.data?.id
                     orderLiveData.value = order
-                    var list = order.line_items
-                    orderList.value = list
+                    var list = order.data?.line_items
+                    orderList.value = list!!
                     connectionStatus.value = true
                 } catch (e: Exception) {
                     connectionStatus.value = false
@@ -54,8 +54,8 @@ class OrderViewModel @Inject constructor(
         viewModelScope.launch {
             if (hasInternetConnection(context)) {
                 try {
-                    var list = repository.updateAnOrder(id, order).line_items
-                    orderList.value = list
+                    var list = repository.updateAnOrder(id, order).data?.line_items
+                    orderList.value = list!!
                     connectionStatus.value = true
                 } catch (e: Exception) {
                     connectionStatus.value = false
@@ -68,22 +68,7 @@ class OrderViewModel @Inject constructor(
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    fun searchForProductWithId(id: Int) {
-        viewModelScope.launch {
-            if (hasInternetConnection(context)) {
-                try {
-                    val productWithId = repository.searchForProduct(id)
-                    searchProductWithId.value = productWithId
-                    connectionStatus.value = true
-                } catch (e: Exception) {
-                    connectionStatus.value = false
-                }
-            } else {
-                connectionStatus.value = false
-            }
-        }
-    }
+
 
 
 }

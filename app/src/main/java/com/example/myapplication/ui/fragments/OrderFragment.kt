@@ -122,7 +122,7 @@ class OrderFragment : Fragment() {
             responseOrder?.let { it1 -> viewModel.updateAnOrder(it1.id, updateOrder) }
         })
         viewModel.orderLiveData.observe(viewLifecycleOwner) {
-            responseOrder = it
+            responseOrder = it.data
         }
 
         binding.orderListRecyclerView.adapter = adaptor

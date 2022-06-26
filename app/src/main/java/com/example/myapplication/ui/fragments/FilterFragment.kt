@@ -46,7 +46,7 @@ class FilterFragment : Fragment() {
         }
         binding.attributeRecyclerView.adapter = adaptor
         viewModel.attributesList.observe(viewLifecycleOwner) {
-            adaptor.submitList(it)
+            adaptor.submitList(it.data)
         }
         val termAdaptor = AttributeTermAdaptor {
             filterName = it.name
@@ -55,7 +55,7 @@ class FilterFragment : Fragment() {
         }
         binding.attributeTermRecyclerView.adapter = termAdaptor
         viewModel.attributesTermList.observe(viewLifecycleOwner) {
-            termAdaptor.submitList(it)
+            termAdaptor.submitList(it.data)
         }
         binding.filterButton.setOnClickListener {
             val action = FilterFragmentDirections.actionFilterFragmentToSearchFragment(filterId,filterTermId,filterName)
