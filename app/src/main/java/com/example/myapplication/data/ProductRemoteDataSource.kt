@@ -56,7 +56,7 @@ class ProductRemoteDataSource @Inject constructor(val apiService: ApiService) {
         search: String,
         attribute: String,
         attributeTerm: Int
-    ): List<ProductsItem> {
+    ): Response<List<ProductsItem>>  {
         return apiService.getProductWithFilter(
             attribute = attribute,
             attribute_term = attributeTerm,
@@ -69,7 +69,7 @@ class ProductRemoteDataSource @Inject constructor(val apiService: ApiService) {
         attribute: String,
         attributeTerm: Int,
         orderBy: String, order: String
-    ): List<ProductsItem> {
+    ): Response<List<ProductsItem>> {
         return apiService.searchProduct2(
             attribute = attribute,
             attribute_term = attributeTerm,

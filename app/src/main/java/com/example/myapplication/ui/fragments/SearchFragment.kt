@@ -58,7 +58,7 @@ class SearchFragment : Fragment() {
         viewModel.searchedList.observe(viewLifecycleOwner) {
             binding.filter.text = getString(R.string.filter) + " " + filterName
             if (it != null) {
-                adaptor.submitList(it)
+                adaptor.submitList(it.data)
             }
 
         }

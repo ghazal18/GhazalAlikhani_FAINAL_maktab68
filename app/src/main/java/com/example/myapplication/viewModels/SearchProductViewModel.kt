@@ -7,6 +7,7 @@ import com.example.myapplication.data.ProductRepository
 import com.example.myapplication.model.AttributesItem
 import com.example.myapplication.model.ProductsItem
 import com.example.myapplication.model.Term
+import com.example.myapplication.network.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -14,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchProductViewModel @Inject constructor(val productRepository: ProductRepository) :
     ViewModel() {
-    var searchedList = MutableLiveData<List<ProductsItem>>()
+    var searchedList = MutableLiveData<Resource<List<ProductsItem>>>()
     var attributesList = MutableLiveData<List<AttributesItem>>()
     var attributesTermList = MutableLiveData<List<Term>>()
 

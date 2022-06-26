@@ -71,25 +71,25 @@ class ProductRepository @Inject constructor(val productRemoteDataSource: Product
         search: String,
         attribute: String,
         attributeTerm: Int
-    ): List<ProductsItem> {
-        return productRemoteDataSource.getProductWithFilter(
+    ):  Resource<List<ProductsItem>> {
+        return  ApiResponse(productRemoteDataSource.getProductWithFilter(
             search = search,
             attribute = attribute,
             attributeTerm = attributeTerm
-        )
+        ))
     }
     suspend fun searchProduct(
         search: String,
         attribute: String,
         attributeTerm: Int,
         orderBy: String, order: String
-    ): List<ProductsItem> {
-        return productRemoteDataSource.searchProduct(
+    ):  Resource<List<ProductsItem>> {
+        return ApiResponse(productRemoteDataSource.searchProduct(
             attribute = attribute,
             attributeTerm = attributeTerm,
             search = search,
             order = order, orderBy = orderBy
-        )
+        ))
     }
     fun <T> ApiResponse(response :Response<T>):Resource<T>{
         return if(response.isSuccessful && response.body() != null){

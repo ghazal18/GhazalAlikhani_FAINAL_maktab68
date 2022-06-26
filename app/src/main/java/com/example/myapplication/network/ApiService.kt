@@ -53,7 +53,7 @@ interface ApiService {
         @Query("orderby") orderBy: String,
         @Query("attribute") attribute: String,
         @Query("attribute_term") attribute_term: Int
-    ): List<ProductsItem>
+    ): Response<List<ProductsItem>>
 
     @POST("orders")
     suspend fun setOrder(
@@ -104,7 +104,7 @@ interface ApiService {
         @Query("attribute") attribute: String,
         @Query("attribute_term") attribute_term: Int,
         @Query("search") search: String
-    ): List<ProductsItem>
+    ):  Response<List<ProductsItem>>
 
 
 }
