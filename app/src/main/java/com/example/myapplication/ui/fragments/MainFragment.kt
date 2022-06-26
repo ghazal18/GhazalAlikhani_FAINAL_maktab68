@@ -16,7 +16,6 @@ import com.example.myapplication.R
 import com.example.myapplication.adaptor.CategoriesAdaptor
 import com.example.myapplication.adaptor.ProductAdaptor
 import com.example.myapplication.adaptor.ViewPagerAdapter
-import com.example.myapplication.data.Status
 import com.example.myapplication.databinding.FragmentMainBinding
 import com.example.myapplication.viewModels.CategoryViewModel
 import com.example.myapplication.viewModels.MainProductViewModel
@@ -47,20 +46,6 @@ class MainFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        viewModel.statusLiveData.observe(viewLifecycleOwner) {
-            if (it == Status.Loading){
-                binding.animationLoading.visibility = View.VISIBLE
-                binding.mainLinearLayout.visibility = View.GONE
-            }
-            else if(it == Status.Failed){
-                binding.animationLoading.visibility = View.VISIBLE
-                binding.mainLinearLayout.visibility = View.GONE
-            }
-            else{
-                binding.animationLoading.visibility = View.GONE
-                binding.mainLinearLayout.visibility = View.VISIBLE
-            }
-        }
         val adapter = ProductAdaptor() { Product ->
             val action = MainFragmentDirections.actionMainFragmentToDetailsFragment(Product)
             findNavController().navigate(action)
