@@ -2,11 +2,13 @@ package com.example.myapplication.data
 
 import com.example.myapplication.model.*
 import com.example.myapplication.network.ApiService
+import com.example.myapplication.network.Resource
 import okhttp3.RequestBody
+import retrofit2.Response
 import javax.inject.Inject
 
 class ProductRemoteDataSource @Inject constructor(val apiService: ApiService) {
-    suspend fun getCategorys(): List<CategoriesItem> {
+    suspend fun getCategorys(): Response<List<CategoriesItem>> {
         return apiService.getCategories()
     }
 
@@ -18,7 +20,7 @@ class ProductRemoteDataSource @Inject constructor(val apiService: ApiService) {
         return apiService.getProductsWithCategory(categoryy = categoryId)
     }
 
-    suspend fun setaCustomer(customer: Customer): Customer {
+    suspend fun setaCustomer(customer: Customer): Response<Customer> {
         return apiService.createAccount(customer = customer)
     }
 

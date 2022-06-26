@@ -3,6 +3,7 @@ package com.example.myapplication.network
 import com.example.myapplication.data.NetworkParams.Companion.CONSUMER_KEY
 import com.example.myapplication.data.NetworkParams.Companion.CONSUMER_SECRET
 import com.example.myapplication.model.*
+import retrofit2.Response
 import retrofit2.http.*
 
 
@@ -11,7 +12,7 @@ interface ApiService {
     suspend fun getCategories(
         @Query("consumer_key") key: String = CONSUMER_KEY,
         @Query("consumer_secret") secret: String = CONSUMER_SECRET
-    ): List<CategoriesItem>
+    ): Response<List<CategoriesItem>>
 
     @GET("products")
     suspend fun getProducts(
@@ -32,7 +33,7 @@ interface ApiService {
         @Query("consumer_key") key: String = CONSUMER_KEY,
         @Query("consumer_secret") secret: String = CONSUMER_SECRET,
         @Body customer: Customer
-    ): Customer
+    ): Response<Customer>
 
     @GET("products")
     suspend fun searchProduct(

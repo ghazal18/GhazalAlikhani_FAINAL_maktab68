@@ -13,6 +13,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.ProductRepository
 import com.example.myapplication.model.CategoriesItem
 import com.example.myapplication.model.ProductsItem
+import com.example.myapplication.network.Resource
 import com.example.myapplication.network.hasInternetConnection
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -28,7 +29,7 @@ class CategoryViewModel @Inject constructor(
 
     private val context = getApplication<Application>().applicationContext
 
-    var categoriesList = MutableLiveData<List<CategoriesItem>>()
+    var categoriesList = MutableLiveData<Resource<List<CategoriesItem>>>()
     var productslist = MutableLiveData<List<ProductsItem>>()
     var connectionStatus = MutableLiveData<Boolean>(true)
 
@@ -39,6 +40,7 @@ class CategoryViewModel @Inject constructor(
     @RequiresApi(Build.VERSION_CODES.M)
     fun getCategories() {
         viewModelScope.launch {
+            categoriesList.value = Resource.Loading()
             if (hasInternetConnection(context)) {
                 try {
                     val list = productRepository.getCategoriesList()

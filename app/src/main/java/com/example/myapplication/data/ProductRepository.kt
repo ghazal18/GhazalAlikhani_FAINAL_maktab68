@@ -5,11 +5,14 @@ import com.example.myapplication.data.NetworkParams.Companion.ORDER_BY_DATE
 import com.example.myapplication.data.NetworkParams.Companion.ORDER_BY_POPULARITY
 import com.example.myapplication.data.NetworkParams.Companion.ORDER_BY_RATING
 import com.example.myapplication.model.*
+import com.example.myapplication.network.Resource
+import com.example.myapplication.network.errorCode
+import retrofit2.Response
 import javax.inject.Inject
 
 class ProductRepository @Inject constructor(val productRemoteDataSource: ProductRemoteDataSource) {
-    suspend fun getCategoriesList(): List<CategoriesItem> {
-        return productRemoteDataSource.getCategorys()
+    suspend fun getCategoriesList(): Resource<List<CategoriesItem>> {
+        return  ApiResponse(productRemoteDataSource.getCategorys())
     }
 
     suspend fun getRatingProduct(): List<ProductsItem> {
@@ -28,8 +31,8 @@ class ProductRepository @Inject constructor(val productRemoteDataSource: Product
         return productRemoteDataSource.getCategorysProduct(categoryId)
     }
 
-    suspend fun setCustomer(customer: Customer): Customer {
-        return productRemoteDataSource.setaCustomer(customer)
+    suspend fun setCustomer(customer: Customer): Resource<Customer> {
+        return ApiResponse(productRemoteDataSource.setaCustomer(customer))
     }
 
     suspend fun searchWord(orderBy: String, searchWord: String, order: String): List<ProductsItem> {
@@ -87,6 +90,13 @@ class ProductRepository @Inject constructor(val productRemoteDataSource: Product
             search = search,
             order = order, orderBy = orderBy
         )
+    }
+    fun <T> ApiResponse(response :Response<T>):Resource<T>{
+        return if(response.isSuccessful && response.body() != null){
+            Resource.Success(response.body())
+        }else{
+            Resource.Error(massage = response.message().toString(),code = response.code().toString())
+        }
     }
 
 }

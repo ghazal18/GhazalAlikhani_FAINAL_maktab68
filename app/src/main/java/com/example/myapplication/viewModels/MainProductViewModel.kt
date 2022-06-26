@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.NetworkParams.Companion.ASC_ORDER
 import com.example.myapplication.data.NetworkParams.Companion.ORDER_BY_DATE
 import com.example.myapplication.data.ProductRepository
+import com.example.myapplication.data.Status
 import com.example.myapplication.model.Image
 import com.example.myapplication.model.ProductsItem
 import com.example.myapplication.model.ReviewsItem
@@ -30,7 +31,7 @@ class MainProductViewModel @Inject constructor(
     var productDataList = MutableLiveData<List<ProductsItem>>()
     var productRatingList = MutableLiveData<List<ProductsItem>>()
     var reviewsList = MutableLiveData<List<ReviewsItem>>()
-
+    var statusLiveData = MutableLiveData<Status>()
     var connectionStatus = MutableLiveData(true)
 
 
@@ -56,12 +57,15 @@ class MainProductViewModel @Inject constructor(
     @RequiresApi(Build.VERSION_CODES.M)
     fun getRatingProducts() {
         viewModelScope.launch {
+            statusLiveData.value = Status.Loading
             if (hasInternetConnection(context)) {
                 try {
+                    statusLiveData.value = Status.Successful
                     val list = productRepository.getRatingProduct()
                     productRatingList.value = list
                     connectionStatus.value = true
                 } catch (e: Exception) {
+                    statusLiveData.value = Status.Failed
                     connectionStatus.value = false
                 }
             } else {
@@ -73,12 +77,15 @@ class MainProductViewModel @Inject constructor(
     @RequiresApi(Build.VERSION_CODES.M)
     fun getDatingProducts() {
         viewModelScope.launch {
+            statusLiveData.value = Status.Loading
             if (hasInternetConnection(context)) {
                 try {
+                    statusLiveData.value = Status.Successful
                     val dateList = productRepository.getDateProduct()
                     productDataList.value = dateList
                     connectionStatus.value = true
                 } catch (e: Exception) {
+                    statusLiveData.value = Status.Failed
                     connectionStatus.value = false
                 }
             } else {

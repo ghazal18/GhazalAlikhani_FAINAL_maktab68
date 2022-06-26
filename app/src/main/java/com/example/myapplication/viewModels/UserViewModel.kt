@@ -9,10 +9,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.ProductRepository
 import com.example.myapplication.model.Customer
+import com.example.myapplication.network.Resource
 import com.example.myapplication.network.hasInternetConnection
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import okhttp3.RequestBody
+import okhttp3.Response
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,7 +24,7 @@ class UserViewModel @Inject constructor(
 ) : AndroidViewModel(application) {
 
     private val context = getApplication<Application>().applicationContext
-    var customerLiveData = MutableLiveData<Customer?>()
+    var customerLiveData = MutableLiveData<Resource<Customer>>()
     var connectionStatus = MutableLiveData(true)
 
     @RequiresApi(Build.VERSION_CODES.M)

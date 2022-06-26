@@ -17,6 +17,7 @@ import com.example.myapplication.databinding.FragmentSigninBinding
 import com.example.myapplication.model.Billing
 import com.example.myapplication.model.Customer
 import com.example.myapplication.model.Shipping
+import com.example.myapplication.network.errorCode
 import com.example.myapplication.viewModels.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -80,16 +81,21 @@ class SigninFragment : Fragment() {
             )
             viewModel.getAndSetCustomer(customer)
             viewModel.customerLiveData.observe(viewLifecycleOwner) {
-                if (it != null) {
-                    println(it.customer_id)
-                    editor.putInt("id",it.customer_id)
+                if (it.data != null) {
+                    println(it.data.id)
+                    editor.putInt("id", it.data.id)
                     editor.apply()
                 }
-                Toast.makeText(context, "سفارش شما ثبت شد", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,  it.code?.let { it1 -> errorCode(it1) }, Toast.LENGTH_SHORT).show()
+
+                if (it.code == "201") {
+                    Toast.makeText(context, "سفارش شما ثبت شد", Toast.LENGTH_SHORT).show()
+                }
             }
-            viewModel.connectionStatus.observe(viewLifecycleOwner){
-                if (!it){
-                    Toast.makeText(context, "Please check your connection", Toast.LENGTH_SHORT).show()
+            viewModel.connectionStatus.observe(viewLifecycleOwner) {
+                if (!it) {
+                    Toast.makeText(context, "Please check your connection", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }

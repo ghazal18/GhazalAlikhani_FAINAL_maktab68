@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.adaptor.OrderAdaptor
 import com.example.myapplication.databinding.FragmentOrderBinding
@@ -50,22 +51,25 @@ class OrderFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         var userId = sp.getInt("id", 0)
-            println("the user id is $userId")
+        println("the user id is $userId")
         if (userId == 0) {
             val alertDialog: AlertDialog? = activity?.let {
                 val builder = AlertDialog.Builder(it)
                 builder.setTitle("ابتدا وارد اکانت خود شوید")
-                    .apply {
-                        setPositiveButton("ساختن اکانت ",
-                            DialogInterface.OnClickListener { dialog, id ->
-                                // User clicked OK button
-                            })
-                        setNegativeButton("لغو",
-                            DialogInterface.OnClickListener { dialog, id ->
-                                // User cancelled the dialog
-                            })
-                    }
+
+                    .setPositiveButton("ساختن اکانت",
+                        DialogInterface.OnClickListener { dialog, id ->
+
+
+                        })
+                    .setNegativeButton(R.string.cancel,
+                        DialogInterface.OnClickListener { dialog, id ->
+                        })
+
                 builder.create()
+            }
+            if (alertDialog != null) {
+                alertDialog.show()
             }
         }
 
@@ -75,11 +79,21 @@ class OrderFragment : Fragment() {
         println(productId)
         println(productCount)
         val listOfOrder = mutableListOf<LineItemBody>()
-
-        val list: List<String>? = productId?.split("-")?.let { listOf(*it.toTypedArray()) }
-        val countList: List<String>? = productCount?.split("-")?.let { listOf(*it.toTypedArray()) }
+        var list: List<String>? = listOf()
+        var countList: List<String>? = listOf()
+        if (productId != "" && productCount != "") {
+            val listt: List<String>? = productId?.split("-")?.let { listOf(*it.toTypedArray()) }
+            list = listt
+            val countListt: List<String>? =
+                productCount?.split("-")?.let { listOf(*it.toTypedArray()) }
+            countList = countListt
+        }
         val idResult = list?.map { it.toInt() }
         val countResult = countList?.map { it.toInt() }
+
+
+
+
         println(idResult)
         println(countResult)
         //convert id list to list of LineItemBody and add to list
@@ -118,8 +132,8 @@ class OrderFragment : Fragment() {
             }
             println("the order id is ${responseOrder?.id}")
         }
-        viewModel.connectionStatus.observe(viewLifecycleOwner){
-            if (!it){
+        viewModel.connectionStatus.observe(viewLifecycleOwner) {
+            if (!it) {
                 Toast.makeText(context, "Please check your connection", Toast.LENGTH_SHORT).show()
             }
         }

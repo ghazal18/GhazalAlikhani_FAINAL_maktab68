@@ -44,7 +44,7 @@ class CategoriesFragment : Fragment() {
         binding.categoryRecyclerView.adapter = adaptor
         viewModel.categoriesList.observe(viewLifecycleOwner) {
             if (it != null) {
-                adaptor.submitList(it)
+                adaptor.submitList(it.data)
             }
         }
         viewModel.connectionStatus.observe(viewLifecycleOwner){

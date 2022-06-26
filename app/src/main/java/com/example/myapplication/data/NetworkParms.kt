@@ -12,3 +12,9 @@ class NetworkParams {
         const val ASC_ORDER = "asc"
     }
 }
+
+enum class Status {
+    Loading,
+    Failed,
+    Successful
+}

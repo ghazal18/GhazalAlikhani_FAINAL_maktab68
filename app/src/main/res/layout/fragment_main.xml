@@ -11,193 +11,49 @@
     </data>
 
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
-
-
-            <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-                android:id="@+id/indicator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:dotsColor="@color/slowGray"
-                app:dotsCornerRadius="10dp"
-                app:dotsSize="10dp"
-                app:dotsSpacing="2dp"
-                android:layout_gravity="center"
-                app:dotsWidthFactor="1.5"
-                app:progressMode="true"
-                app:selectedDotColor="@color/gray" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="21dp"
-                    android:clickable="true"
-                    android:src="@drawable/ic_baseline_arrow_left_24" />
-
-                <TextView
-                    android:id="@+id/showAllcategory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="7dp"
-                    android:clickable="true"
-                    android:text="نمایش همه"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/textViewCategory"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    android:text="دسته بندی ها:"
-                    android:textColor="@color/black"
-                    android:textSize="28sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/categoryRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="12dp"
-                android:layout_marginTop="70dp"
-                android:background="@drawable/rounded_corner_four"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="21dp"
-                        android:clickable="true"
-                        android:src="@drawable/ic_baseline_arrow_left_24" />
-
-                    <TextView
-                        android:id="@+id/showAllNew"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="12dp"
-                        android:clickable="true"
-                        android:text="نمایش همه"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="12dp"
-                        android:text="جدیدترین محصولات:"
-                        android:textColor="@color/black"
-                        android:textSize="23sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/NewestProductRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="12dp"
-                android:layout_marginTop="70dp"
-                android:background="@drawable/rounded_corner_five"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="21dp"
-                        android:clickable="true"
-                        android:src="@drawable/ic_baseline_arrow_left_24" />
-
-                    <TextView
-                        android:id="@+id/showAllBest"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="12dp"
-                        android:clickable="true"
-                        android:text="نمایش همه"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="12dp"
-                        android:text="بهترین محصولات:"
-                        android:textColor="@color/black"
-                        android:textSize="23sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/RatingProductRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    android:orientation="horizontal"
-                    android:scrollbars="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-            </LinearLayout>
-
-
-            <ImageView
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animationLoading"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/fotoo" />
-
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/loadinganimation" />
 
             <LinearLayout
+                android:id="@+id/mainLinearLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="12dp"
-                android:background="@drawable/rounded_corner_six"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+                <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                    android:id="@+id/indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    app:dotsColor="@color/slowGray"
+                    app:dotsCornerRadius="10dp"
+                    app:dotsSize="10dp"
+                    app:dotsSpacing="2dp"
+                    app:dotsWidthFactor="1.5"
+                    app:progressMode="true"
+                    app:selectedDotColor="@color/gray" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -213,35 +69,192 @@
                         android:src="@drawable/ic_baseline_arrow_left_24" />
 
                     <TextView
-                        android:id="@+id/showAllPopulary"
+                        android:id="@+id/showAllcategory"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="7dp"
                         android:clickable="true"
                         android:text="نمایش همه"
                         android:textSize="15sp" />
 
                     <TextView
+                        android:id="@+id/textViewCategory"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="12dp"
-                        android:text="پربازدید محصولات:"
+                        android:layout_margin="15dp"
+                        android:text="دسته بندی ها:"
                         android:textColor="@color/black"
-                        android:textSize="23sp"
+                        android:textSize="28sp"
                         android:textStyle="bold" />
+
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/PopulartiyProductRecyclerView"
+                    android:id="@+id/categoryRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
                     android:orientation="horizontal"
-                    android:scrollbars="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="70dp"
+                    android:background="@drawable/rounded_corner_four"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="21dp"
+                            android:clickable="true"
+                            android:src="@drawable/ic_baseline_arrow_left_24" />
+
+                        <TextView
+                            android:id="@+id/showAllNew"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="12dp"
+                            android:clickable="true"
+                            android:text="نمایش همه"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="12dp"
+                            android:text="جدیدترین محصولات:"
+                            android:textColor="@color/black"
+                            android:textSize="23sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/NewestProductRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="70dp"
+                    android:background="@drawable/rounded_corner_five"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="21dp"
+                            android:clickable="true"
+                            android:src="@drawable/ic_baseline_arrow_left_24" />
+
+                        <TextView
+                            android:id="@+id/showAllBest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="12dp"
+                            android:clickable="true"
+                            android:text="نمایش همه"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="12dp"
+                            android:text="بهترین محصولات:"
+                            android:textColor="@color/black"
+                            android:textSize="23sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/RatingProductRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:orientation="horizontal"
+                        android:scrollbars="vertical"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                </LinearLayout>
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/fotoo" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:background="@drawable/rounded_corner_six"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="21dp"
+                            android:clickable="true"
+                            android:src="@drawable/ic_baseline_arrow_left_24" />
+
+                        <TextView
+                            android:id="@+id/showAllPopulary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="12dp"
+                            android:clickable="true"
+                            android:text="نمایش همه"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="12dp"
+                            android:text="پربازدید محصولات:"
+                            android:textColor="@color/black"
+                            android:textSize="23sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/PopulartiyProductRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:orientation="horizontal"
+                        android:scrollbars="vertical"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                </LinearLayout>
+
+
             </LinearLayout>
-
-
         </LinearLayout>
     </ScrollView>
 
