@@ -50,26 +50,26 @@ class ShowAllFragment : Fragment() {
         if (type == "best") {
             viewModel.productRatingList.observe(viewLifecycleOwner) {
                 if (it != null) {
-                    adaptor.submitList(it)
+                    adaptor.submitList(it.data)
                 }
             }
         } else if (type == "new") {
             viewModel.productDataList.observe(viewLifecycleOwner) {
                 if (it != null) {
-                    adaptor.submitList(it)
+                    adaptor.submitList(it.data)
                 }
             }
 
         } else {
             viewModel.productPopularityList.observe(viewLifecycleOwner) {
                 if (it != null) {
-                    adaptor.submitList(it)
+                    adaptor.submitList(it.data)
                 }
             }
 
         }
-        viewModel.connectionStatus.observe(viewLifecycleOwner){
-            if (!it){
+        viewModel.connectionStatus.observe(viewLifecycleOwner) {
+            if (!it) {
                 Toast.makeText(context, "Please check your connection", Toast.LENGTH_SHORT).show()
             }
         }

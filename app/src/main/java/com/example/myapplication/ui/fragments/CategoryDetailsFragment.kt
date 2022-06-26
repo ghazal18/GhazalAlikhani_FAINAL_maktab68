@@ -52,7 +52,7 @@ class CategoryDetailsFragment : Fragment() {
         var id = args.id
         viewModel.getProductWithCategoryId(id)
         viewModel.productslist.observe(viewLifecycleOwner){
-            adaptor.submitList(it)
+            adaptor.submitList(it.data)
         }
         viewModel.connectionStatus.observe(viewLifecycleOwner){
             if (!it){

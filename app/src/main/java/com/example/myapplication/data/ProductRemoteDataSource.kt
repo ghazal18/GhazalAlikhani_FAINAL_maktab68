@@ -12,11 +12,11 @@ class ProductRemoteDataSource @Inject constructor(val apiService: ApiService) {
         return apiService.getCategories()
     }
 
-    suspend fun getProduct(oderBy: String): List<ProductsItem> {
+    suspend fun getProduct(oderBy: String): Response<List<ProductsItem>> {
         return apiService.getProducts(orderBy = oderBy)
     }
 
-    suspend fun getCategorysProduct(categoryId: String): List<ProductsItem> {
+    suspend fun getCategorysProduct(categoryId: String): Response<List<ProductsItem>> {
         return apiService.getProductsWithCategory(categoryy = categoryId)
     }
 
@@ -24,7 +24,7 @@ class ProductRemoteDataSource @Inject constructor(val apiService: ApiService) {
         return apiService.createAccount(customer = customer)
     }
 
-    suspend fun search(orderBy: String, searchWord: String, order: String): List<ProductsItem> {
+    suspend fun search(orderBy: String, searchWord: String, order: String): Response<List<ProductsItem>>{
         return apiService.searchProduct(word = searchWord, order = order, orderBy = orderBy)
     }
 

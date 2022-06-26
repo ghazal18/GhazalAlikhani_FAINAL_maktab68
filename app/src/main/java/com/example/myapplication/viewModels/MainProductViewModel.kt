@@ -13,6 +13,7 @@ import com.example.myapplication.data.Status
 import com.example.myapplication.model.Image
 import com.example.myapplication.model.ProductsItem
 import com.example.myapplication.model.ReviewsItem
+import com.example.myapplication.network.Resource
 import com.example.myapplication.network.hasInternetConnection
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -27,9 +28,9 @@ class MainProductViewModel @Inject constructor(
 
     var number = MutableLiveData(1)
     private val context = getApplication<Application>().applicationContext
-    var productPopularityList = MutableLiveData<List<ProductsItem>>()
-    var productDataList = MutableLiveData<List<ProductsItem>>()
-    var productRatingList = MutableLiveData<List<ProductsItem>>()
+    var productPopularityList = MutableLiveData<Resource<List<ProductsItem>>>()
+    var productDataList = MutableLiveData<Resource<List<ProductsItem>>>()
+    var productRatingList = MutableLiveData<Resource<List<ProductsItem>>>()
     var reviewsList = MutableLiveData<List<ReviewsItem>>()
     var statusLiveData = MutableLiveData<Status>()
     var connectionStatus = MutableLiveData(true)
@@ -112,7 +113,7 @@ class MainProductViewModel @Inject constructor(
         }
     }
 
-    var sliderPhoto = MutableLiveData<List<Image>>()
+    var sliderPhoto = MutableLiveData<Resource<List<ProductsItem>>>()
 
     fun slider() {
         viewModelScope.launch {
@@ -124,7 +125,7 @@ class MainProductViewModel @Inject constructor(
                         order = ASC_ORDER
                     )
 
-                    sliderPhoto.value = list[0].images
+                    sliderPhoto.value = list
                     connectionStatus.value = true
                 } catch (e: Exception) {
                     connectionStatus.value = false

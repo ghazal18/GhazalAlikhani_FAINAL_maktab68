@@ -30,7 +30,7 @@ class CategoryViewModel @Inject constructor(
     private val context = getApplication<Application>().applicationContext
 
     var categoriesList = MutableLiveData<Resource<List<CategoriesItem>>>()
-    var productslist = MutableLiveData<List<ProductsItem>>()
+    var productslist = MutableLiveData<Resource<List<ProductsItem>>>()
     var connectionStatus = MutableLiveData<Boolean>(true)
 
     init {

@@ -22,17 +22,6 @@ class SearchProductViewModel @Inject constructor(val productRepository: ProductR
         getAttribute()
     }
 
-    fun searchItem(searchWord: String, orderBy: String, order: String) {
-        viewModelScope.launch {
-            val list = productRepository.searchWord(
-                searchWord = searchWord,
-                orderBy = orderBy,
-                order = order
-            )
-            searchedList.value = list
-        }
-    }
-
     fun getAttribute() {
         viewModelScope.launch {
             val listOfAttributes = productRepository.getAttributes()

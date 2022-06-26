@@ -15,32 +15,32 @@ class ProductRepository @Inject constructor(val productRemoteDataSource: Product
         return  ApiResponse(productRemoteDataSource.getCategorys())
     }
 
-    suspend fun getRatingProduct(): List<ProductsItem> {
-        return productRemoteDataSource.getProduct(ORDER_BY_RATING)
+    suspend fun getRatingProduct(): Resource<List<ProductsItem>>{
+        return ApiResponse(productRemoteDataSource.getProduct(ORDER_BY_RATING))
     }
 
-    suspend fun getDateProduct(): List<ProductsItem> {
-        return productRemoteDataSource.getProduct(ORDER_BY_DATE)
+    suspend fun getDateProduct(): Resource<List<ProductsItem>> {
+        return ApiResponse(productRemoteDataSource.getProduct(ORDER_BY_DATE))
     }
 
-    suspend fun getPopularProduct(): List<ProductsItem> {
-        return productRemoteDataSource.getProduct(ORDER_BY_POPULARITY)
+    suspend fun getPopularProduct(): Resource<List<ProductsItem>> {
+        return ApiResponse(productRemoteDataSource.getProduct(ORDER_BY_POPULARITY))
     }
 
-    suspend fun getCategorysProduct(categoryId: String): List<ProductsItem> {
-        return productRemoteDataSource.getCategorysProduct(categoryId)
+    suspend fun getCategorysProduct(categoryId: String): Resource<List<ProductsItem>> {
+        return ApiResponse(productRemoteDataSource.getCategorysProduct(categoryId))
     }
 
     suspend fun setCustomer(customer: Customer): Resource<Customer> {
         return ApiResponse(productRemoteDataSource.setaCustomer(customer))
     }
 
-    suspend fun searchWord(orderBy: String, searchWord: String, order: String): List<ProductsItem> {
-        return productRemoteDataSource.search(
+    suspend fun searchWord(orderBy: String, searchWord: String, order: String):Resource<List<ProductsItem>> {
+        return ApiResponse(productRemoteDataSource.search(
             searchWord = searchWord,
             order = order,
             orderBy = orderBy
-        )
+        ))
     }
 
     suspend fun serOrder(order: OrderBody): Order {

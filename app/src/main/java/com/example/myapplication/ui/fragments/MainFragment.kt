@@ -90,19 +90,19 @@ class MainFragment : Fragment() {
         binding.PopulartiyProductRecyclerView.adapter = adapter
         viewModel.productPopularityList.observe(viewLifecycleOwner) {
             if (it != null) {
-                adapter.submitList(it)
+                adapter.submitList(it.data)
             }
         }
         binding.NewestProductRecyclerView.adapter = xxadapter
         viewModel.productDataList.observe(viewLifecycleOwner) {
             if (it != null) {
-                xxadapter.submitList(it)
+                xxadapter.submitList(it.data)
             }
         }
         binding.RatingProductRecyclerView.adapter = xadapter
         viewModel.productRatingList.observe(viewLifecycleOwner) {
             if (it != null) {
-                xadapter.submitList(it)
+                xadapter.submitList(it.data)
             }
         }
         binding.showAllBest.setOnClickListener {
@@ -127,7 +127,8 @@ class MainFragment : Fragment() {
         }
         viewModel.sliderPhoto.observe(viewLifecycleOwner) {
             var list = it
-            binding.viewPager.adapter = context?.let { ViewPagerAdapter(it, list) }
+            binding.viewPager.adapter = context?.let { list.data?.get(0)
+                ?.let { it1 -> ViewPagerAdapter(it, it1.images) } }
             binding.indicator.setViewPager2(binding.viewPager)
         }
 

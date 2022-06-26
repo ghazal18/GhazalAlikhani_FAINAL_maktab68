@@ -19,14 +19,14 @@ interface ApiService {
         @Query("consumer_key") key: String = CONSUMER_KEY,
         @Query("consumer_secret") secret: String = CONSUMER_SECRET,
         @Query("orderby") orderBy: String
-    ): List<ProductsItem>
+    ): Response<List<ProductsItem>>
 
     @GET("products")
     suspend fun getProductsWithCategory(
         @Query("consumer_key") key: String = CONSUMER_KEY,
         @Query("consumer_secret") secret: String = CONSUMER_SECRET,
         @Query("category") categoryy: String
-    ): List<ProductsItem>
+    ): Response<List<ProductsItem>>
 
     @POST("customers")
     suspend fun createAccount(
@@ -42,7 +42,7 @@ interface ApiService {
         @Query("search") word: String,
         @Query("order") order: String,
         @Query("orderby") orderBy: String
-    ): List<ProductsItem>
+    ): Response<List<ProductsItem>>
 
     @GET("products")
     suspend fun searchProduct2(
