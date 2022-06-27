@@ -55,10 +55,9 @@ class MainProductViewModel @Inject constructor(
     @RequiresApi(Build.VERSION_CODES.M)
     fun getRatingProducts() {
         viewModelScope.launch {
-
+            productRatingList.value = Resource.Loading()
             if (hasInternetConnection(context)) {
                 try {
-
                     val list = productRepository.getRatingProduct()
                     productRatingList.value = list
                     connectionStatus.value = true

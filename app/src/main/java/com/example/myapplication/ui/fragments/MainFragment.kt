@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,6 +16,7 @@ import com.example.myapplication.adaptor.CategoriesAdaptor
 import com.example.myapplication.adaptor.ProductAdaptor
 import com.example.myapplication.adaptor.ViewPagerAdapter
 import com.example.myapplication.databinding.FragmentMainBinding
+import com.example.myapplication.network.Resource
 import com.example.myapplication.viewModels.CategoryViewModel
 import com.example.myapplication.viewModels.MainProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -86,9 +86,18 @@ class MainFragment : Fragment() {
         }
         binding.RatingProductRecyclerView.adapter = xadapter
         viewModel.productRatingList.observe(viewLifecycleOwner) {
-            if (it != null) {
-                xadapter.submitList(it.data)
+            when(it){
+                is Resource.Loading -> {
+                    binding.animationLoading.visibility = View.VISIBLE
+                    binding.mainLinearLayout.visibility = View.GONE
+                }
+                is Resource.Success ->{
+                    binding.animationLoading.visibility = View.GONE
+                    binding.mainLinearLayout.visibility = View.VISIBLE
+                    xadapter.submitList(it.data)
+                }
             }
+
         }
         binding.showAllBest.setOnClickListener {
             val action = MainFragmentDirections.actionMainFragmentToShowAllFragment("best")
