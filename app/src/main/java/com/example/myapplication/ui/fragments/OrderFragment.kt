@@ -106,6 +106,7 @@ class OrderFragment : Fragment() {
 
             }
         }
+
         val order = OrderBody(userId, 0, "", listOfOrder)
         viewModel.order(order)
 
@@ -136,6 +137,23 @@ class OrderFragment : Fragment() {
             if (!it) {
                 Toast.makeText(context, "Please check your connection", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        binding.addCouponButton.setOnClickListener {
+            var code = binding.couponEditText.text.toString()
+            println(code)
+
+            val order = OrderWithCoupon(
+                userId,
+                orderId,
+                "",
+                listOfOrder,
+                listOf(Coupon(code))
+            )
+            viewModel.orderWithCoupon(orderId,order)
+            println(" this is order user ${order.customer_id} this is order id ${order.id}" +
+                    "this is order copone code ${order.coupon_lines[0].code}")
+
         }
 
     }

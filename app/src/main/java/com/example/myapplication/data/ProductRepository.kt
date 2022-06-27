@@ -52,7 +52,9 @@ class ProductRepository @Inject constructor(val productRemoteDataSource: Product
     suspend fun serOrder(order: OrderBody): Resource<Order> {
         return ApiResponse(productRemoteDataSource.setOrder(order))
     }
-
+    suspend fun setWithCouponOrder(id: Int,order: OrderWithCoupon): Resource<Order> {
+        return ApiResponse(productRemoteDataSource.setWithCouponOrder(id = id,order = order))
+    }
     suspend fun updateAnOrder(id: Int, order: OrderUpdate): Resource<Order> {
         return ApiResponse(productRemoteDataSource.updateAnOrder(id, order))
     }

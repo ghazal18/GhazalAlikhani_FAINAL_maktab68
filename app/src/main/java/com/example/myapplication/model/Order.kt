@@ -5,4 +5,5 @@ data class Order(
     val id: Int,
     val total: String,
     val line_items: List<LineItem>,
+    val coupon_lines:List<Coupon>
 )

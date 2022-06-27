@@ -67,8 +67,24 @@ class OrderViewModel @Inject constructor(
 
     }
 
-
-
-
-
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun orderWithCoupon(id: Int,order: OrderWithCoupon) {
+        viewModelScope.launch {
+            if (hasInternetConnection(context)) {
+                try {
+                    var list = repository.setWithCouponOrder(id,order).data?.line_items
+                    orderList.value = list!!
+                } catch (e: Exception) {
+                    connectionStatus.value = false
+                }
+            } else {
+                connectionStatus.value = false
+            }
+        }
+    }
 }
+
+
+
+
+

@@ -63,6 +63,14 @@ interface ApiService {
     ): Response<Order>
 
     @PUT("orders/{id}")
+    suspend fun setWithCouponOrder(
+        @Path(value = "id") id: Int,
+        @Query("consumer_key") key: String = CONSUMER_KEY,
+        @Query("consumer_secret") secret: String = CONSUMER_SECRET,
+        @Body order: OrderWithCoupon
+    ): Response<Order>
+
+    @PUT("orders/{id}")
     suspend fun updateAnOrder(
         @Path(value = "id") id: Int,
         @Query("consumer_key") key: String = CONSUMER_KEY,
