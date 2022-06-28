@@ -108,6 +108,7 @@ class OrderFragment : Fragment() {
         }
 
         val order = OrderBody(userId, 0, "", listOfOrder)
+        println("the order userid = $userId , order product id ${listOfOrder[0].id} order product quantity ${listOfOrder[0].quantity} and order product product_id ${listOfOrder[0].product_id}")
         viewModel.order(order)
 
         viewModel.orderId.observe(viewLifecycleOwner) {
@@ -150,9 +151,11 @@ class OrderFragment : Fragment() {
                 listOfOrder,
                 listOf(Coupon(code))
             )
-            viewModel.orderWithCoupon(orderId,order)
-            println(" this is order user ${order.customer_id} this is order id ${order.id}" +
-                    "this is order copone code ${order.coupon_lines[0].code}")
+            viewModel.orderWithCoupon(orderId, order)
+            println(
+                " this is order user ${order.customer_id} this is order id ${order.id}" +
+                        "this is order copone code ${order.coupon_lines[0].code}"
+            )
 
         }
 

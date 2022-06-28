@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.databinding.OrderItemViewBinding
 import com.example.myapplication.model.LineItem
@@ -21,6 +22,7 @@ class OrderAdaptor(val onClick: OrderClickHandler, val onClick2: OrderClickHandl
     class ItemHolder(val binding: OrderItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(orderProduct: LineItem, onClick: OrderClickHandler, onClick2: OrderClickHandler) {
+            Glide.with(itemView).load(orderProduct.image.src).into(binding.imageViewProduct)
             binding.buttonDecrease.setOnClickListener {
                 var quantity = binding.textViewQuantity.text.toString().toInt()
                 var increase = ++quantity

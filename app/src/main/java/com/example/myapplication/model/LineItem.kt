@@ -5,5 +5,6 @@ data class LineItem(
     val name: String,
     val product_id: Int,
     var quantity: Int,
-    val total: String
+    val total: String,
+    val image:LineItemImage
 )
