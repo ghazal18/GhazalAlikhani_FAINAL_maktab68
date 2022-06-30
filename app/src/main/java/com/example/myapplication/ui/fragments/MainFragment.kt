@@ -46,15 +46,15 @@ class MainFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        val adapter = ProductAdaptor() { Product ->
+        val adapter = ProductAdaptor("پربازدید محصولات") { Product ->
             val action = MainFragmentDirections.actionMainFragmentToDetailsFragment(Product)
             findNavController().navigate(action)
         }
-        val xadapter = ProductAdaptor() { Product ->
+        val xadapter = ProductAdaptor("بهترین محصولات") { Product ->
             val action = MainFragmentDirections.actionMainFragmentToDetailsFragment(Product)
             findNavController().navigate(action)
         }
-        val xxadapter = ProductAdaptor() { Product ->
+        val xxadapter = ProductAdaptor("جدیدترین محصولات") { Product ->
             val action = MainFragmentDirections.actionMainFragmentToDetailsFragment(Product)
             findNavController().navigate(action)
         }

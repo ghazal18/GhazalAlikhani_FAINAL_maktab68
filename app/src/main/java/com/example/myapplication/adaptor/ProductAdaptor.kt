@@ -16,7 +16,7 @@ import com.example.myapplication.databinding.HeaderProductBinding
 
 typealias ProductClickHandler = (ProductsItem) -> Unit
 
-class ProductAdaptor(val onClick: ProductClickHandler) :
+class ProductAdaptor(val title:String,val onClick: ProductClickHandler) :
     ListAdapter<ProductsItem, Holder<*>>(MovieDiffCallback) {
 
     class ItemHolder(val binding1: ProductListItemViewBinding) :
@@ -36,9 +36,10 @@ class ProductAdaptor(val onClick: ProductClickHandler) :
         }
     }
 
-    class HeaderHolder(val binding2: HeaderProductBinding) :
+    inner class HeaderHolder(val binding2: HeaderProductBinding) :
         Holder<HeaderProductBinding>(binding2) {
         override fun bind(product: ProductsItem, onClick: ProductClickHandler) {
+        binding2.titleText.text = title
 
         }
     }

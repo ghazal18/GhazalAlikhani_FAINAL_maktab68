@@ -108,6 +108,9 @@ class DetailsFragment : Fragment() {
         viewModel.reviewsList.observe(viewLifecycleOwner) {
             reviewAdaptor.submitList(it.data)
         }
+        binding.imageViewAddComment.setOnClickListener{
+
+        }
     }
 
 
