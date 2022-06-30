@@ -24,6 +24,7 @@ class ProductAdaptor(val onClick: ProductClickHandler) :
 
         override fun bind(product: ProductsItem, onClick: ProductClickHandler) {
             binding1.textViewProductName.text = product.name
+            binding1.textViewPrice.text = product.price
             try {
                 Glide.with(itemView).load(product.images[0].src).into(binding1.productImage)
             } catch (e: Exception) {
