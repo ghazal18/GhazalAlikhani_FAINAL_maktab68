@@ -125,6 +125,9 @@ class OrderFragment : Fragment() {
         })
         viewModel.orderLiveData.observe(viewLifecycleOwner) {
             responseOrder = it.data
+            if (it.code != "201") {
+                Toast.makeText(context, "مشکلی در ثبت سفارش شما پیش امده", Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.orderListRecyclerView.adapter = adaptor
