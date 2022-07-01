@@ -83,20 +83,42 @@ interface ApiService {
         @Query("consumer_key") key: String = CONSUMER_KEY,
         @Query("consumer_secret") secret: String = CONSUMER_SECRET,
         @Query("product") id: Int
-    ):Response<List<ReviewsItem>>
+    ): Response<List<ReviewsItem>>
+
+    @POST("products/reviews")
+    suspend fun addReview(
+        @Query("consumer_key") key: String = CONSUMER_KEY,
+        @Query("consumer_secret") secret: String = CONSUMER_SECRET,
+        @Body reviewBody:AddReview
+    ):Response<ReviewsItem>
+
+    @PUT("products/reviews/{id}")
+    suspend fun updateAReview(
+        @Path("id")id:Int,
+        @Query("consumer_key") key: String = CONSUMER_KEY,
+        @Query("consumer_secret") secret: String = CONSUMER_SECRET,
+        @Body reviewBody:AddReview
+    ):Response<ReviewsItem>
+
+    @DELETE("products/reviews/{id}")
+    suspend fun deleteAReview(
+        @Path("id")id:Int,
+        @Query("consumer_key") key: String = CONSUMER_KEY,
+        @Query("consumer_secret") secret: String = CONSUMER_SECRET,
+    ):Response<ReviewsItem>
 
     @GET("products/attributes")
     suspend fun getAttributes(
         @Query("consumer_key") key: String = CONSUMER_KEY,
         @Query("consumer_secret") secret: String = CONSUMER_SECRET,
-    ):Response<List<AttributesItem>>
+    ): Response<List<AttributesItem>>
 
     @GET("products/attributes/{attribute_id}/terms")
     suspend fun getAttributeTerm(
         @Path(value = "attribute_id") attribute_id: Int,
         @Query("consumer_key") key: String = CONSUMER_KEY,
         @Query("consumer_secret") secret: String = CONSUMER_SECRET,
-    ):Response<List<Term>>
+    ): Response<List<Term>>
 
     @GET("products")
     suspend fun getProductWithFilter(
@@ -105,7 +127,7 @@ interface ApiService {
         @Query("attribute") attribute: String,
         @Query("attribute_term") attribute_term: Int,
         @Query("search") search: String
-    ):  Response<List<ProductsItem>>
+    ): Response<List<ProductsItem>>
 
 
 }

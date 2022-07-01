@@ -12,6 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
 import com.example.myapplication.adaptor.ReviewAdaptor
@@ -108,8 +109,9 @@ class DetailsFragment : Fragment() {
         viewModel.reviewsList.observe(viewLifecycleOwner) {
             reviewAdaptor.submitList(it.data)
         }
-        binding.imageViewAddComment.setOnClickListener{
-
+        binding.imageViewAddComment.setOnClickListener {
+            val action = DetailsFragmentDirections.actionDetailsFragmentToCommentFragment(porductt.id)
+            findNavController().navigate(action)
         }
     }
 

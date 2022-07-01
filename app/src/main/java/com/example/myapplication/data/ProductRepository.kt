@@ -63,6 +63,10 @@ class ProductRepository @Inject constructor(val productRemoteDataSource: Product
         return ApiResponse(productRemoteDataSource.getReviews(productId))
     }
 
+    suspend fun setReview(newReview: AddReview):Resource<ReviewsItem>{
+        return ApiResponse(productRemoteDataSource.setReview(newReview))
+    }
+
     suspend fun getAttributes(): Resource<List<AttributesItem>> {
         return ApiResponse(productRemoteDataSource.getAttributes())
     }

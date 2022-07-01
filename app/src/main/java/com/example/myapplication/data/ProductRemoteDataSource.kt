@@ -42,6 +42,10 @@ class ProductRemoteDataSource @Inject constructor(val apiService: ApiService) {
         return apiService.getReviews(id = productId)
     }
 
+    suspend fun setReview(newReview:AddReview):Response<ReviewsItem>{
+        return apiService.addReview(reviewBody = newReview)
+    }
+
     suspend fun getAttributes():Response<List<AttributesItem>> {
         return apiService.getAttributes()
     }

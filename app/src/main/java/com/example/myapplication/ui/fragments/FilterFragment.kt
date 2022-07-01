@@ -51,7 +51,6 @@ class FilterFragment : Fragment() {
         val termAdaptor = AttributeTermAdaptor {
             filterName = it.name
             filterTermId = it.id
-            Toast.makeText(context, it.slug, Toast.LENGTH_SHORT).show()
         }
         binding.attributeTermRecyclerView.adapter = termAdaptor
         viewModel.attributesTermList.observe(viewLifecycleOwner) {
