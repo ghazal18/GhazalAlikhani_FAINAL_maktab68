@@ -2,6 +2,8 @@ package com.example.myapplication.network
 
 import com.example.myapplication.data.NetworkParams.Companion.CONSUMER_KEY
 import com.example.myapplication.data.NetworkParams.Companion.CONSUMER_SECRET
+import com.example.myapplication.data.NetworkParams.Companion.DESC_ORDER
+import com.example.myapplication.data.NetworkParams.Companion.ORDER_BY_PRICE
 import com.example.myapplication.model.*
 import retrofit2.Response
 import retrofit2.http.*
@@ -49,8 +51,8 @@ interface ApiService {
         @Query("consumer_key") key: String = CONSUMER_KEY,
         @Query("consumer_secret") secret: String = CONSUMER_SECRET,
         @Query("search") search: String,
-        @Query("order") order: String,
-        @Query("orderby") orderBy: String,
+        @Query("order") order: String = DESC_ORDER,
+        @Query("orderby") orderBy: String = ORDER_BY_PRICE,
         @Query("attribute") attribute: String,
         @Query("attribute_term") attribute_term: Int
     ): Response<List<ProductsItem>>

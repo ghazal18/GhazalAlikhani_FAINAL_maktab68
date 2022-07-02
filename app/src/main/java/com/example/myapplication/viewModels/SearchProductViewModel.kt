@@ -55,7 +55,7 @@ class SearchProductViewModel @Inject constructor(val productRepository: ProductR
                 attribute = attribute,
                 attributeTerm = attributeTerm,
                 search = search,
-                order = order, orderBy = orderBy
+                order = order , orderBy = orderBy
             )
             searchedList.value = list
         }

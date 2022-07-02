@@ -68,6 +68,7 @@ class SearchFragment : Fragment() {
         binding.go.setOnClickListener {
             search = binding.searchEditText.text.toString()
             search(orderBy, order, search, filterSlug, filterTermId)
+
         }
         binding.autoCompleteText.setOnClickListener {
             PopupMenu(context, binding.autoCompleteText).apply {
