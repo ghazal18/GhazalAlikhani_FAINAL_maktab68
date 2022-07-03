@@ -32,7 +32,7 @@ class Module {
     fun getInspector(): OkHttpClient {
         val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
         return OkHttpClient.Builder().connectTimeout(60, TimeUnit.SECONDS)
-            .readTimeout(60, TimeUnit.SECONDS).writeTimeout(60, TimeUnit.SECONDS)
+            .readTimeout(130, TimeUnit.SECONDS).writeTimeout(60, TimeUnit.SECONDS)
             .addInterceptor(logger).build()
     }
 

@@ -84,6 +84,7 @@ class SigninFragment : Fragment() {
                 if (it.data != null) {
                     println(it.data.id)
                     editor.putInt("id", it.data.id)
+                    editor.putString("email", it.data.email)
                     editor.apply()
                 }
                 Toast.makeText(context,  it.code?.let { it1 -> errorCode(it1) }, Toast.LENGTH_SHORT).show()
