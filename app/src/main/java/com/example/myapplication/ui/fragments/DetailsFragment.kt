@@ -104,17 +104,24 @@ class DetailsFragment : Fragment() {
             binding.linearLayoutReviews.visibility = View.GONE
             binding.linearLayoutSpecifications.visibility = View.VISIBLE
         }
-        val reviewAdaptor = ReviewAdaptor {
+        val reviewAdaptor = ReviewAdaptor({
             println("the review id is ${it.id}")
             reviewViewModel.deleteReview(it.id)
-        }
+        }, {
+
+        })
+
+
         binding.reviewRecyclerView.adapter = reviewAdaptor
-        viewModel.reviewsList.observe(viewLifecycleOwner) {
+        viewModel.reviewsList.observe(viewLifecycleOwner)
+        {
             reviewAdaptor.submitList(it)
         }
         binding.imageViewAddComment.setOnClickListener {
-            val action = DetailsFragmentDirections.actionDetailsFragmentToCommentFragment(porductt.id)
+            val action =
+                DetailsFragmentDirections.actionDetailsFragmentToCommentFragment(porductt.id)
             findNavController().navigate(action)
+
         }
 
 

@@ -13,15 +13,17 @@ import com.example.myapplication.model.ReviewsItem
 import com.example.myapplication.RemoveTag
 
 typealias ReviewClickHandler = (ReviewsItem) -> Unit
-class ReviewAdaptor(val onClick: ReviewClickHandler) :
+
+class ReviewAdaptor(val onClick: ReviewClickHandler, val onClick2: ReviewClickHandler) :
     ListAdapter<ReviewsItem, ReviewAdaptor.ItemHolder>(ReviewsDiffCallback) {
 
     class ItemHolder(val binding: ReviewListItemViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(review: ReviewsItem, onClick: ReviewClickHandler) {
+        fun bind(review: ReviewsItem, onClick: ReviewClickHandler, onClick2: ReviewClickHandler) {
             binding.textViewReview.text = RemoveTag.removingTag(review.review)
             try {
-                Glide.with(itemView).load(review.reviewer_avatar_urls.`48`).into(binding.imageViewAvatar)
+                Glide.with(itemView).load(review.reviewer_avatar_urls.`48`)
+                    .into(binding.imageViewAvatar)
             } catch (e: Exception) {
                 binding.imageViewAvatar.setImageResource(R.drawable.ic_connection_error)
             }
@@ -29,6 +31,9 @@ class ReviewAdaptor(val onClick: ReviewClickHandler) :
             binding.rBar.rating = numberOfStars
             binding.deleteCommentButton.setOnClickListener {
                 onClick.invoke(review)
+            }
+            binding.editCommentButton.setOnClickListener {
+                onClick2.invoke(review)
             }
         }
     }
@@ -46,7 +51,7 @@ class ReviewAdaptor(val onClick: ReviewClickHandler) :
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
         val reviews = getItem(position)
         holder.binding.reviews = reviews
-        holder.bind(reviews, onClick)
+        holder.bind(reviews, onClick, onClick2)
     }
 
 }

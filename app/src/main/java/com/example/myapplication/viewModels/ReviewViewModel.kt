@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.ProductRepository
 import com.example.myapplication.model.AddReview
 import com.example.myapplication.model.ReviewsItem
+import com.example.myapplication.model.UpdateReview
 import com.example.myapplication.network.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -19,16 +20,22 @@ class ReviewViewModel @Inject constructor(
     application: Application
 ) : AndroidViewModel(application) {
     var reviewLiveData = MutableLiveData<Resource<ReviewsItem>>()
-    fun setReview(review:AddReview){
+    fun setReview(review: AddReview) {
         viewModelScope.launch {
             val data = repository.setReview(review)
             reviewLiveData.value = data
         }
     }
 
-    fun deleteReview(id :Int){
+    fun deleteReview(id: Int) {
         viewModelScope.launch {
             val data = repository.deleteReview(id)
+        }
+    }
+
+    fun updateReview(id: Int, review: UpdateReview) {
+        viewModelScope.launch {
+            val date = repository.updateReview(id, review)
         }
     }
 }

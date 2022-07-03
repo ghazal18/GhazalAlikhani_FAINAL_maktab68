@@ -99,7 +99,7 @@ interface ApiService {
         @Path("id")id:Int,
         @Query("consumer_key") key: String = CONSUMER_KEY,
         @Query("consumer_secret") secret: String = CONSUMER_SECRET,
-        @Body reviewBody:AddReview
+        @Body reviewBody:UpdateReview
     ):Response<ReviewsItem>
 
     @DELETE("products/reviews/{id}")
