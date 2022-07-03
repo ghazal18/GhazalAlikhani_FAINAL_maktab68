@@ -29,7 +29,7 @@ class MainProductViewModel @Inject constructor(
     var productPopularityList = MutableLiveData<Resource<List<ProductsItem>>>()
     var productDataList = MutableLiveData<Resource<List<ProductsItem>>>()
     var productRatingList = MutableLiveData<Resource<List<ProductsItem>>>()
-    var reviewsList = MutableLiveData<Resource<List<ReviewsItem>>>()
+    var reviewsList = MutableLiveData<List<ReviewsItem>>()
     var connectionStatus = MutableLiveData(true)
 
 
@@ -134,7 +134,7 @@ class MainProductViewModel @Inject constructor(
             if (hasInternetConnection(context)) {
                 try {
                     val listOfReview = productRepository.getReviews(id)
-                    reviewsList.value = listOfReview
+                    reviewsList.value = listOfReview.data
                     connectionStatus.value = true
                 } catch (e: Exception) {
                     connectionStatus.value = false

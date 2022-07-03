@@ -21,6 +21,7 @@ import com.example.myapplication.databinding.FragmentDetailsBinding
 import com.example.myapplication.data.ArrayOfProductDetails
 import com.example.myapplication.viewModels.MainProductViewModel
 import com.example.myapplication.RemoveTag
+import com.example.myapplication.viewModels.ReviewViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,6 +29,7 @@ class DetailsFragment : Fragment() {
     val args: DetailsFragmentArgs by navArgs()
     lateinit var binding: FragmentDetailsBinding
     val viewModel: MainProductViewModel by viewModels()
+    val reviewViewModel: ReviewViewModel by viewModels()
     lateinit var sp: SharedPreferences
     lateinit var editor: SharedPreferences.Editor
     var clicked = false
@@ -103,16 +105,19 @@ class DetailsFragment : Fragment() {
             binding.linearLayoutSpecifications.visibility = View.VISIBLE
         }
         val reviewAdaptor = ReviewAdaptor {
-
+            println("the review id is ${it.id}")
+            reviewViewModel.deleteReview(it.id)
         }
         binding.reviewRecyclerView.adapter = reviewAdaptor
         viewModel.reviewsList.observe(viewLifecycleOwner) {
-            reviewAdaptor.submitList(it.data)
+            reviewAdaptor.submitList(it)
         }
         binding.imageViewAddComment.setOnClickListener {
             val action = DetailsFragmentDirections.actionDetailsFragmentToCommentFragment(porductt.id)
             findNavController().navigate(action)
         }
+
+
     }
 
 

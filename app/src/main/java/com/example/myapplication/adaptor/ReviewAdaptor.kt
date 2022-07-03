@@ -27,9 +27,9 @@ class ReviewAdaptor(val onClick: ReviewClickHandler) :
             }
             var numberOfStars = review.rating.toFloat()
             binding.rBar.rating = numberOfStars
-//            binding.linear.setOnClickListener {
-//                onClick.invoke(review)
-//            }
+            binding.deleteCommentButton.setOnClickListener {
+                onClick.invoke(review)
+            }
         }
     }
 

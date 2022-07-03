@@ -25,4 +25,10 @@ class ReviewViewModel @Inject constructor(
             reviewLiveData.value = data
         }
     }
+
+    fun deleteReview(id :Int){
+        viewModelScope.launch {
+            val data = repository.deleteReview(id)
+        }
+    }
 }

@@ -24,29 +24,39 @@ class ProductRemoteDataSource @Inject constructor(val apiService: ApiService) {
         return apiService.createAccount(customer = customer)
     }
 
-    suspend fun search(orderBy: String, searchWord: String, order: String): Response<List<ProductsItem>>{
+    suspend fun search(
+        orderBy: String,
+        searchWord: String,
+        order: String
+    ): Response<List<ProductsItem>> {
         return apiService.searchProduct(word = searchWord, order = order, orderBy = orderBy)
     }
 
     suspend fun setOrder(order: OrderBody): Response<Order> {
         return apiService.setOrder(order = order)
     }
-    suspend fun setWithCouponOrder(id: Int,order: OrderWithCoupon): Response<Order> {
+
+    suspend fun setWithCouponOrder(id: Int, order: OrderWithCoupon): Response<Order> {
         return apiService.setWithCouponOrder(id = id, order = order)
     }
+
     suspend fun updateAnOrder(id: Int, order: OrderUpdate): Response<Order> {
         return apiService.updateAnOrder(id = id, order = order)
     }
 
-    suspend fun getReviews(productId: Int):Response<List<ReviewsItem>> {
+    suspend fun getReviews(productId: Int): Response<List<ReviewsItem>> {
         return apiService.getReviews(id = productId)
     }
 
-    suspend fun setReview(newReview:AddReview):Response<ReviewsItem>{
+    suspend fun setReview(newReview: AddReview): Response<ReviewsItem> {
         return apiService.addReview(reviewBody = newReview)
     }
 
-    suspend fun getAttributes():Response<List<AttributesItem>> {
+    suspend fun deleteReview(id: Int): Response<ReviewsItem> {
+        return apiService.deleteAReview(id = id)
+    }
+
+    suspend fun getAttributes(): Response<List<AttributesItem>> {
         return apiService.getAttributes()
     }
 
@@ -58,7 +68,7 @@ class ProductRemoteDataSource @Inject constructor(val apiService: ApiService) {
         search: String,
         attribute: String,
         attributeTerm: Int
-    ): Response<List<ProductsItem>>  {
+    ): Response<List<ProductsItem>> {
         return apiService.getProductWithFilter(
             attribute = attribute,
             attribute_term = attributeTerm,

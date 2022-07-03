@@ -52,9 +52,11 @@ class ProductRepository @Inject constructor(val productRemoteDataSource: Product
     suspend fun serOrder(order: OrderBody): Resource<Order> {
         return ApiResponse(productRemoteDataSource.setOrder(order))
     }
-    suspend fun setWithCouponOrder(id: Int,order: OrderWithCoupon): Resource<Order> {
-        return ApiResponse(productRemoteDataSource.setWithCouponOrder(id = id,order = order))
+
+    suspend fun setWithCouponOrder(id: Int, order: OrderWithCoupon): Resource<Order> {
+        return ApiResponse(productRemoteDataSource.setWithCouponOrder(id = id, order = order))
     }
+
     suspend fun updateAnOrder(id: Int, order: OrderUpdate): Resource<Order> {
         return ApiResponse(productRemoteDataSource.updateAnOrder(id, order))
     }
@@ -63,8 +65,12 @@ class ProductRepository @Inject constructor(val productRemoteDataSource: Product
         return ApiResponse(productRemoteDataSource.getReviews(productId))
     }
 
-    suspend fun setReview(newReview: AddReview):Resource<ReviewsItem>{
+    suspend fun setReview(newReview: AddReview): Resource<ReviewsItem> {
         return ApiResponse(productRemoteDataSource.setReview(newReview))
+    }
+
+    suspend fun deleteReview(id: Int): Resource<ReviewsItem> {
+        return ApiResponse(productRemoteDataSource.deleteReview(id))
     }
 
     suspend fun getAttributes(): Resource<List<AttributesItem>> {
