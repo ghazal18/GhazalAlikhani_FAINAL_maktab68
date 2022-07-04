@@ -17,4 +17,10 @@
     <string name="option_4">جدیدترین ها</string>
     <string name="filter">فیلتر:</string>
     <string name="cancel">لغو</string>
+    <string name="ok">ok</string>
+    <string name="Rating">امتیاز دهید: </string>
+
+    <string name="star">امتیاز دهید:  <font color='#FFE42828'>* </font></string>
+    <string name="explane">دیدگاه خود را شرح دهید:  <font color='#FFE42828'>* </font></string>
+    <string name="reviewer">نام:  <font color='#FFE42828'>* </font></string>
 </resources>

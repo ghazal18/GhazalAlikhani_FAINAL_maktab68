@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.fragments
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -39,8 +40,10 @@ class CommentFragment : Fragment() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         var email = sp.getString("email", "")
+
 
 
 

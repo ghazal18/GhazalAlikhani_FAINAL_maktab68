@@ -1,28 +1,33 @@
 package com.example.myapplication.ui.fragments
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RatingBar
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
+import com.example.myapplication.RemoveTag
 import com.example.myapplication.adaptor.ReviewAdaptor
 import com.example.myapplication.adaptor.ViewPagerAdapter
-import com.example.myapplication.databinding.FragmentDetailsBinding
 import com.example.myapplication.data.ArrayOfProductDetails
+import com.example.myapplication.databinding.FragmentDetailsBinding
+import com.example.myapplication.model.UpdateReview
 import com.example.myapplication.viewModels.MainProductViewModel
-import com.example.myapplication.RemoveTag
 import com.example.myapplication.viewModels.ReviewViewModel
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class DetailsFragment : Fragment() {
@@ -108,7 +113,7 @@ class DetailsFragment : Fragment() {
             println("the review id is ${it.id}")
             reviewViewModel.deleteReview(it.id)
         }, {
-
+            reviewViewModel.updateReview(it.id, UpdateReview(it.rating,it.review))
         })
 
 
@@ -126,6 +131,7 @@ class DetailsFragment : Fragment() {
 
 
     }
+
 
 
 }
