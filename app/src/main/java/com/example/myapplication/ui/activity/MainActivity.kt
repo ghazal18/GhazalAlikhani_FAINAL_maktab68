@@ -2,8 +2,13 @@ package com.example.myapplication.ui.activity
 
 
 
+import android.Manifest
+import android.os.Build
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
@@ -14,9 +19,11 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        getLocationPermission()
         val toolbar = findViewById<Toolbar>(R.id.mytoolbar)
         setSupportActionBar(toolbar)
         val buttonProfile = findViewById<ImageButton>(R.id.buttonProfile)
@@ -49,6 +56,29 @@ class MainActivity : AppCompatActivity() {
                 darkMode = !darkMode
         }
 
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun getLocationPermission() {
+        val locationPermissionRequest = registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions ->
+            when {
+                permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
+                    Toast.makeText(this, "permission done", Toast.LENGTH_SHORT).show()
+                }
+                permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
+                    Toast.makeText(this, "permission done", Toast.LENGTH_SHORT).show()
+                    // Only approximate location access granted.
+                } else -> {
+                // No location access granted.
+                    Toast.makeText(this, "permission faild", Toast.LENGTH_SHORT).show()
+            }
+            }
+        }
+        locationPermissionRequest.launch(arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION))
     }
 
 
