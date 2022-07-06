@@ -59,7 +59,6 @@ class DetailsFragment : Fragment() {
         var porductt = args.productsss
         binding.product = porductt
         binding.lifecycleOwner = this.viewLifecycleOwner
-        binding.cardView.setBackgroundResource(R.drawable.rounded_top_corner)
         binding.viewPager.adapter = context?.let { ViewPagerAdapter(it, porductt.images) }
         binding.indicator.setViewPager2(binding.viewPager)
         var numberOfStars = porductt.average_rating.toFloat()

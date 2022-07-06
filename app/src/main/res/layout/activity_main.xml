@@ -53,6 +53,7 @@
                 android:id="@+id/buttonDarkMode"
                 android:layout_width="60dp"
                 android:layout_weight="1"
+                android:src="@drawable/ic_baseline_dark_mode_24"
                 android:layout_height="match_parent"
                 android:background="@color/pinkDark" />
 

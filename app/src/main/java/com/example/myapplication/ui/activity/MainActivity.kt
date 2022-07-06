@@ -1,7 +1,6 @@
 package com.example.myapplication.ui.activity
 
 
-
 import android.Manifest
 import android.os.Build
 import android.os.Bundle
@@ -19,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    var darkMode = false
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         val buttonSearch = findViewById<ImageButton>(R.id.buttonSearch)
         val buttonDarkMode = findViewById<ImageButton>(R.id.buttonDarkMode)
         val buttonShop = findViewById<ImageButton>(R.id.buttonshop)
-        var darkMode = false
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
         val navController = navHostFragment.navController
@@ -44,16 +43,18 @@ class MainActivity : AppCompatActivity() {
         buttonSearch.setOnClickListener {
             navController.navigate(R.id.searchFragment)
         }
-        buttonDarkMode.setImageResource(R.drawable.ic_baseline_dark_mode_24)
+
+      //  buttonDarkMode.setImageResource(R.drawable.ic_baseline_dark_mode_24)
+
         buttonDarkMode.setOnClickListener {
-            if(!darkMode){
+            if (!darkMode) {
                 buttonDarkMode.setImageResource(R.drawable.ic_baseline_wb_sunny_24)
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            }else{
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            } else {
                 buttonDarkMode.setImageResource(R.drawable.ic_baseline_dark_mode_24)
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
-                darkMode = !darkMode
+            darkMode = !darkMode
         }
 
     }
@@ -69,13 +70,17 @@ class MainActivity : AppCompatActivity() {
                 }
                 permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
 
-                } else -> {
-            }
+                }
+                else -> {
+                }
             }
         }
-        locationPermissionRequest.launch(arrayOf(
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION))
+        locationPermissionRequest.launch(
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+        )
     }
 
 
