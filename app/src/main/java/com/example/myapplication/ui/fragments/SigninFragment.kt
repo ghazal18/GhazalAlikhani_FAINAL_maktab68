@@ -41,7 +41,7 @@ class SigninFragment : Fragment() {
     lateinit var sp: SharedPreferences
     lateinit var editor: SharedPreferences.Editor
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-
+    var latLon = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         sp = this.requireActivity().getSharedPreferences("accountId", Context.MODE_PRIVATE)
         editor = sp.edit()
@@ -68,8 +68,8 @@ class SigninFragment : Fragment() {
                 binding.EditTextEmail.text.toString(),
                 binding.EditTextUserName.text.toString(),
                 Billing(
-                    binding.EditTextFirstAddress.text.toString(),
-                    binding.EditTextSecondAddress.text.toString(),
+                    binding.EditTextFirstAddress.text.toString()+latLon,
+                    binding.EditTextSecondAddress.text.toString()+latLon,
                     binding.EditTextCity.text.toString(),
                     binding.EditTextCompany.text.toString(),
                     binding.EditTextCountry.text.toString(),
@@ -122,6 +122,7 @@ class SigninFragment : Fragment() {
         }
 
     }
+
     @SuppressLint("MissingPermission")
     private fun showLocation() {
 
@@ -151,6 +152,7 @@ class SigninFragment : Fragment() {
                     Toast.LENGTH_LONG
                 ).show()
                 Log.d("location lastLocation", "latitude" + it.latitude + " , long=" + it.longitude)
+                latLon = ",it.latitude,it.longitude"
             }
         }
         fusedLocationClient.getCurrentLocation(PRIORITY_HIGH_ACCURACY, null)

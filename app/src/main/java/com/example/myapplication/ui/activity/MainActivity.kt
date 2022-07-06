@@ -65,14 +65,11 @@ class MainActivity : AppCompatActivity() {
         ) { permissions ->
             when {
                 permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
-                    Toast.makeText(this, "permission done", Toast.LENGTH_SHORT).show()
+
                 }
                 permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
-                    Toast.makeText(this, "permission done", Toast.LENGTH_SHORT).show()
-                    // Only approximate location access granted.
+
                 } else -> {
-                // No location access granted.
-                    Toast.makeText(this, "permission faild", Toast.LENGTH_SHORT).show()
             }
             }
         }

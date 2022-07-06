@@ -15,7 +15,7 @@
         android:layout_margin="10dp"
         android:background="@drawable/rounded_corner_two"
         android:orientation="horizontal"
-        android:padding="4dp">
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/productImageView"
@@ -34,6 +34,7 @@
                 android:layout_margin="16dp"
                 android:layout_gravity="end"
                 android:maxLines="1"
+                android:theme="@style/Theme.MyApplication.theme3"
                 android:text="@{productt.name}" />
 
             <LinearLayout
@@ -68,6 +69,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="7dp"
+                    android:theme="@style/Theme.MyApplication.theme3"
                     android:text="@{productt.average_rating}"
                     android:textSize="13sp" />
 

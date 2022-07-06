@@ -96,7 +96,6 @@ class LocationFragment : Fragment() {
 
         if (!isLocationEnabled()) {
             Toast.makeText(context, "turn on your location", Toast.LENGTH_SHORT).show()
-            Log.d("location", "turn on your location")
         }
         if (context?.let {
                 ActivityCompat.checkSelfPermission(
@@ -110,6 +109,7 @@ class LocationFragment : Fragment() {
                 )
             } != PackageManager.PERMISSION_GRANTED
         ) {
+            Toast.makeText(context, "لطفا به برنامه دسترسی لوکیشن دهید", Toast.LENGTH_SHORT).show()
             return
         }
         fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
@@ -117,15 +117,8 @@ class LocationFragment : Fragment() {
                 showLocationOnMap(LatLng(35.725333, 51.446806))
             }
             location?.let {
-
-                Toast.makeText(
-                    context,
-                    "latitude" + it.latitude + " , long=" + it.longitude,
-                    Toast.LENGTH_LONG
-                ).show()
-                Log.d("location lastLocation", "latitude" + it.latitude + " , long=" + it.longitude)
-
-            }
+                showLocationOnMap(LatLng(it.latitude, it.longitude))
+           }
         }
         fusedLocationClient.getCurrentLocation(PRIORITY_HIGH_ACCURACY, null)
             .addOnSuccessListener { location: Location? ->
