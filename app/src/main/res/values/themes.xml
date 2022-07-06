@@ -45,6 +45,10 @@
     <style name="Theme.MyApplication.theme6" >
         <item name="android:textColor">@color/darkGray2</item>
     </style>
+    <style name="Theme.MyApplication.theme7" >
+        <item name="android:textColor">@color/black</item>
+        <item name="android:background">@drawable/rounded_corner_seven</item>
+    </style>
 
     <style name="RatingBar" parent="Theme.AppCompat">
         <item name="colorControlNormal">@color/darkGray</item>

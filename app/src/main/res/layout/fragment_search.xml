@@ -51,12 +51,12 @@
                 android:layout_height="match_parent"
                 android:layout_margin="11dp"
                 android:layout_weight="1"
-                android:background="@drawable/rounded_corner_seven"
                 android:gravity="start"
                 android:padding="16dp"
                 android:text="@string/filter"
                 android:textSize="20sp"
-                app:drawableStartCompat="@drawable/ic_baseline_filter_alt_24" />
+                android:theme="@style/Theme.MyApplication.theme7" />
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/menu"
@@ -66,13 +66,12 @@
                 android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:hint="مرتب سازی:"
-                android:src="@drawable/ic_baseline_sort_24">
+                android:textColorHint="@color/black">
 
                 <AutoCompleteTextView
                     android:id="@+id/autoCompleteText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
                     android:cursorVisible="false"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
