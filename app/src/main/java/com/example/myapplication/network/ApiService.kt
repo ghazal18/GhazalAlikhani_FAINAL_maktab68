@@ -64,9 +64,8 @@ interface ApiService {
         @Body order: OrderBody
     ): Response<Order>
 
-    @PUT("orders/{id}")
+    @POST("orders")
     suspend fun setWithCouponOrder(
-        @Path(value = "id") id: Int,
         @Query("consumer_key") key: String = CONSUMER_KEY,
         @Query("consumer_secret") secret: String = CONSUMER_SECRET,
         @Body order: OrderWithCoupon

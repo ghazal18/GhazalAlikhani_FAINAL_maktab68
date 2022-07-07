@@ -36,8 +36,8 @@ class ProductRemoteDataSource @Inject constructor(val apiService: ApiService) {
         return apiService.setOrder(order = order)
     }
 
-    suspend fun setWithCouponOrder(id: Int, order: OrderWithCoupon): Response<Order> {
-        return apiService.setWithCouponOrder(id = id, order = order)
+    suspend fun setWithCouponOrder(order: OrderWithCoupon): Response<Order> {
+        return apiService.setWithCouponOrder(order = order)
     }
 
     suspend fun updateAnOrder(id: Int, order: OrderUpdate): Response<Order> {

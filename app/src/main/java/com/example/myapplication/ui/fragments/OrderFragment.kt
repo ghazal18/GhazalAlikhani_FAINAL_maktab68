@@ -22,8 +22,6 @@ import com.example.myapplication.model.*
 import com.example.myapplication.viewModels.OrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-var srcOfProductItem: String = ""
-
 @AndroidEntryPoint
 class OrderFragment : Fragment() {
     lateinit var binding: FragmentOrderBinding
@@ -32,6 +30,7 @@ class OrderFragment : Fragment() {
     lateinit var sp2: SharedPreferences
     var responseOrder: Order? = null
     var orderId = 0
+    var code = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,10 +108,30 @@ class OrderFragment : Fragment() {
 
         val order = OrderBody(userId, 0, "", listOfOrder)
 //        println("the order userid = $userId , order product id ${listOfOrder[0].id} order product quantity ${listOfOrder[0].quantity} and order product product_id ${listOfOrder[0].product_id}")
-        viewModel.order(order)
+        binding.buttonSetOrder.setOnClickListener {
+            if (code != "") {
+                val order = OrderWithCoupon(
+                    userId,
+                    0,
+                    "",
+                    listOfOrder,
+                    listOf(Coupon(code))
+                )
+
+                viewModel.orderWithCoupon(order)
+                println(
+                    " this is order user ${order.customer_id} this is order id ${order.id}" +
+                            "this is order copone code ${order.coupon_lines[0].code}"
+                )
+            } else {
+                viewModel.order(order)
+            }
+
+        }
 
         viewModel.orderId.observe(viewLifecycleOwner) {
             orderId = it
+            println("the order id is $it")
         }
 
         val adaptor = OrderAdaptor({
@@ -126,7 +145,8 @@ class OrderFragment : Fragment() {
         viewModel.orderLiveData.observe(viewLifecycleOwner) {
             responseOrder = it.data
             if (it.code != "201") {
-                Toast.makeText(context, "مشکلی در ثبت سفارش شما پیش امده", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "مشکلی در ثبت سفارش شما پیش امده", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 
@@ -144,22 +164,8 @@ class OrderFragment : Fragment() {
         }
 
         binding.addCouponButton.setOnClickListener {
-            var code = binding.couponEditText.text.toString()
+            code = binding.couponEditText.text.toString()
             println(code)
-
-            val order = OrderWithCoupon(
-                userId,
-                orderId,
-                "",
-                listOfOrder,
-                listOf(Coupon(code))
-            )
-            viewModel.orderWithCoupon(orderId, order)
-            println(
-                " this is order user ${order.customer_id} this is order id ${order.id}" +
-                        "this is order copone code ${order.coupon_lines[0].code}"
-            )
-
         }
 
     }
