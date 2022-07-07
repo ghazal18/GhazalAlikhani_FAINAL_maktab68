@@ -68,8 +68,8 @@ class SigninFragment : Fragment() {
                 binding.EditTextEmail.text.toString(),
                 binding.EditTextUserName.text.toString(),
                 Billing(
-                    binding.EditTextFirstAddress.text.toString()+latLon,
-                    binding.EditTextSecondAddress.text.toString()+latLon,
+                    binding.EditTextFirstAddress.text.toString() + latLon,
+                    binding.EditTextSecondAddress.text.toString() + latLon,
                     binding.EditTextCity.text.toString(),
                     binding.EditTextCompany.text.toString(),
                     binding.EditTextCountry.text.toString(),
@@ -119,6 +119,10 @@ class SigninFragment : Fragment() {
         }
         binding.buttonShowMap2.setOnClickListener {
             findNavController().navigate(R.id.action_signinFragment_to_locationFragment)
+        }
+        binding.buttonExit.setOnClickListener {
+            editor.clear().commit()
+            Toast.makeText(context, "از حساب خارج شدید", Toast.LENGTH_SHORT).show()
         }
 
     }
