@@ -75,7 +75,7 @@ class OrderFragment : Fragment() {
             countList = countListt
         }
         val idResult = list?.map { it.toInt() }
-        val countResult = countList?.map { it.toInt() }
+        val countResult = countList?.map { it.toInt() }?.toMutableList()
         if (countResult != null) {
             ArrayOfProductDetails.orderCountProductList = countResult
         }
@@ -102,13 +102,14 @@ class OrderFragment : Fragment() {
         }
 
         val adaptott = countResult?.let {
-            OrderProductAdaptor(it) {
-
-            }
+            OrderProductAdaptor(it, {
+                listOfOrder[it].quantity = ++listOfOrder[it].quantity
+            }, {
+                listOfOrder[it].quantity = --listOfOrder[it].quantity
+            })
         }
         binding.orderListRecyclerView.adapter = adaptott
         adaptott?.submitList(ArrayOfProductDetails.orderProductList)
-        val order = OrderBody(userId, 0, "", listOfOrder)
 
         binding.buttonSetOrder.setOnClickListener {
             if (code != "") {
@@ -121,6 +122,7 @@ class OrderFragment : Fragment() {
                 )
                 viewModel.orderWithCoupon(order)
             } else {
+                val order = OrderBody(userId, 0, "", listOfOrder)
                 viewModel.order(order)
             }
             ArrayOfProductDetails.orderProductList = mutableListOf<ProductsItem>()
@@ -155,7 +157,8 @@ class OrderFragment : Fragment() {
         }
 
     }
-    fun showDialog(){
+
+    fun showDialog() {
         val alertDialog: AlertDialog? = activity?.let {
             val builder = AlertDialog.Builder(it)
             builder.setTitle("ابتدا وارد اکانت خود شوید")
