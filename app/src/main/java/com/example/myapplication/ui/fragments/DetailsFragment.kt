@@ -96,6 +96,7 @@ class DetailsFragment : Fragment() {
                 editor.putString("count", string2)
                 editor.apply()
                 clicked = true
+                viewModel.getProductWithId(porductt.id)
             }
         }
         viewModel.getReviews(porductt.id)
@@ -127,6 +128,7 @@ class DetailsFragment : Fragment() {
             findNavController().navigate(action)
 
         }
+
 
 
     }

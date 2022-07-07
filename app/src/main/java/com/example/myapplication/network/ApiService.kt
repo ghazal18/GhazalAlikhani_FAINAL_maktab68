@@ -23,6 +23,13 @@ interface ApiService {
         @Query("orderby") orderBy: String
     ): Response<List<ProductsItem>>
 
+    @GET("products/{id}")
+    suspend fun getWithIdProducts(
+        @Path("id")id:Int,
+        @Query("consumer_key") key: String = CONSUMER_KEY,
+        @Query("consumer_secret") secret: String = CONSUMER_SECRET,
+    ): Response<ProductsItem>
+
     @GET("products")
     suspend fun getProductsWithCategory(
         @Query("consumer_key") key: String = CONSUMER_KEY,

@@ -17,8 +17,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.adaptor.OrderAdaptor
+import com.example.myapplication.adaptor.OrderProductAdaptor
+import com.example.myapplication.adaptor.ProductAdaptor
+import com.example.myapplication.data.ArrayOfProductDetails
 import com.example.myapplication.databinding.FragmentOrderBinding
 import com.example.myapplication.model.*
+import com.example.myapplication.viewModels.MainProductViewModel
 import com.example.myapplication.viewModels.OrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -52,24 +56,7 @@ class OrderFragment : Fragment() {
         var userId = sp.getInt("id", 0)
         println("the user id is $userId")
         if (userId == 0) {
-            val alertDialog: AlertDialog? = activity?.let {
-                val builder = AlertDialog.Builder(it)
-                builder.setTitle("ابتدا وارد اکانت خود شوید")
-
-                    .setPositiveButton("ساختن اکانت",
-                        DialogInterface.OnClickListener { dialog, id ->
-
-
-                        })
-                    .setNegativeButton(R.string.cancel,
-                        DialogInterface.OnClickListener { dialog, id ->
-                        })
-
-                builder.create()
-            }
-            if (alertDialog != null) {
-                alertDialog.show()
-            }
+            showDialog()
         }
 
         //get list from details and convert from string to int array
@@ -89,7 +76,9 @@ class OrderFragment : Fragment() {
         }
         val idResult = list?.map { it.toInt() }
         val countResult = countList?.map { it.toInt() }
-
+        if (countResult != null) {
+            ArrayOfProductDetails.orderCountProductList = countResult
+        }
 
 
 
@@ -106,8 +95,21 @@ class OrderFragment : Fragment() {
             }
         }
 
+        if (idResult != null) {
+            for (i in 0..idResult.size - 1) {
+                viewModel.getProductWithId(idResult[i])
+            }
+        }
+
+        val adaptott = countResult?.let {
+            OrderProductAdaptor(it) {
+
+            }
+        }
+        binding.orderListRecyclerView.adapter = adaptott
+        adaptott?.submitList(ArrayOfProductDetails.orderProductList)
         val order = OrderBody(userId, 0, "", listOfOrder)
-//        println("the order userid = $userId , order product id ${listOfOrder[0].id} order product quantity ${listOfOrder[0].quantity} and order product product_id ${listOfOrder[0].product_id}")
+
         binding.buttonSetOrder.setOnClickListener {
             if (code != "") {
                 val order = OrderWithCoupon(
@@ -117,17 +119,14 @@ class OrderFragment : Fragment() {
                     listOfOrder,
                     listOf(Coupon(code))
                 )
-
                 viewModel.orderWithCoupon(order)
-                println(
-                    " this is order user ${order.customer_id} this is order id ${order.id}" +
-                            "this is order copone code ${order.coupon_lines[0].code}"
-                )
             } else {
                 viewModel.order(order)
             }
-
+            ArrayOfProductDetails.orderProductList = mutableListOf<ProductsItem>()
+            ArrayOfProductDetails.orderCountProductList = listOf()
         }
+
 
         viewModel.orderId.observe(viewLifecycleOwner) {
             orderId = it
@@ -150,24 +149,31 @@ class OrderFragment : Fragment() {
             }
         }
 
-        binding.orderListRecyclerView.adapter = adaptor
-        viewModel.orderList.observe(viewLifecycleOwner) {
-            if (it != null) {
-                adaptor.submitList(it)
-            }
-            println("the order id is ${responseOrder?.id}")
-        }
-        viewModel.connectionStatus.observe(viewLifecycleOwner) {
-            if (!it) {
-                Toast.makeText(context, "Please check your connection", Toast.LENGTH_SHORT).show()
-            }
-        }
-
         binding.addCouponButton.setOnClickListener {
             code = binding.couponEditText.text.toString()
             println(code)
         }
 
+    }
+    fun showDialog(){
+        val alertDialog: AlertDialog? = activity?.let {
+            val builder = AlertDialog.Builder(it)
+            builder.setTitle("ابتدا وارد اکانت خود شوید")
+
+                .setPositiveButton("ساختن اکانت",
+                    DialogInterface.OnClickListener { dialog, id ->
+
+
+                    })
+                .setNegativeButton(R.string.cancel,
+                    DialogInterface.OnClickListener { dialog, id ->
+                    })
+
+            builder.create()
+        }
+        if (alertDialog != null) {
+            alertDialog.show()
+        }
     }
 
 

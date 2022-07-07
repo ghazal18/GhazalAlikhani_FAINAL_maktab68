@@ -16,6 +16,10 @@ class ProductRemoteDataSource @Inject constructor(val apiService: ApiService) {
         return apiService.getProducts(orderBy = oderBy)
     }
 
+    suspend fun getProductWithId(id:Int):Response<ProductsItem>{
+        return apiService.getWithIdProducts(id = id)
+    }
+
     suspend fun getCategorysProduct(categoryId: String): Response<List<ProductsItem>> {
         return apiService.getProductsWithCategory(categoryy = categoryId)
     }

@@ -73,4 +73,5 @@ data class ProductsItem(
     val variations: @RawValue List<Any>?,
     val virtual: Boolean,
     val weight: String
+
 ) : Parcelable

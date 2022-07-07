@@ -23,6 +23,10 @@ class ProductRepository @Inject constructor(val productRemoteDataSource: Product
         return ApiResponse(productRemoteDataSource.getProduct(ORDER_BY_DATE))
     }
 
+    suspend fun getProductWithId(id:Int):Resource<ProductsItem>{
+        return ApiResponse(productRemoteDataSource.getProductWithId(id))
+    }
+
     suspend fun getPopularProduct(): Resource<List<ProductsItem>> {
         return ApiResponse(productRemoteDataSource.getProduct(ORDER_BY_POPULARITY))
     }

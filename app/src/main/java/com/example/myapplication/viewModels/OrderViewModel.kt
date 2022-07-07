@@ -3,11 +3,9 @@ package com.example.myapplication.viewModels
 
 import android.app.Application
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.myapplication.data.ProductRepository
 import com.example.myapplication.model.*
 import com.example.myapplication.network.Resource
@@ -25,9 +23,12 @@ class OrderViewModel @Inject constructor(
     private val context = getApplication<Application>().applicationContext
     val orderList = MutableLiveData<List<LineItem>>()
     val orderLiveData = MutableLiveData<Resource<Order>>()
+    val productsItem = MutableLiveData<ProductsItem>()
+    val productsItemList = mutableListOf<ProductsItem>()
     var orderId = MutableLiveData<Int>()
     var connectionStatus = MutableLiveData(true)
-
+    val listt = MutableLiveData<List<ProductsItem>>(productsItemList)
+    val listttt = MutableLiveData<MutableList<ProductsItem>>()
 
     @RequiresApi(Build.VERSION_CODES.M)
     fun order(order: OrderBody) {
@@ -74,6 +75,27 @@ class OrderViewModel @Inject constructor(
                 try {
                     var list = repository.setWithCouponOrder(order).data?.line_items
                     orderList.value = list!!
+                } catch (e: Exception) {
+                    connectionStatus.value = false
+                }
+            } else {
+                connectionStatus.value = false
+            }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun getProductWithId(id: Int) {
+        viewModelScope.launch {
+            if (hasInternetConnection(context)) {
+                try {
+                    var list = repository.getProductWithId(id).data
+
+                    if (list != null) {
+                        listttt.value?.add(list)
+                    }
+
+                    productsItem.value = list!!
                 } catch (e: Exception) {
                     connectionStatus.value = false
                 }
