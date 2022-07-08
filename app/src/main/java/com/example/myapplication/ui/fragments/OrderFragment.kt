@@ -141,10 +141,6 @@ class OrderFragment : Fragment() {
 
         viewModel.orderLiveData.observe(viewLifecycleOwner) {
             responseOrder = it.data
-            if (it.code != "201") {
-                Toast.makeText(context, "مشکلی در ثبت سفارش شما پیش امده", Toast.LENGTH_SHORT)
-                    .show()
-            }
         }
         viewModel.order.observe(viewLifecycleOwner){
             binding.textViewDiscout.text = it.discount_total
