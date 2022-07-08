@@ -36,7 +36,9 @@ class OrderProductAdaptor(
             } catch (e: Exception) {
                 binding.imageViewProduct.setImageResource(R.drawable.ic_connection_error)
             }
-            binding.textViewQuantity.text = QuantityList[position].toString()
+            if (QuantityList.size != 0) {
+                binding.textViewQuantity.text = QuantityList[position].toString()
+            }
             binding.buttonDecrease.setOnClickListener {
                 var quantity = binding.textViewQuantity.text.toString().toInt()
                 var increase = ++quantity

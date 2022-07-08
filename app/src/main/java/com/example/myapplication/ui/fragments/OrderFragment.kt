@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
+import android.system.Os.remove
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +33,7 @@ class OrderFragment : Fragment() {
     val viewModel: OrderViewModel by viewModels()
     lateinit var sp: SharedPreferences
     lateinit var sp2: SharedPreferences
+    lateinit var editor: SharedPreferences.Editor
     var responseOrder: Order? = null
     var orderId = 0
     var code = ""
@@ -40,6 +42,7 @@ class OrderFragment : Fragment() {
         super.onCreate(savedInstanceState)
         sp = this.requireActivity().getSharedPreferences("accountId", Context.MODE_PRIVATE)
         sp2 = this.requireActivity().getSharedPreferences("order", Context.MODE_PRIVATE)
+        editor = sp2.edit()
     }
 
     override fun onCreateView(
@@ -65,17 +68,18 @@ class OrderFragment : Fragment() {
         println(productId)
         println(productCount)
         val listOfOrder = mutableListOf<LineItemBody>()
-        var list: List<String>? = listOf()
-        var countList: List<String>? = listOf()
+        var list: MutableList<String>? = mutableListOf()
+        var countList: MutableList<String>? = mutableListOf()
         if (productId != "" && productCount != "") {
-            val listt: List<String>? = productId?.split("-")?.let { listOf(*it.toTypedArray()) }
-            list = listt
+            val listt: List<String>? =
+                productId?.split("-")?.let { listOf(*it.toTypedArray()) }?.toMutableList()
+            list = listt as MutableList<String>?
             val countListt: List<String>? =
-                productCount?.split("-")?.let { listOf(*it.toTypedArray()) }
-            countList = countListt
+                productCount?.split("-")?.let { listOf(*it.toTypedArray()) }?.toMutableList()
+            countList = countListt as MutableList<String>?
         }
-        val idResult = list?.map { it.toInt() }
-        val countResult = countList?.map { it.toInt() }?.toMutableList()
+        var idResult = list?.map { it.toInt() }?.toMutableList()
+        var countResult = countList?.map { it.toInt() }?.toMutableList()
         if (countResult != null) {
             ArrayOfProductDetails.orderCountProductList = countResult
         }
@@ -125,8 +129,14 @@ class OrderFragment : Fragment() {
                 val order = OrderBody(userId, 0, "", listOfOrder)
                 viewModel.order(order)
             }
-            ArrayOfProductDetails.orderProductList = mutableListOf<ProductsItem>()
-            ArrayOfProductDetails.orderCountProductList = listOf()
+            idResult?.clear()
+            countResult?.clear()
+            listOfOrder?.clear()
+            list?.clear()
+            countList?.clear()
+            makeListClear()
+
+
         }
 
 
@@ -135,14 +145,7 @@ class OrderFragment : Fragment() {
             println("the order id is $it")
         }
 
-        val adaptor = OrderAdaptor({
-            var updateOrder = OrderUpdate(listOf(LineItemBodyUpdate(it.id, ++it.quantity)))
-            responseOrder?.let { it1 -> viewModel.updateAnOrder(it1.id, updateOrder) }
 
-        }, {
-            var updateOrder = OrderUpdate(listOf(LineItemBodyUpdate(it.id, --it.quantity)))
-            responseOrder?.let { it1 -> viewModel.updateAnOrder(it1.id, updateOrder) }
-        })
         viewModel.orderLiveData.observe(viewLifecycleOwner) {
             responseOrder = it.data
             if (it.code != "201") {
@@ -156,6 +159,15 @@ class OrderFragment : Fragment() {
             println(code)
         }
 
+    }
+
+    private fun makeListClear() {
+        sp.edit().clear().commit()
+        sp2.edit().clear().commit()
+        editor.clear().apply()
+        ArrayOfProductDetails.idOfProductArray.clear()
+        ArrayOfProductDetails.numberOfProductArray.clear()
+        ArrayOfProductDetails.orderProductList.clear()
     }
 
     fun showDialog() {

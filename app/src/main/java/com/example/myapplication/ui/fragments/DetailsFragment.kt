@@ -81,6 +81,7 @@ class DetailsFragment : Fragment() {
         binding.buttonInc.setOnClickListener {
             viewModel.incTheNumber()
         }
+
         binding.buyButton.setOnClickListener {
             if (!clicked) {
                 ArrayOfProductDetails.idOfProductArray.add(porductt.id)
