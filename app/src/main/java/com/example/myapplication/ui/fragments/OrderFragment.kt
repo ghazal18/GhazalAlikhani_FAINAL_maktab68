@@ -5,7 +5,6 @@ import android.content.DialogInterface
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
-import android.system.Os.remove
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,15 +14,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
-import com.example.myapplication.adaptor.OrderAdaptor
 import com.example.myapplication.adaptor.OrderProductAdaptor
-import com.example.myapplication.adaptor.ProductAdaptor
 import com.example.myapplication.data.ArrayOfProductDetails
 import com.example.myapplication.databinding.FragmentOrderBinding
 import com.example.myapplication.model.*
-import com.example.myapplication.viewModels.MainProductViewModel
 import com.example.myapplication.viewModels.OrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -150,6 +145,10 @@ class OrderFragment : Fragment() {
                 Toast.makeText(context, "مشکلی در ثبت سفارش شما پیش امده", Toast.LENGTH_SHORT)
                     .show()
             }
+        }
+        viewModel.order.observe(viewLifecycleOwner){
+            binding.textViewDiscout.text = it.discount_total
+            binding.textViewTotalWithDicount.text = it.total
         }
 
         binding.addCouponButton.setOnClickListener {

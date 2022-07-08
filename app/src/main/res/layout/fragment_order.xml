@@ -9,15 +9,32 @@
         android:orientation="vertical"
         tools:context=".ui.OrderFragment">
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/orderListRecyclerView"
+        <LinearLayout
+            android:id="@+id/linearrr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/orderListRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView4"
@@ -26,23 +43,91 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/orderListRecyclerView"
+            app:layout_constraintTop_toBottomOf="@+id/linearrr"
             app:layout_constraintVertical_bias="1.0">
 
             <LinearLayout
 
                 android:layout_width="match_parent"
-                android:theme="@style/Theme.MyApplication.theme9"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:theme="@style/Theme.MyApplication.theme9">
 
-                <Button
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:gravity="right"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:padding="8dp">-->
+
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/textViewTotal"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:textSize="16sp" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="قیمت کالاها "-->
+<!--                        android:textSize="16sp" />-->
+<!--                </LinearLayout>-->
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+
+                    <TextView
+                        android:id="@+id/textViewDiscout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="سود شما از این خرید"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:id="@+id/textViewTotalWithDicount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="قیمت با احتساب تخفیف "
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <Button
                     android:id="@+id/buttonSetOrder"
-                    android:text="ثبت سفارش"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:backgroundTint="@color/red"
+                    android:padding="8dp"
+                    android:text="ثبت سفارش"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
