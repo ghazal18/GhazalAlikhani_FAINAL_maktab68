@@ -24,10 +24,8 @@ class OrderViewModel @Inject constructor(
     val orderList = MutableLiveData<List<LineItem>>()
     val orderLiveData = MutableLiveData<Resource<Order>>()
     val productsItem = MutableLiveData<ProductsItem>()
-    val productsItemList = mutableListOf<ProductsItem>()
     var orderId = MutableLiveData<Int>()
     var connectionStatus = MutableLiveData(true)
-    val listt = MutableLiveData<List<ProductsItem>>(productsItemList)
     val listttt = MutableLiveData<MutableList<ProductsItem>>()
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -50,31 +48,17 @@ class OrderViewModel @Inject constructor(
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    fun updateAnOrder(id: Int, order: OrderUpdate) {
-        viewModelScope.launch {
-            if (hasInternetConnection(context)) {
-                try {
-                    var list = repository.updateAnOrder(id, order).data?.line_items
-                    orderList.value = list!!
-                    connectionStatus.value = true
-                } catch (e: Exception) {
-                    connectionStatus.value = false
-                }
-            } else {
-                connectionStatus.value = false
-            }
-        }
-
-    }
 
     @RequiresApi(Build.VERSION_CODES.M)
     fun orderWithCoupon(order: OrderWithCoupon) {
         viewModelScope.launch {
             if (hasInternetConnection(context)) {
                 try {
-                    var list = repository.setWithCouponOrder(order).data?.line_items
-                    orderList.value = list!!
+                    var list = repository.setWithCouponOrder(order).data
+                    if (list != null) {
+                        orderId.value = list.id
+                    }
+                    orderList.value = list!!.line_items
                 } catch (e: Exception) {
                     connectionStatus.value = false
                 }

@@ -63,6 +63,12 @@
         <item name="android:background">@color/slowGray</item>
     </style>
 
+    <style name="Theme.MyApplication.theme10">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:background">@drawable/rounded_corner_gray</item>
+        <item name="android:backgroundTint">@color/slowGray</item>
+    </style>
+
     <style name="RatingBar" parent="Theme.AppCompat">
         <item name="colorControlNormal">@color/darkGray</item>
         <item name="colorControlActivated">@color/yellow</item>

@@ -135,8 +135,6 @@ class OrderFragment : Fragment() {
             list?.clear()
             countList?.clear()
             makeListClear()
-
-
         }
 
 

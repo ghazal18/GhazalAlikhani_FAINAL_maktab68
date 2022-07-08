@@ -50,6 +50,11 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:background">@color/darkGray2</item>
     </style>
+    <style name="Theme.MyApplication.theme10">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/rounded_corner_geryer</item>
+        <item name="android:backgroundTint">@color/darkGray</item>
+    </style>
 
 
 </resources>
