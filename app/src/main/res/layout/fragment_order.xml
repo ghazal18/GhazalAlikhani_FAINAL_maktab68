@@ -30,8 +30,9 @@
             app:layout_constraintVertical_bias="1.0">
 
             <LinearLayout
+
                 android:layout_width="match_parent"
-                android:background="@color/slowGray"
+                android:theme="@style/Theme.MyApplication.theme9"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
