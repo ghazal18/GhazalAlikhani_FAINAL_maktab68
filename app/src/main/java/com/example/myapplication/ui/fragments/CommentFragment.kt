@@ -2,6 +2,7 @@ package com.example.myapplication.ui.fragments
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.DialogInterface
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RatingBar
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -43,6 +45,9 @@ class CommentFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         var email = sp.getString("email", "")
+        if (email == "") {
+            showDialog()
+        }
 
 
 
@@ -75,4 +80,24 @@ class CommentFragment : Fragment() {
         rating = fl.toInt()
 
     }
+    fun showDialog() {
+        val alertDialog: AlertDialog? = activity?.let {
+            val builder = AlertDialog.Builder(it)
+            builder.setTitle("ابتدا وارد اکانت خود شوید")
+
+                .setPositiveButton("ساختن اکانت",
+                    DialogInterface.OnClickListener { dialog, id ->
+
+
+                    })
+                .setNegativeButton(R.string.cancel,
+                    DialogInterface.OnClickListener { dialog, id ->
+                    })
+            builder.create()
+        }
+        if (alertDialog != null) {
+            alertDialog.show()
+        }
+    }
+
 }
