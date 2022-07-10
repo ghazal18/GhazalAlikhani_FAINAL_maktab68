@@ -61,38 +61,8 @@ class SigninFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         showLocation()
         binding.saveInformationButton.setOnClickListener {
-            var customer = Customer(
-                0,
-                binding.EditTextName.text.toString(),
-                binding.EditTextLastName.text.toString(),
-                binding.EditTextEmail.text.toString(),
-                binding.EditTextUserName.text.toString(),
-                Billing(
-                    binding.EditTextFirstAddress.text.toString() + latLon,
-                    binding.EditTextSecondAddress.text.toString() + latLon,
-                    binding.EditTextCity.text.toString(),
-                    binding.EditTextCompany.text.toString(),
-                    binding.EditTextCountry.text.toString(),
-                    binding.EditTextEmail.text.toString(),
-                    binding.EditTextName.text.toString(),
-                    binding.EditTextLastName.text.toString(),
-                    binding.EditTextPhone.text.toString(),
-                    binding.EditTextPostCode.text.toString(),
-                    binding.EditTextState.text.toString()
-                ),
-                Shipping(
-                    binding.EditTextFirstAddress.text.toString(),
-                    binding.EditTextSecondAddress.text.toString(),
-                    binding.EditTextCity.text.toString(),
-                    binding.EditTextCompany.text.toString(),
-                    binding.EditTextCountry.text.toString(),
-                    binding.EditTextName.text.toString(),
-                    binding.EditTextLastName.text.toString(),
-                    binding.EditTextPostCode.text.toString(),
-                    binding.EditTextState.text.toString()
-                )
-            )
-            viewModel.getAndSetCustomer(customer)
+
+            viewModel.getAndSetCustomer(makeCustomer())
             viewModel.customerLiveData.observe(viewLifecycleOwner) {
                 if (it.data != null) {
                     println(it.data.id)
@@ -125,6 +95,41 @@ class SigninFragment : Fragment() {
             Toast.makeText(context, "از حساب خارج شدید", Toast.LENGTH_SHORT).show()
         }
 
+    }
+
+    fun makeCustomer() :Customer{
+        var customer = Customer(
+            0,
+            binding.EditTextName.text.toString(),
+            binding.EditTextLastName.text.toString(),
+            binding.EditTextEmail.text.toString(),
+            binding.EditTextUserName.text.toString(),
+            Billing(
+                binding.EditTextFirstAddress.text.toString() + latLon,
+                binding.EditTextSecondAddress.text.toString() + latLon,
+                binding.EditTextCity.text.toString(),
+                binding.EditTextCompany.text.toString(),
+                binding.EditTextCountry.text.toString(),
+                binding.EditTextEmail.text.toString(),
+                binding.EditTextName.text.toString(),
+                binding.EditTextLastName.text.toString(),
+                binding.EditTextPhone.text.toString(),
+                binding.EditTextPostCode.text.toString(),
+                binding.EditTextState.text.toString()
+            ),
+            Shipping(
+                binding.EditTextFirstAddress.text.toString(),
+                binding.EditTextSecondAddress.text.toString(),
+                binding.EditTextCity.text.toString(),
+                binding.EditTextCompany.text.toString(),
+                binding.EditTextCountry.text.toString(),
+                binding.EditTextName.text.toString(),
+                binding.EditTextLastName.text.toString(),
+                binding.EditTextPostCode.text.toString(),
+                binding.EditTextState.text.toString()
+            )
+        )
+        return customer
     }
 
     @SuppressLint("MissingPermission")

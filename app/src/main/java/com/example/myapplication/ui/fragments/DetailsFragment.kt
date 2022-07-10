@@ -114,7 +114,10 @@ class DetailsFragment : Fragment() {
             println("the review id is ${it.id}")
             reviewViewModel.deleteReview(it.id)
         }, {
-            reviewViewModel.updateReview(it.id, UpdateReview(it.rating,it.review))
+
+            val action =
+                DetailsFragmentDirections.actionDetailsFragmentToEditCommentFragment(it.id)
+            findNavController().navigate(action)
         })
 
 

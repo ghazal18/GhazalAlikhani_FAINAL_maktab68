@@ -50,8 +50,6 @@ class CommentFragment : Fragment() {
         }
 
 
-
-
         viewModel.reviewLiveData.observe(viewLifecycleOwner) {
             it.data?.let { it1 -> println(it1.id) }
         }
