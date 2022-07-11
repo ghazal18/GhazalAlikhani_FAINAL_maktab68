@@ -130,6 +130,7 @@ class OrderFragment : Fragment() {
             list?.clear()
             countList?.clear()
             makeListClear()
+
         }
 
 
@@ -145,6 +146,8 @@ class OrderFragment : Fragment() {
         viewModel.order.observe(viewLifecycleOwner){
             binding.textViewDiscout.text = it.discount_total
             binding.textViewTotalWithDicount.text = it.total
+            adaptott?.notifyDataSetChanged()
+            binding.couponEditText.text.clear()
         }
 
         binding.addCouponButton.setOnClickListener {

@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.fragments
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,6 +20,7 @@ import com.example.myapplication.databinding.FragmentMainBinding
 import com.example.myapplication.network.Resource
 import com.example.myapplication.viewModels.CategoryViewModel
 import com.example.myapplication.viewModels.MainProductViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -30,7 +32,6 @@ class MainFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -43,6 +44,7 @@ class MainFragment : Fragment() {
     }
 
 
+    @SuppressLint("ShowToast", "DetachAndAttachSameFragment")
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -66,7 +68,7 @@ class MainFragment : Fragment() {
         }
         binding.categoryRecyclerView.adapter = categoryAdap
         categoryViewModel.categoriesList.observe(viewLifecycleOwner) {
-            println("loooooooooooooookkkkkkk hereee ${it.code} ${it.massage}" )
+            println("loooooooooooooookkkkkkk hereee ${it.code} ${it.massage}")
             if (it != null) {
                 categoryAdap.submitList(it.data)
             }
@@ -86,12 +88,13 @@ class MainFragment : Fragment() {
         }
         binding.RatingProductRecyclerView.adapter = xadapter
         viewModel.productRatingList.observe(viewLifecycleOwner) {
-            when(it){
+            println("observing ")
+            when (it) {
                 is Resource.Loading -> {
                     binding.animationLoading.visibility = View.VISIBLE
                     binding.mainLinearLayout.visibility = View.GONE
                 }
-                is Resource.Success ->{
+                is Resource.Success -> {
                     binding.animationLoading.visibility = View.GONE
                     binding.mainLinearLayout.visibility = View.VISIBLE
                     xadapter.submitList(it.data)
@@ -114,15 +117,33 @@ class MainFragment : Fragment() {
         binding.showAllcategory.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_categoriesFragment)
         }
-        viewModel.connectionStatus.observe(viewLifecycleOwner) {
-            if (!it) {
-                Toast.makeText(context, "Please check your connection", Toast.LENGTH_SHORT).show()
+        viewModel.connectionStatus.observe(viewLifecycleOwner) { connection ->
+            if (!connection) {
+                val snackbar = Snackbar.make(
+                    binding.mainLinearLayouttt,
+                    "Click DISMISS to CLOSE",
+                    Snackbar.LENGTH_INDEFINITE
+                )
+                    .setAction("reload", View.OnClickListener {
+                        println("reload button clicked")
+                        viewModel.getPopularProducts()
+                        viewModel.getRatingProducts()
+                        viewModel.getDatingProducts()
+                        viewModel.getPopularProducts()
+                        viewModel.slider()
+                        categoryViewModel.getCategories()
+
+
+
+                    }).show()
             }
         }
         viewModel.sliderPhoto.observe(viewLifecycleOwner) {
             var list = it
-            binding.viewPager.adapter = context?.let { list.data?.get(0)
-                ?.let { it1 -> ViewPagerAdapter(it, it1.images) } }
+            binding.viewPager.adapter = context?.let {
+                list.data?.get(0)
+                    ?.let { it1 -> ViewPagerAdapter(it, it1.images) }
+            }
             binding.indicator.setViewPager2(binding.viewPager)
         }
 
