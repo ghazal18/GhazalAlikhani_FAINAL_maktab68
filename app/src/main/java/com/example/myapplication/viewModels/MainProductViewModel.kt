@@ -30,8 +30,10 @@ class MainProductViewModel @Inject constructor(
     private val context = getApplication<Application>().applicationContext
     var productPopularityList = MutableLiveData<Resource<List<ProductsItem>>>()
     var productDataList = MutableLiveData<Resource<List<ProductsItem>>>()
+    var productRelatedList = MutableLiveData<List<ProductsItem>>()
     var productRatingList = MutableLiveData<Resource<List<ProductsItem>>>()
     var reviewsList = MutableLiveData<List<ReviewsItem>>()
+    var list = mutableListOf<ProductsItem>()
 
     var connectionStatus = MutableLiveData(true)
 
@@ -41,6 +43,8 @@ class MainProductViewModel @Inject constructor(
         getDatingProducts()
         getPopularProducts()
         slider()
+
+
     }
 
     fun decTheNumber() {
@@ -158,6 +162,26 @@ class MainProductViewModel @Inject constructor(
                     if (list != null) {
                         ArrayOfProductDetails.orderProductList.add(list)
                     }
+                } catch (e: Exception) {
+                    connectionStatus.value = false
+                }
+            } else {
+                connectionStatus.value = false
+            }
+        }
+    }
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun getProductWithIdForRelated(id: Int) {
+        viewModelScope.launch {
+            if (hasInternetConnection(context)) {
+                try {
+
+                    var product = productRepository.getProductWithId(id).data
+                    if (product != null) {
+                        list.add(product)
+                    }
+                    productRelatedList.value = list
+
                 } catch (e: Exception) {
                     connectionStatus.value = false
                 }

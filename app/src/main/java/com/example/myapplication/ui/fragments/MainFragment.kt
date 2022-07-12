@@ -121,7 +121,7 @@ class MainFragment : Fragment() {
             if (!connection) {
                 val snackbar = Snackbar.make(
                     binding.mainLinearLayouttt,
-                    "Click DISMISS to CLOSE",
+                    "No Internet Connection",
                     Snackbar.LENGTH_INDEFINITE
                 )
                     .setAction("reload", View.OnClickListener {

@@ -19,6 +19,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
 import com.example.myapplication.RemoveTag
+import com.example.myapplication.adaptor.ProductRelatedAdaptor
 import com.example.myapplication.adaptor.ReviewAdaptor
 import com.example.myapplication.adaptor.ViewPagerAdapter
 import com.example.myapplication.data.ArrayOfProductDetails
@@ -114,7 +115,6 @@ class DetailsFragment : Fragment() {
             println("the review id is ${it.id}")
             reviewViewModel.deleteReview(it.id)
         }, {
-
             val action =
                 DetailsFragmentDirections.actionDetailsFragmentToEditCommentFragment(it.id)
             findNavController().navigate(action)
@@ -132,11 +132,21 @@ class DetailsFragment : Fragment() {
             findNavController().navigate(action)
 
         }
+        for (i in 0 until porductt.related_ids.size) {
+            viewModel.getProductWithIdForRelated(porductt.related_ids[i])
+        }
+        val productRelatedAdaptor = ProductRelatedAdaptor {
 
+        }
+        binding.relatedProductRecyclerView.adapter = productRelatedAdaptor
+        viewModel.productRelatedList.observe(viewLifecycleOwner) {
+            if (it != null) {
+                productRelatedAdaptor.submitList(it)
+            }
+        }
 
 
     }
-
 
 
 }
