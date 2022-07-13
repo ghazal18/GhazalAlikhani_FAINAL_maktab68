@@ -55,6 +55,9 @@
         <item name="android:background">@drawable/rounded_corner_geryer</item>
         <item name="android:backgroundTint">@color/darkGray</item>
     </style>
+    <style name="Theme.MyApplication.theme5.theme11">
+        <item name="android:background">@color/darkGray</item>
+    </style>
 
 
 </resources>

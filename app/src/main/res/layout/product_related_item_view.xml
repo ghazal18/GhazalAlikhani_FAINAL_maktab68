@@ -12,7 +12,7 @@
     <LinearLayout
         android:id="@+id/linear"
         android:layout_width="170dp"
-        android:layout_height="215dp"
+        android:layout_height="200dp"
         android:layout_margin="4dp"
         android:background="@color/white"
         android:orientation="vertical"
@@ -22,20 +22,23 @@
             android:id="@+id/productImage"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:background="@color/white" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:background="@color/white"
             android:maxLines="1"
             android:text="@{product.name}"
             android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <TextView
@@ -43,6 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|start"
                 android:layout_marginEnd="4dp"
+                android:background="@color/white"
                 android:text="تومان"
                 android:textColor="@color/darkGray"
                 android:textSize="13sp" />
@@ -52,6 +56,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|start"
+                android:background="@color/white"
+                android:text="@{String.valueOf(product.price)}"
                 android:textColor="@color/darkGray"
                 android:textSize="13sp" />
 

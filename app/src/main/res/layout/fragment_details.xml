@@ -57,15 +57,17 @@
                 android:id="@+id/cardView"
                 android:layout_width="match_parent"
                 android:layout_height="620dp"
-                android:layout_marginBottom="20dp"
                 android:layout_gravity="bottom|end"
+                android:layout_marginBottom="20dp"
                 android:theme="@style/Theme.MyApplication.theme5"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
+
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -210,8 +212,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="12dp"
-                                android:theme="@style/Theme.MyApplication.theme6"
-                                android:textSize="18sp" />
+                                android:textSize="18sp"
+                                android:theme="@style/Theme.MyApplication.theme6" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -221,11 +223,11 @@
                                 android:padding="8dp">
 
                                 <ImageView
+                                    android:id="@+id/imageViewAddComment"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="8dp"
                                     android:layout_weight="1"
-                                    android:id="@+id/imageViewAddComment"
                                     android:src="@drawable/ic_baseline_arrow_left_24" />
 
                                 <TextView
@@ -310,14 +312,38 @@
                                     app:cornerRadius="10dp"
                                     app:icon="@drawable/ic_baseline_shopping_basket_24" />
                             </LinearLayout>
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:layout_width="match_parent"
-                                android:layout_height="100dp"
-                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                                android:layout_marginVertical="22dp"
-                                android:orientation="horizontal"
-                                android:id="@+id/relatedProductRecyclerView"/>
 
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="20dp"
+                                android:theme="@style/Theme.MyApplication.theme5.theme11"
+                                android:background="@color/darkGray2">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="8dp"
+                                        android:padding="8dp"
+                                        android:text="کالا های مشابه:"
+                                        android:textSize="22sp" />
+
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/relatedProductRecyclerView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginVertical="10dp"
+                                        android:orientation="horizontal"
+                                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                                </LinearLayout>
+                            </androidx.cardview.widget.CardView>
 
                         </LinearLayout>
 
@@ -338,7 +364,6 @@
 
                     </LinearLayout>
                 </ScrollView>
-
 
 
             </androidx.cardview.widget.CardView>

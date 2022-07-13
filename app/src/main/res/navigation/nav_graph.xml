@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_detailsFragment_to_editCommentFragment"
             app:destination="@id/editCommentFragment" />
+        <action
+            android:id="@+id/action_detailsFragment_self"
+            app:destination="@id/detailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/showAllFragment"

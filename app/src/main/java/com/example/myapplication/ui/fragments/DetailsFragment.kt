@@ -136,7 +136,8 @@ class DetailsFragment : Fragment() {
             viewModel.getProductWithIdForRelated(porductt.related_ids[i])
         }
         val productRelatedAdaptor = ProductRelatedAdaptor {
-
+            val action = DetailsFragmentDirections.actionDetailsFragmentSelf(it)
+            findNavController().navigate(action)
         }
         binding.relatedProductRecyclerView.adapter = productRelatedAdaptor
         viewModel.productRelatedList.observe(viewLifecycleOwner) {
