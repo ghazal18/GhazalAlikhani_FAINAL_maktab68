@@ -85,6 +85,7 @@ class DetailsFragment : Fragment() {
 
         binding.buyButton.setOnClickListener {
             if (!clicked) {
+
                 ArrayOfProductDetails.idOfProductArray.add(porductt.id)
                 val separator = "-"
                 val string = ArrayOfProductDetails.idOfProductArray.joinToString(separator)

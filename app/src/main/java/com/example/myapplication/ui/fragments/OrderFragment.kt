@@ -143,7 +143,12 @@ class OrderFragment : Fragment() {
 
         viewModel.orderId.observe(viewLifecycleOwner) {
             orderId = it
-            println("the order id is $it")
+            binding.buttonSetOrder.visibility = View.GONE
+            binding.textViewCode.visibility = View.GONE
+            binding.LinearCoupone.visibility = View.GONE
+            binding.textViewOrderId.visibility = View.VISIBLE
+            binding.textViewOrderId.text = " شماره پیگیری سفارش $it"
+
         }
 
 

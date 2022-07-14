@@ -70,11 +70,9 @@ class SigninFragment : Fragment() {
                     editor.putString("email", it.data.email)
                     editor.apply()
                 }
-                Toast.makeText(context, it.code?.let { it1 -> errorCode(it1) }, Toast.LENGTH_SHORT)
-                    .show()
 
                 if (it.code == "201") {
-                    Toast.makeText(context, "سفارش شما ثبت شد", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "ثبت نام شما انجام شد ", Toast.LENGTH_SHORT).show()
                 }
             }
             viewModel.connectionStatus.observe(viewLifecycleOwner) {
