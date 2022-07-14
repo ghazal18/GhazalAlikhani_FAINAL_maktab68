@@ -132,8 +132,8 @@ class SearchFragment : Fragment() {
                 search,
                 filterSlug,
                 filterTermId,
-                orderBy,
-                order
+                tempOrderBy,
+                tempOrder
             )
         }
     }
