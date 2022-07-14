@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
@@ -59,7 +60,12 @@ class SearchFragment : Fragment() {
             binding.filter.text = getString(R.string.filter) + " " + filterName
             if (it != null) {
                 adaptor.submitList(it.data)
+                if (it.data?.size  == 0 ){
+                    Toast.makeText(context, "جست و جو نتایجی در بر نداشت", Toast.LENGTH_SHORT)
+                        .show()
+                }
             }
+
 
         }
         binding.movieRecyclerView.adapter = adaptor
@@ -114,20 +120,20 @@ class SearchFragment : Fragment() {
     ) {
         var tempOrderBy: String = ""
 
-        if(orderBy == ""){
+        if (orderBy == "") {
             tempOrderBy = ORDER_BY_RATING
-        }else{
+        } else {
             tempOrderBy = orderBy
         }
-        var tempOrder: String= ""
-        if(orderBy == ""){
+        var tempOrder: String = ""
+        if (orderBy == "") {
             tempOrder = DESC_ORDER
-        }else{
+        } else {
             tempOrder = order
         }
-        if(filterTermId == 0 ){
-            viewModel.justWithWord(search,tempOrderBy,tempOrder)
-        }else{
+        if (filterTermId == 0) {
+            viewModel.justWithWord(search, tempOrderBy, tempOrder)
+        } else {
             viewModel.searchProduct(
                 search,
                 filterSlug,
