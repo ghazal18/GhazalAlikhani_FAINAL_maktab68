@@ -32,6 +32,8 @@ class OrderFragment : Fragment() {
     var responseOrder: Order? = null
     var orderId = 0
     var code = ""
+    var totalPrice = 0
+    var y = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,6 +111,11 @@ class OrderFragment : Fragment() {
         }
         binding.orderListRecyclerView.adapter = adaptott
         adaptott?.submitList(ArrayOfProductDetails.orderProductList)
+        for(i in ArrayOfProductDetails.orderProductList){
+            totalPrice = totalPrice + (i.price.toInt()*ArrayOfProductDetails.numberOfProductArray[y])
+            ++y
+        }
+        binding.textViewTotal.text = totalPrice.toString()
 
         binding.buttonSetOrder.setOnClickListener {
             if (code != "") {
@@ -146,8 +153,6 @@ class OrderFragment : Fragment() {
         viewModel.order.observe(viewLifecycleOwner){
             binding.textViewDiscout.text = it.discount_total
             binding.textViewTotalWithDicount.text = it.total
-            adaptott?.notifyDataSetChanged()
-            binding.couponEditText.text.clear()
         }
 
         binding.addCouponButton.setOnClickListener {

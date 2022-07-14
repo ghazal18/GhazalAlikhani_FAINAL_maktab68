@@ -16,6 +16,7 @@ import com.example.myapplication.data.NetworkParams.Companion.DESC_ORDER
 import com.example.myapplication.data.NetworkParams.Companion.ORDER_BY_DATE
 import com.example.myapplication.data.NetworkParams.Companion.ORDER_BY_POPULARITY
 import com.example.myapplication.data.NetworkParams.Companion.ORDER_BY_PRICE
+import com.example.myapplication.data.NetworkParams.Companion.ORDER_BY_RATING
 import com.example.myapplication.databinding.FragmentSearchBinding
 import com.example.myapplication.viewModels.SearchProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,7 +54,6 @@ class SearchFragment : Fragment() {
         var filterTermId = args.filterTermID
         var filterName = args.filterName
 
-        viewModel.getProductWithFilter(search, filterSlug, filterTermId)
 
         viewModel.searchedList.observe(viewLifecycleOwner) {
             binding.filter.text = getString(R.string.filter) + " " + filterName
@@ -112,13 +112,30 @@ class SearchFragment : Fragment() {
         filterSlug: String,
         filterTermId: Int
     ) {
-        viewModel.searchProduct(
-            search,
-            filterSlug,
-            filterTermId,
-            orderBy,
-            order
-        )
+        var tempOrderBy: String = ""
+
+        if(orderBy == ""){
+            tempOrderBy = ORDER_BY_RATING
+        }else{
+            tempOrderBy = orderBy
+        }
+        var tempOrder: String= ""
+        if(orderBy == ""){
+            tempOrder = DESC_ORDER
+        }else{
+            tempOrder = order
+        }
+        if(filterTermId == 0 ){
+            viewModel.justWithWord(search,tempOrderBy,tempOrder)
+        }else{
+            viewModel.searchProduct(
+                search,
+                filterSlug,
+                filterTermId,
+                orderBy,
+                order
+            )
+        }
     }
 
 }

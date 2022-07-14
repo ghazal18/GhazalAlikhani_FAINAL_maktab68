@@ -55,7 +55,20 @@ class SearchProductViewModel @Inject constructor(val productRepository: ProductR
                 attribute = attribute,
                 attributeTerm = attributeTerm,
                 search = search,
-                order = order , orderBy = orderBy
+                order = order, orderBy = orderBy
+            )
+            searchedList.value = list
+        }
+    }
+
+    fun justWithWord(
+        search: String,
+        orderBy: String, order: String
+    ) {
+        viewModelScope.launch {
+            val list = productRepository.searchWord(
+                searchWord = search,
+                order = order, orderBy = orderBy
             )
             searchedList.value = list
         }

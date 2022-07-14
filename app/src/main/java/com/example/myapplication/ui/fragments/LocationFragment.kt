@@ -17,16 +17,19 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import androidx.core.location.LocationManagerCompat
 import com.example.myapplication.R
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.GoogleMap
-import androidx.core.location.LocationManagerCompat
+import com.example.myapplication.databinding.FragmentLocationBinding
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority.PRIORITY_HIGH_ACCURACY
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -35,6 +38,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class LocationFragment : Fragment() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var map: GoogleMap
+    var latitude = 0.0
+    var longitude = 0.0
+    lateinit var binding: FragmentLocationBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,12 +51,13 @@ class LocationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        return inflater.inflate(R.layout.fragment_location, container, false)
+        binding = FragmentLocationBinding.inflate(layoutInflater, container, false)
+        return binding.root
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         getLocationPermission()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
@@ -62,8 +69,18 @@ class LocationFragment : Fragment() {
             map = readyMap
 
         })
+        binding.buttonSaveLocation.setOnClickListener {
+            Toast.makeText(
+                context,
+                " this is latitude $latitude and this is  longitude $longitude",
+                Toast.LENGTH_SHORT
+            ).show()
+            binding.buttonSaveLocation.isEnabled = true
+        }
+
 
     }
+
 
     @RequiresApi(Build.VERSION_CODES.N)
     private fun getLocationPermission() {
@@ -118,7 +135,7 @@ class LocationFragment : Fragment() {
             }
             location?.let {
                 showLocationOnMap(LatLng(it.latitude, it.longitude))
-           }
+            }
         }
         fusedLocationClient.getCurrentLocation(PRIORITY_HIGH_ACCURACY, null)
             .addOnSuccessListener { location: Location? ->
@@ -134,21 +151,38 @@ class LocationFragment : Fragment() {
     }
 
     private fun showLocationOnMap(latLng: LatLng) {
-        map.setMinZoomPreference(6.0f)
-        map.setMaxZoomPreference(14.0f)
+        map.clear()
+        map.setMinZoomPreference(15.0f)
+        map.setMaxZoomPreference(60.0f)
         map.addMarker(
             MarkerOptions()
+                .position(latLng)
+                .draggable(true)
                 .position(latLng)
                 .title("Marker in location")
                 .zIndex(2.0f)
         )
         map.moveCamera(CameraUpdateFactory.newLatLng(latLng))
+        map.setOnMarkerDragListener(object : GoogleMap.OnMarkerDragListener {
+            override fun onMarkerDrag(p0: Marker) {
+            }
 
+            override fun onMarkerDragEnd(marker: Marker) {
+                Toast.makeText(context, "thisis mew drap", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onMarkerDragStart(p0: Marker) {
+                Toast.makeText(context, "thisis mew drap", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
+
 
     private fun isLocationEnabled(): Boolean {
         val locationManager =
             activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return LocationManagerCompat.isLocationEnabled(locationManager)
     }
+
+
 }

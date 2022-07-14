@@ -18,7 +18,6 @@ class ViewPagerAdapter(
             ViewPageHolderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewPagerHolder(binding)
     }
-
     override fun onBindViewHolder(holder: ViewPagerHolder, position: Int) {
         val label = labelList[position]
         holder.bind(label)

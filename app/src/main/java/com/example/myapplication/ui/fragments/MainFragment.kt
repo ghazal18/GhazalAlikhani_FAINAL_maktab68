@@ -3,6 +3,7 @@ package com.example.myapplication.ui.fragments
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
+import androidx.viewpager2.widget.ViewPager2.SCROLL_STATE_DRAGGING
 import com.example.myapplication.R
 import com.example.myapplication.adaptor.CategoriesAdaptor
 import com.example.myapplication.adaptor.ProductAdaptor
@@ -29,6 +32,9 @@ class MainFragment : Fragment() {
     val viewModel: MainProductViewModel by viewModels()
     val categoryViewModel: CategoryViewModel by viewModels()
     lateinit var binding: FragmentMainBinding
+    val handler = Handler()
+    var origPosition: Int = 0
+    private val timerDelay: Long = 10 * 1000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +74,6 @@ class MainFragment : Fragment() {
         }
         binding.categoryRecyclerView.adapter = categoryAdap
         categoryViewModel.categoriesList.observe(viewLifecycleOwner) {
-            println("loooooooooooooookkkkkkk hereee ${it.code} ${it.massage}")
             if (it != null) {
                 categoryAdap.submitList(it.data)
             }
@@ -88,7 +93,6 @@ class MainFragment : Fragment() {
         }
         binding.RatingProductRecyclerView.adapter = xadapter
         viewModel.productRatingList.observe(viewLifecycleOwner) {
-            println("observing ")
             when (it) {
                 is Resource.Loading -> {
                     binding.animationLoading.visibility = View.VISIBLE
@@ -117,6 +121,24 @@ class MainFragment : Fragment() {
         binding.showAllcategory.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_categoriesFragment)
         }
+
+        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+
+                val runnable = Runnable {  binding.viewPager.setCurrentItem(position + 1) }
+                if (position <  binding.viewPager.adapter?.itemCount ?: 0) {
+                    handler.postDelayed(runnable, timerDelay)
+                }
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+                super.onPageScrollStateChanged(state)
+
+                if (state == SCROLL_STATE_DRAGGING) handler.removeMessages(0)
+            }
+        })
+
         viewModel.connectionStatus.observe(viewLifecycleOwner) { connection ->
             if (!connection) {
                 val snackbar = Snackbar.make(

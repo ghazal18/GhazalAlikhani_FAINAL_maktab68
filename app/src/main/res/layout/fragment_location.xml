@@ -11,5 +11,12 @@
         android:id="@+id/map"
         tools:context=".MainActivity"
         android:name="com.google.android.gms.maps.SupportMapFragment" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:id="@+id/buttonSaveLocation"
+        android:textSize="28sp"
+        android:textColor="@color/black"/>
 
 </FrameLayout>
