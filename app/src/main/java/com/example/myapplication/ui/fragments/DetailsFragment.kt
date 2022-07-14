@@ -85,21 +85,8 @@ class DetailsFragment : Fragment() {
 
         binding.buyButton.setOnClickListener {
             if (!clicked) {
+                setProdcutForOrder(porductt.id)
 
-                ArrayOfProductDetails.idOfProductArray.add(porductt.id)
-                val separator = "-"
-                val string = ArrayOfProductDetails.idOfProductArray.joinToString(separator)
-                println("the id: " + string)
-                editor.putString("id", string)
-                ArrayOfProductDetails.numberOfProductArray.add(
-                    binding.textViewNumber.text.toString().toInt()
-                )
-                val string2 = ArrayOfProductDetails.numberOfProductArray.joinToString(separator)
-                println("the count: " + string2)
-                editor.putString("count", string2)
-                editor.apply()
-                clicked = true
-                viewModel.getProductWithId(porductt.id)
             }
         }
         viewModel.getReviews(porductt.id)
@@ -148,6 +135,24 @@ class DetailsFragment : Fragment() {
         }
 
 
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun setProdcutForOrder(id:Int) {
+        ArrayOfProductDetails.idOfProductArray.add(id)
+        val separator = "-"
+        val string = ArrayOfProductDetails.idOfProductArray.joinToString(separator)
+        println("the id: " + string)
+        editor.putString("id", string)
+        ArrayOfProductDetails.numberOfProductArray.add(
+            binding.textViewNumber.text.toString().toInt()
+        )
+        val string2 = ArrayOfProductDetails.numberOfProductArray.joinToString(separator)
+        println("the count: " + string2)
+        editor.putString("count", string2)
+        editor.apply()
+        clicked = true
+        viewModel.getProductWithId(id)
     }
 
 

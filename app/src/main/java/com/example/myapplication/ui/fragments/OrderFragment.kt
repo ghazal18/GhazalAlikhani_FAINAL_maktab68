@@ -105,17 +105,17 @@ class OrderFragment : Fragment() {
         val adaptott = countResult?.let {
             OrderProductAdaptor(it, {
                 listOfOrder[it].quantity = ++listOfOrder[it].quantity
+                y = 0
+                setTotalPrice()
             }, {
                 listOfOrder[it].quantity = --listOfOrder[it].quantity
+                y = 0
+                setTotalPrice()
             })
         }
         binding.orderListRecyclerView.adapter = adaptott
         adaptott?.submitList(ArrayOfProductDetails.orderProductList)
-        for(i in ArrayOfProductDetails.orderProductList){
-            totalPrice = totalPrice + (i.price.toInt()*ArrayOfProductDetails.numberOfProductArray[y])
-            ++y
-        }
-        binding.textViewTotal.text = totalPrice.toString()
+        setTotalPrice()
 
         binding.buttonSetOrder.setOnClickListener {
             if (code != "") {
@@ -164,6 +164,15 @@ class OrderFragment : Fragment() {
             code = binding.couponEditText.text.toString()
             println(code)
         }
+
+    }
+
+    private fun setTotalPrice() {
+        for(i in ArrayOfProductDetails.orderProductList){
+            totalPrice = totalPrice + (i.price.toInt()*ArrayOfProductDetails.numberOfProductArray[y])
+            ++y
+        }
+        binding.textViewTotal.text = totalPrice.toString()
 
     }
 
